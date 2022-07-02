@@ -1,0 +1,91 @@
+#link {
+  /* display: none; */
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  vertical-align: middle;
+  font-size: 1.2rem;
+  letter-spacing: 0px;
+}
+
+#link img {
+  vertical-align: middle;
+}
+
+#link span {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+/* td.correspond {
+  background-image:
+    linear-gradient(45deg,
+      var(--pyro-color),
+      var(--dendro-color),
+      var(--hydro-color),
+      var(--geo-color),
+      var(--anemo-color),
+      var(--electro-color),
+      var(--cryo-color));
+
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+} */
+
+td.minus {
+  font-weight: 900;
+  /* font-style: italic; */
+}
+
+td.greater {
+  font-weight: 400;
+  font-style: italic;
+}
+
+td.infinity {
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+  /* transform: rotate(90deg); */
+}
+
+#download {
+  position: fixed;
+  box-sizing: border-box;
+  top: 1%;
+  left: 0;
+
+  width: 70px;
+  height: 70px;
+
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: .8rem;
+  color: white;
+  text-align: center;
+
+  background-color: var(--background-color);
+
+  border-style: dashed;
+  border-color: white;
+  border-radius: 10%;
+  padding: 0;
+
+  z-index: 9999;
+}
+
+#download div {
+  font-size: 0.8em;
+  margin: .5em;
+  padding: 0;
+}
+
+#download:hover {
+  background-color: #fff;
+  color: var(--background-color);
+  cursor: pointer;
+}
