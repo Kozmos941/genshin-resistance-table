@@ -1,0 +1,104 @@
+[
+  {
+    "name": "✸史莱姆",
+    "states": [
+      {
+        "particular": {
+          "correspond": "infinity"
+        }
+      }
+    ]
+  },
+  {
+    "name": "狂风之核",
+    "states": [
+      {
+        "particular": {
+          "correspond": "infinity"
+        }
+      }
+    ]
+  },
+  {
+    "name": "✸无相元素",
+    "states": [
+      {
+        "particular": {
+          "correspond": "infinity"
+        }
+      }
+    ]
+  },
+  {
+    "name": "纯水幻形",
+    "states": [
+      {
+        "state": "猪/鼠",
+        "general": "15",
+        "particular": {
+          "hydro": "infinity",
+          "pyro": "-40"
+        }
+      },
+      {
+        "state": "鹤/鹰",
+        "particular": {
+          "hydro": "infinity",
+          "electro": "-40"
+        }
+      },
+      {
+        "state": "蟹/鸭",
+        "particular": {
+          "hydro": "infinity",
+          "cryo": "-40"
+        }
+      },
+      {
+        "state": "雀/蛙",
+        "particular": {
+          "hydro": "infinity",
+          "geo": "-40"
+        }
+      },
+      {
+        "state": "本体(活动)",
+        "particular": {
+          "hydro": "infinity"
+        }
+      },
+      {
+        "state": "猪/鼠(活动)",
+        "particular": {
+          "hydro": "infinity"
+        }
+      },
+      {
+        "state": "蟹(活动)",
+        "particular": {
+          "hydro": "infinity"
+        }
+      }
+    ]
+  },
+  {
+    "name": "雷音权现",
+    "states": [
+      {
+        "particular": {
+          "electro": "infinity"
+        }
+      }
+    ]
+  },
+  {
+    "name": "✸漂浮灵",
+    "states": [
+      {
+        "particular": {
+          "correspond": "infinity"
+        }
+      }
+    ]
+  }
+]

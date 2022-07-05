@@ -1,0 +1,42 @@
+[
+  {
+    "name": "千岩军",
+    "states": [
+      {
+        "particular": {
+          "physical": "-20"
+        }
+      }
+    ]
+  },
+  {
+    "name": "盗宝团",
+    "states": [
+      {
+        "particular": {
+          "physical": "-20"
+        }
+      }
+    ]
+  },
+  {
+    "name": "野伏众",
+    "states": [
+      {
+        "particular": {
+          "physical": "-20"
+        }
+      }
+    ]
+  },
+  {
+    "name": "海乱鬼",
+    "states": [
+      {
+        "particular": {
+          "physical": "-20"
+        }
+      }
+    ]
+  }
+]

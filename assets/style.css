@@ -1,0 +1,78 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  font-size: 16px;
+}
+
+a {
+  color: var(--light-color);
+  text-decoration: none;
+}
+
+th {
+  font-weight: bolder;
+}
+
+table {
+  min-width: max-content;
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table caption {
+  font-family: 'Poppins', 'Noto Serif SC';
+  font-weight: 900;
+  font-size: 4em;
+}
+
+table thead {
+  font-family: 'Poppins', 'Noto Serif SC';
+  font-weight: 900;
+  font-size: 2.3em;
+  border-color: var(--light-color);
+  /* border-width: 0.2rem; */
+  border-style: solid;
+  border-top-width: 0.8rem;
+  border-bottom-width: 0.4rem;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+table tbody {
+  font-family: 'Poppins', 'Noto Sans Serif SC';
+  font-weight: 100;
+  font-size: 1.5em;
+}
+
+table tfoot {
+  font-family: 'Poppins', 'Noto Sans Serif SC';
+  border-color: var(--light-color);
+  border-style: solid;
+  border-top-width: 0.4rem;
+  border-bottom-width: 0.8rem;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+table thead tr th {
+  padding: 0.2em;
+}
+
+table tbody tr td {
+  padding: 0.1em;
+  border-color: var(--light-color);
+  border-style: solid;
+  border-top-width: 0.2rem;
+  border-bottom-width: 0.2rem;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+table tfoot tr td {
+  padding: 0.5em;
+}

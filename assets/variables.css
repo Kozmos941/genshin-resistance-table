@@ -1,0 +1,16 @@
+:root {
+  --physical-color: #ccc;
+  --anemo-color: #80ffd7;
+  --cryo-color: #5cffff;
+  --dendro-color: #13eea2;
+  --electro-color: #ffacff;
+  --geo-color: #ffe699;
+  --hydro-color: #80c0ff;
+  --pyro-color: #ff9999;
+
+  --dark-color: #25294a;
+  --light-color: #ffffff;
+
+  /* --dark-color: #ffffff;
+  --light-color: #25294a; */
+}

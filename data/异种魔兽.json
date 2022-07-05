@@ -1,0 +1,142 @@
+[
+  {
+    "name": "✸飞萤",
+    "states": [
+      {
+        "particular": {
+          "correspond": "50",
+          "physical": "-50"
+        }
+      }
+    ]
+  },
+  {
+    "name": "浮游蕈兽",
+    "states": [
+      {
+        "particular": {
+          "correspond": "20",
+          "dendro": "20"
+        }
+      }
+    ]
+  },
+  {
+    "name": "✸骗骗花",
+    "states": [
+      {
+        "general": "35",
+        "particular": {
+          "correspond": "75"
+        }
+      },
+      {
+        "state": "眩晕",
+        "particular": {
+          "correspond": "50"
+        }
+      }
+    ]
+  },
+  {
+    "name": "爆炎/急冻树",
+    "states": [
+      {
+        "general": "110",
+        "particular": {
+          "correspond": "170",
+          "physical": "130"
+        }
+      },
+      {
+        "state": "倒地",
+        "particular": {
+          "correspond": "70",
+          "physical": "30"
+        }
+      }
+    ]
+  },
+  {
+    "name": "幼岩龙蜥",
+    "states": [
+      {
+        "particular": {
+          "geo": "50",
+          "physical": "30"
+        }
+      }
+    ]
+  },
+  {
+    "name": "✸岩龙蜥",
+    "states": [
+      {
+        "particular": {
+          "geo": "50",
+          "physical": "30"
+        }
+      },
+      {
+        "state": "附魔",
+        "particular": {
+          "correspond": "30",
+          "geo": "50",
+          "physical": "30"
+        }
+      }
+    ]
+  },
+  {
+    "name": "✸古岩龙蜥",
+    "states": [
+      {
+        "state": "沉睡",
+        "general": "210",
+        "particular": {
+          "correspond": "230",
+          "geo": "250",
+          "physical": "230"
+        }
+      },
+      {
+        "particular": {
+          "correspond": "30",
+          "geo": "50",
+          "physical": "30"
+        }
+      },
+      {
+        "state": "反弹(5s)",
+        "general": "-40",
+        "particular": {
+          "correspond": "-20",
+          "geo": "0",
+          "physical": "-20"
+        }
+      }
+    ]
+  },
+  {
+    "name": "深海龙蜥幼体",
+    "states": [
+      {
+        "particular": {
+          "correspond": "20",
+          "physical": "30"
+        }
+      }
+    ]
+  },
+  {
+    "name": "深海龙蜥",
+    "states": [
+      {
+        "particular": {
+          "correspond": "30",
+          "physical": "30"
+        }
+      }
+    ]
+  }
+]

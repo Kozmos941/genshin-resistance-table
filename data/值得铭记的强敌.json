@@ -1,0 +1,116 @@
+[
+  {
+    "name": "风魔龙"
+  },
+  {
+    "name": "北风之狼",
+    "states": [
+      {
+        "particular": {
+          "cryo": "infinity",
+          "anemo": "infinity"
+        }
+      }
+    ]
+  },
+  {
+    "name": "公子",
+    "states": [
+      {
+        "state": "阶段一",
+        "general": "0",
+        "particular": {
+          "hydro": "50"
+        }
+      },
+      {
+        "state": "阶段一 虚弱",
+        "general": "-30",
+        "particular": {
+          "hydro": "20"
+        }
+      },
+      {
+        "state": "阶段二",
+        "general": "0",
+        "particular": {
+          "electro": "50"
+        }
+      },
+      {
+        "state": "阶段二 虚弱",
+        "general": "-50",
+        "particular": {
+          "electro": "0"
+        }
+      },
+      {
+        "state": "阶段三",
+        "general": "0",
+        "particular": {
+          "electro": "70",
+          "hydro": "70"
+        }
+      }
+    ]
+  },
+  {
+    "name": "✸若陀龙王",
+    "states": [
+      {
+        "state": "阶段一",
+        "particular": {
+          "geo": "70",
+          "physical": "40"
+        }
+      },
+      {
+        "state": "阶段二",
+        "particular": {
+          "correspond": "70",
+          "geo": "70",
+          "physical": "40"
+        }
+      },
+      {
+        "state": "阶段三",
+        "particular": {
+          "correspond": "60",
+          "geo": "70",
+          "physical": "40"
+        }
+      }
+    ]
+  },
+  {
+    "name": "女士",
+    "states": [
+      {
+        "state": "冰",
+        "particular": {
+          "cryo": "50"
+        }
+      },
+      {
+        "state": "火",
+        "particular": {
+          "pyro": "70"
+        }
+      }
+    ]
+  },
+  {
+    "name": "雷电将军",
+    "states": [
+      {},
+      {
+        "state": "护盾",
+        "general": "210"
+      },
+      {
+        "state": "虚弱",
+        "general": "-50"
+      }
+    ]
+  }
+]
