@@ -20,7 +20,9 @@ th {
 table {
   min-width: max-content;
   margin: 0 auto;
+  padding: 2em;
   text-align: center;
+  background-color: var(--dark-color);
   border-collapse: collapse;
 }
 
@@ -75,4 +77,26 @@ table tbody tr td {
 
 table tfoot tr td {
   padding: 0.5em;
+}
+
+#download {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+
+  width: 8rem;
+  height: 8rem;
+
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: .9em;
+  color: var(--light-color);
+  background-color: var(--dark-color);
+
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--light-color);
+  /* border-radius: 50%; */
+
+  z-index: 9999;
 }

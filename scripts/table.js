@@ -66,7 +66,6 @@ function createCaption(caption, text) {
   }
   Object.assign(caption.style, style)
   caption.appendChild(textNode(text))
-  caption.appendChild($.githubLink)
 }
 
 function createTable() {
