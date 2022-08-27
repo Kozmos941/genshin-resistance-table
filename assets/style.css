@@ -27,13 +27,13 @@ table {
 }
 
 table caption {
-  font-family: 'Poppins', 'Noto Serif SC';
+  font-family: 'Poppins', 'Noto Serif SC', serif;
   font-weight: 900;
   font-size: 4em;
 }
 
 table thead {
-  font-family: 'Poppins', 'Noto Serif SC';
+  font-family: 'Poppins', 'Noto Serif SC', serif;
   font-weight: 900;
   font-size: 2.3em;
   border-color: var(--light-color);
@@ -46,13 +46,13 @@ table thead {
 }
 
 table tbody {
-  font-family: 'Poppins', 'Noto Sans Serif SC';
+  font-family: 'Poppins', 'Noto Sans SC', sans-serif;
   font-weight: 100;
   font-size: 1.5em;
 }
 
 table tfoot {
-  font-family: 'Poppins', 'Noto Sans Serif SC';
+  font-family: 'Poppins', 'Noto Sans SC', sans-serif;
   border-color: var(--light-color);
   border-style: solid;
   border-top-width: 0.4rem;
