@@ -1,6 +1,6 @@
 [
   {
-    "name": "✸飞萤",
+    "name": "✱飞萤",
     "states": [
       {
         "particular": {
@@ -11,7 +11,17 @@
     ]
   },
   {
-    "name": "浮游蕈兽",
+    "name": "草蕈兽",
+    "states": [
+      {
+        "particular": {
+          "dendro": "25"
+        }
+      }
+    ]
+  },
+  {
+    "name": "其他蕈兽",
     "states": [
       {
         "particular": {
@@ -22,7 +32,46 @@
     ]
   },
   {
-    "name": "✸骗骗花",
+    "name": "草本真蕈",
+    "states": [
+      {
+        "particular": {
+          "dendro": "40"
+        }
+      }
+    ]
+  },
+  {
+    "name": "其他真蕈",
+    "states": [
+      {
+        "particular": {
+          "correspond": "30",
+          "dendro": "30"
+        }
+      }
+    ]
+  },
+  {
+    "name": "翠翎恐蕈",
+    "states": [
+      {
+        "general": "25",
+        "particular": {
+          "dendro": "80"
+        }
+      },
+      {
+        "state": "倒地",
+        "general": "0",
+        "particular": {
+          "dendro": "55"
+        }
+      }
+    ]
+  },
+  {
+    "name": "✱骗骗花",
     "states": [
       {
         "general": "35",
@@ -58,6 +107,24 @@
     ]
   },
   {
+    "name": "掣电树",
+    "states": [
+      {
+        "general": "310",
+        "particular": {
+          "electro": "370"
+        }
+      },
+      {
+        "state": "倒地",
+        "particular": {
+          "electro": "70",
+          "physical": "30"
+        }
+      }
+    ]
+  },
+  {
     "name": "幼岩龙蜥",
     "states": [
       {
@@ -69,7 +136,7 @@
     ]
   },
   {
-    "name": "✸岩龙蜥",
+    "name": "✱岩龙蜥",
     "states": [
       {
         "particular": {
@@ -88,7 +155,7 @@
     ]
   },
   {
-    "name": "✸古岩龙蜥",
+    "name": "✱古岩龙蜥",
     "states": [
       {
         "state": "沉睡",

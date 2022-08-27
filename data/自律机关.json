@@ -30,6 +30,23 @@
     ]
   },
   {
+    "name": "遗迹龙兽",
+    "states": [
+      {
+        "particular": {
+          "physical": "50"
+        }
+      },
+      {
+        "state": "吸收",
+        "particular": {
+          "correspond": "50",
+          "physical": "50"
+        }
+      }
+    ]
+  },
+  {
     "name": "遗迹巡弋/歼击者",
     "states": [
       {

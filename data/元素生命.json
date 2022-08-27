@@ -1,6 +1,6 @@
 [
   {
-    "name": "✸史莱姆",
+    "name": "✱史莱姆",
     "states": [
       {
         "particular": {
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "name": "✸无相元素",
+    "name": "✱无相元素",
     "states": [
       {
         "particular": {
@@ -60,24 +60,6 @@
           "hydro": "infinity",
           "geo": "-40"
         }
-      },
-      {
-        "state": "本体(活动)",
-        "particular": {
-          "hydro": "infinity"
-        }
-      },
-      {
-        "state": "猪/鼠(活动)",
-        "particular": {
-          "hydro": "infinity"
-        }
-      },
-      {
-        "state": "蟹(活动)",
-        "particular": {
-          "hydro": "infinity"
-        }
       }
     ]
   },
@@ -92,7 +74,7 @@
     ]
   },
   {
-    "name": "✸漂浮灵",
+    "name": "✱漂浮灵",
     "states": [
       {
         "particular": {

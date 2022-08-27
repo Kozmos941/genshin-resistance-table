@@ -69,7 +69,7 @@ const Download = (function () {
     const windows = navigator.userAgent.match(/windows/i)
     const options = Object.assign({
       scale: windows ? 1.2 : 1.0,
-      // width: table.offsetWidth
+      width: table.offsetWidth
     }, opts)
     return html2canvas(table, options)
       .then(async canvas =>

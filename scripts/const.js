@@ -23,11 +23,11 @@ const _ = {
     { key: 'geo', value: '岩' },
     { key: 'physical', value: '物' },
   ],
-  Infinity: '♾️', //♾️∞
-  Caption: '原神怪物抗性表 v2.6',
+  Infinity: '８', //♾️∞Ꝏꝏထ８
+  Caption: '原神怪物抗性表 v3.0',
   GitHubLink: 'https://github.com/Kozmos941/genshin-resistance-table',
   TFootComment: `
     * 来自【空萤酒馆】，初版由巴别塔夜空提供，由 whrily、小明明、羽川raid 完善、修正，最后由 NGA 吾竟南宫遥保持更新。<br>
     * 现版又经更新、重制、并会在 <strong>米游社</strong> 和 
-    <a href="https://bbs.nga.cn/read.php?tid=29649225" target="_blank"><strong>NGA</strong></a> 一直保持更新。`
+    <a href="https://bbs.nga.cn/read.php?tid=29649225" target="_blank"><strong>NGA</strong></a> 一直保持更新。`,
 }

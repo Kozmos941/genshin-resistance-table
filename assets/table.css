@@ -27,6 +27,8 @@ table tbody td.minus {
 table tbody td.infinity {
   padding: 0;
   margin: 0;
+  font-weight: 900;
+  transform: rotate(-90deg);
 }
 
 table tbody td.electro,

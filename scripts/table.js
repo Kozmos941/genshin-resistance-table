@@ -26,7 +26,6 @@ function createTBody(tbody, tableData) {
     })
 
     function createTCell(celldata, key) {
-
       function check(data) {
         let text = data
         if (!data) text = 'ㅤ'

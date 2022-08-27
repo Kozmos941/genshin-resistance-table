@@ -71,8 +71,8 @@
 
 ```js
 [
-  { race:'A', raw:[ {...}, ...] },
-  { race:'B', raw:[ {...}, ...] },
+  { race:'元素生命', raw:[ {...}, ...] },
+  { race:'丘丘部落', raw:[ {...}, ...] },
   ...
 ]
 ```
@@ -81,24 +81,26 @@
 
 ```js
 [
+  // ...
   {
-    race: 'A',
-    name: 'aaaa',
-    state: '1',
+    race: '愚人众',
+    name: '藏镜仕女',
+    state: null,
     correspond: 'infinity',
     electro: 10,
     pyro: 10,
-    hydro: 10,
+    hydro: 50,
     cryo: 10,
     dendro: 10,
     anemo: 10,
     geo: 10,
-    physical: 50
+    physical: -20
   },
-  { race: 'A', name: 'aaaa', state: '2', ... },
-  { race: 'A', name: 'bbbb', state: null, ... }, 
+  { race: '愚人众', name: '✱愚人众先遣队', state: null, ... },
+  { race: '愚人众', name: '✱愚人众先遣队', state: '盾', ... }, 
   // ...
-  { race: 'B', name: 'xxxx', state: null, ... }
+  { race: '异种魔兽', name: '✱飞萤', state: null, ... },
+  // ...
 ]
 ```
 
@@ -106,11 +108,13 @@
 
 ```js
 [
-  { race: 'A', name: 'aaaa', state: '1', ... },
-  { state: '2', ... },
-  { name: 'bbbb', state: null, ... },
   // ...
-  { race: 'B', name: 'xxxx', state: null, ... }
+  { race: '愚人众', name: '藏镜仕女', state: null, ... },
+  { name: '✱愚人众先遣队', state: null, ... },
+  { state: '盾', ... },
+  // ...
+  { race: '异种魔兽', name: '✱飞萤', state: null, ... },
+  // ...
 ]
 ```
 

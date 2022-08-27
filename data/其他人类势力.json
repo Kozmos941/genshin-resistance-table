@@ -38,5 +38,32 @@
         }
       }
     ]
+  },
+  {
+    "name": "镀金旅团底层",
+    "states": [
+      {
+        "particular": {
+          "physical": "-20"
+        }
+      }
+    ]
+  },
+  {
+    "name": "镀金旅团中层",
+    "states": [
+      {
+        "particular": {
+          "physical": "-20"
+        }
+      },
+      {
+        "state": "虚弱",
+        "particular": {
+          "correspond": "-50",
+          "physical": "-20"
+        }
+      }
+    ]
   }
 ]
