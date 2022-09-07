@@ -14,7 +14,7 @@
     "states": [
       {
         "particular": {
-          "correspond": "infinity"
+          "anemo": "infinity"
         }
       }
     ]
@@ -33,7 +33,7 @@
     "name": "纯水幻形",
     "states": [
       {
-        "state": "猪/鼠",
+        "state": "豕/鼠",
         "general": "15",
         "particular": {
           "hydro": "infinity",
@@ -41,7 +41,7 @@
         }
       },
       {
-        "state": "鹤/鹰",
+        "state": "鹤/鸢",
         "particular": {
           "hydro": "infinity",
           "electro": "-40"

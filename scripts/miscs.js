@@ -11,13 +11,13 @@ function createGithubLink() {
     fontSize: '2.0rem',
     position: 'absolute',
     display: 'inline-block',
-    right: '1rem',
+    right: '2.5rem',
     bottom: '0.5rem',
   }
-
   a.setAttribute('target', '_blank')
   a.setAttribute('href', _.GitHubLink)
   a.setAttribute('id', 'link')
+  a.setAttribute('alt', 'GithubIcon')
   img.src = './assets/GitHub-Mark-Light-32px.png'
   text.style.verticalAlign = 'middle'
   Object.assign(img.style, imgStyle)
@@ -65,16 +65,15 @@ const Download = (function () {
   }
 
   function getBlob(table, opts) {
+    console.log(table.offsetWidth);
     // https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
     const windows = navigator.userAgent.match(/windows/i)
     const options = Object.assign({
-      scale: windows ? 1.2 : 1.0,
+      scale: windows ? 1.25 : 1.0,
       width: table.offsetWidth
     }, opts)
     return html2canvas(table, options)
-      .then(async canvas =>
-        new Promise(blob => canvas.toBlob(blob))
-      )
+      .then(async canvas => new Promise(blob => canvas.toBlob(blob)))
   }
   return { setScale: scale(), getBlob }
 })()

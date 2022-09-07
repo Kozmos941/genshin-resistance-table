@@ -15,22 +15,6 @@ table tbody .correspond {
   font-weight: 700;
 }
 
-table tbody td.greater {
-  font-weight: 400;
-  font-style: italic;
-}
-
-table tbody td.minus {
-  font-weight: 900;
-}
-
-table tbody td.infinity {
-  padding: 0;
-  margin: 0;
-  font-weight: 900;
-  transform: rotate(-90deg);
-}
-
 table tbody td.electro,
 table tbody td.pyro,
 table tbody td.hydro,
@@ -73,4 +57,19 @@ table .geo {
 
 table .physical {
   color: var(--physical-color)
+}
+
+table tbody td.greater {
+  font-weight: 400;
+  font-style: italic;
+}
+
+table tbody td.minus {
+  font-weight: 900;
+}
+
+table tbody td.infinity {
+  padding: 0;
+  margin: 0;
+  font-weight: 900;
 }
