@@ -14,38 +14,38 @@
     ]
   },
   {
-    "name": "公子",
+    "name": "「公子」",
     "states": [
       {
-        "state": "阶段一",
+        "state": "阶段１",
         "general": "0",
         "particular": {
           "hydro": "50"
         }
       },
       {
-        "state": "阶段一 虚弱",
+        "state": "１: 虚弱",
         "general": "-30",
         "particular": {
           "hydro": "20"
         }
       },
       {
-        "state": "阶段二",
+        "state": "阶段２",
         "general": "0",
         "particular": {
           "electro": "50"
         }
       },
       {
-        "state": "阶段二 虚弱",
+        "state": "２: 虚弱",
         "general": "-50",
         "particular": {
           "electro": "0"
         }
       },
       {
-        "state": "阶段三",
+        "state": "阶段３",
         "general": "0",
         "particular": {
           "electro": "70",
@@ -58,14 +58,14 @@
     "name": "✱若陀龙王",
     "states": [
       {
-        "state": "阶段一",
+        "state": "阶段１",
         "particular": {
           "geo": "70",
           "physical": "40"
         }
       },
       {
-        "state": "阶段二",
+        "state": "阶段２",
         "particular": {
           "correspond": "70",
           "geo": "70",
@@ -73,7 +73,7 @@
         }
       },
       {
-        "state": "阶段三",
+        "state": "阶段３",
         "particular": {
           "correspond": "60",
           "geo": "70",
@@ -83,7 +83,7 @@
     ]
   },
   {
-    "name": "女士",
+    "name": "「女士」",
     "states": [
       {
         "state": "冰",

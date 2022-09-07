@@ -1,15 +1,5 @@
 [
   {
-    "name": "遗迹重机",
-    "states": [
-      {
-        "particular": {
-          "physical": "70"
-        }
-      }
-    ]
-  },
-  {
     "name": "遗迹守卫",
     "states": [
       {
@@ -25,6 +15,16 @@
       {
         "particular": {
           "physical": "50"
+        }
+      }
+    ]
+  },
+  {
+    "name": "遗迹重机",
+    "states": [
+      {
+        "particular": {
+          "physical": "70"
         }
       }
     ]
@@ -47,19 +47,28 @@
     ]
   },
   {
-    "name": "遗迹巡弋/歼击者",
+    "name": "遗迹机兵",
     "states": [
       {
+        "state": "巡弋者(蜂)",
         "particular": {
           "physical": "30"
         }
-      }
-    ]
-  },
-  {
-    "name": "遗迹防卫/侦察者",
-    "states": [
+      },
       {
+        "state": "歼击者(花)",
+        "particular": {
+          "physical": "30"
+        }
+      },
+      {
+        "state": "防卫者(蛛)",
+        "particular": {
+          "physical": "50"
+        }
+      },
+      {
+        "state": "侦察者(蜇)",
         "particular": {
           "physical": "50"
         }

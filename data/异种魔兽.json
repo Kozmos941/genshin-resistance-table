@@ -11,19 +11,16 @@
     ]
   },
   {
-    "name": "草蕈兽",
+    "name": "✱蕈兽",
     "states": [
       {
+        "state": "草",
         "particular": {
           "dendro": "25"
         }
-      }
-    ]
-  },
-  {
-    "name": "其他蕈兽",
-    "states": [
+      },
       {
+        "state": "其他",
         "particular": {
           "correspond": "20",
           "dendro": "20"
@@ -32,19 +29,16 @@
     ]
   },
   {
-    "name": "草本真蕈",
+    "name": "✱本真蕈",
     "states": [
       {
+        "state": "草",
         "particular": {
           "dendro": "40"
         }
-      }
-    ]
-  },
-  {
-    "name": "其他真蕈",
-    "states": [
+      },
       {
+        "state": "其他",
         "particular": {
           "correspond": "30",
           "dendro": "30"
@@ -174,7 +168,7 @@
         }
       },
       {
-        "state": "反弹(5s)",
+        "state": "反弹",
         "general": "-40",
         "particular": {
           "correspond": "-20",

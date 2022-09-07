@@ -26,20 +26,24 @@ function createTBody(tbody, tableData) {
     })
 
     function createTCell(celldata, key) {
-      function check(data) {
-        let text = data
-        if (!data) text = 'ㅤ'
-        else if (data === "infinity") {
-          text = _.Infinity
-          td.classList.add(data)
+      function check(value, key) {
+        let text = value
+        if (!value) text = 'ㅤ'
+        else switch (value) {
+          case 'infinity':
+            text = _.Infinity
+            td.classList.add(value)
+            break
+          default:
+            if (value >= 20) td.classList.add('greater')
+            else if (value < 0) td.classList.add('minus')
         }
-        else if (data >= 20) td.classList.add('greater')
-        else if (data < 0) td.classList.add('minus')
         return text % 1 === 0 ? text + '%' : text
       }
+
       const td = tr.insertCell(-1)
       td.classList.add(key)
-      td.appendChild(textNode(check(celldata)))
+      td.appendChild(textNode(check(celldata, key)))
     }
     return tr
   }
@@ -60,7 +64,7 @@ function createThead(thead, thData) {
 function createCaption(caption, text) {
   const style = {
     position: 'relative',
-    paddingLeft: '.5em',
+    paddingLeft: '.2em',
     fontSize: '4em'
   }
   Object.assign(caption.style, style)

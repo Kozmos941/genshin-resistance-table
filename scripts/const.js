@@ -23,7 +23,7 @@ const _ = {
     { key: 'geo', value: '岩' },
     { key: 'physical', value: '物' },
   ],
-  Infinity: '８', //♾️∞Ꝏꝏထ８
+  Infinity: '∞', //♾️∞ထ８ꝏꝎ
   Caption: '原神怪物抗性表 v3.0',
   GitHubLink: 'https://github.com/Kozmos941/genshin-resistance-table',
   TFootComment: `
