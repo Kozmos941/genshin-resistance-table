@@ -31,22 +31,34 @@
 }
 ```
 
-|    key     | required? |         type         |       default       |     meaning      |
-| :--------: | :-------: | :------------------: | :-----------------: | :--------------: |
-|    name    |     ⭕     |        String        | (required property) |     怪物名称     |
-|   states   |    *❌     |        Array         |        null         |     状态列表     |
-|   state    |     ❌     |        String        |        null         |       状态       |
-|  general   |     ❌     |        Number        |         10          | 通常情况下的抗性 |
-| particular |     ❌     |        Object        |        null         | 特殊情况下的抗性 |
-| correspond |     ❌     | Number or 'infinity' |        null         |  对应属性的抗性  |
-|  electro   |     ❌     |        Number        |    this.general     |    电元素抗性    |
-|    pyro    |     ❌     |        Number        |    this.general     |    火元素抗性    |
-|   hydro    |     ❌     |        Number        |    this.general     |    水元素抗性    |
-|    cryo    |     ❌     |        Number        |    this.general     |    冰元素抗性    |
-|   dendro   |     ❌     |        Number        |    this.general     |    草元素抗性    |
-|   anemo    |     ❌     |        Number        |    this.general     |    风元素抗性    |
-|    geo     |     ❌     |        Number        |    this.general     |    地元素抗性    |
-|  physical  |     ❌     |        Number        |    this.general     |     物理抗性     |
+|    key     | required? |         type         |   default    |     meaning      |
+| :--------: | :-------: | :------------------: | :----------: | :--------------: |
+|    name    |     ✅     |        String        |  (required)  |     怪物名称     |
+|   states   |    *❌     |        Array         |     null     |     状态列表     |
+|   state    |     ❌     |        String        |     null     |       状态       |
+| correspond |     ❌     | Number or 'infinity' |     null     |  对应属性的抗性  |
+|  general   |     ❌     |        Number        |      10      | 通常情况下的抗性 |
+| particular |     ❌     |        Object        |     null     | 特殊情况下的抗性 |
+|  electro   |     ❌     |        Number        | this.general |    电元素抗性    |
+|    pyro    |     ❌     |        Number        | this.general |    火元素抗性    |
+|   hydro    |     ❌     |        Number        | this.general |    水元素抗性    |
+|    cryo    |     ❌     |        Number        | this.general |    冰元素抗性    |
+|   dendro   |     ❌     |        Number        | this.general |    草元素抗性    |
+|   anemo    |     ❌     |        Number        | this.general |    风元素抗性    |
+|    geo     |     ❌     |        Number        | this.general |    地元素抗性    |
+|  physical  |     ❌     |        Number        | this.general |     物理抗性     |
+
+- 除 `name` 属性，其他均可省略，如
+
+```json
+{
+  "name": "✱丘丘人"
+}
+
+{
+  "name": "风魔龙"
+}
+```
 
 - 当 `states` 有多个条目时，需要保证每一项至少是空对象 `{}`，如下所示
 
@@ -65,7 +77,11 @@
 }
 ```
 
-## 处理
+## 数据处理
+
+0. 在本地通过 `./data/mergeData.js` 将表格数据合并成 `data.json`
+   - 需安装 `node.js`，`node ./data/mergeData.js`
+   - 在本地处理数据，或许能提升点性能吧？
 
 1. 每个 `.json` 文件存放同一个种族的数据， `fetchData()` 获取数据并存放于 `[]` 中
 
@@ -120,12 +136,29 @@
 
 ## 问题
 
-- 第一次加载，截图会少差不多一列
+- 若第一次加载网页，截图会少差不多一列（可通过无痕模式模拟第一次加载）
   - 貌似是因为字体渲染导致的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体完全渲染后的小
   - 直接设置一个固定宽度 `width: 1200`，好像解决了
 
-- 无穷符号 ∞
-  - 好多字体都没这个符号，看上去不和谐
-  - 试着用 `transform: rotate(-90degree)` 将全角 `８` 逆时针旋转，网页没问题但是截图又出问题了
+- 无穷符号 ∞，好多字体都没这个符号，看上去不和谐
+  - 使用 Emoji ♾️ 可惜不能改变颜色
+  - 试着用 `transform: rotate(-90degree)` 将全角 `８` 旋转
+    - 网页看上去没问题，但截图中 `td` 的 `border` 也旋转了
     - 貌似是 html2canvas 的问题
+  - 之前字体名打错了，Noto 字体其实是有这个符号的，虽然看上去还是小了，但个人已经可以接受了。
 
+- 想使用 `Web Font Loader` 但 Android 端字体完全没加载（Chrome, Firefox），原因不明
+```html 
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: [
+        'Poppins:0,100,0,200,0,300,0,400,0,500,0,600,0,700,0,800,0,900,1,100,1,200,1,300,1,400,1,500,1,600,1,700,1,800,1,900',
+        'Noto Serif SC:200,300,400,500,600,700,900',
+        'Noto Sans SC:200,300,400,500,600,700,900'
+      ]
+    }
+  })
+</script>
+```
