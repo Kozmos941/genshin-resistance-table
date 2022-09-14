@@ -35,15 +35,16 @@ function createTBody(tbody, tableData) {
             td.classList.add(value)
             break
           default:
-            if (value >= 20) td.classList.add('greater')
-            else if (value < 0) td.classList.add('minus')
+            if (value < 0) td.classList.add('minus')
+            else if (value >= 75) td.classList.add('greater-75')
+            else if (value >= 20) td.classList.add('greater-20')
         }
         return text % 1 === 0 ? text + '%' : text
       }
 
       const td = tr.insertCell(-1)
       td.classList.add(key)
-      td.appendChild(textNode(check(celldata, key)))
+      td.appendChild($.createTextNode(check(celldata, key)))
     }
     return tr
   }
@@ -55,7 +56,7 @@ function createThead(thead, thData) {
   thData.map(({ key, value }, i) => {
     const th = $.createElement('th')
     th.classList.add(key)
-    th.appendChild(textNode(value))
+    th.appendChild($.createTextNode(value))
     tr.appendChild(th)
   })
   return tr.children
@@ -68,7 +69,7 @@ function createCaption(caption, text) {
     fontSize: '4em'
   }
   Object.assign(caption.style, style)
-  caption.appendChild(textNode(text))
+  caption.appendChild($.createTextNode(text))
 }
 
 function createTable() {

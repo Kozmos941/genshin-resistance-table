@@ -81,6 +81,7 @@
 
 0. 在本地通过 `./data/mergeData.js` 将表格数据合并成 `data.json`
    - 需安装 `node.js`，`node ./data/mergeData.js`
+   - 结合 `webfontloader` 尝试字体子集化
    - 在本地处理数据，或许能提升点性能吧？
 
 1. 每个 `.json` 文件存放同一个种族的数据， `fetchData()` 获取数据并存放于 `[]` 中
@@ -134,6 +135,14 @@
 ]
 ```
 
+## 截图
+
+- 使用 `html2canvas` 实现截图功能
+  - PC 端缩放默认为 1.25，移动端为 1
+
+- 在 devtool 中可使用 `setScale(NUM)` 自定义缩放 (NUM 最大为 5)
+  - 待测试功能，可能存在问题
+
 ## 问题
 
 - 若第一次加载网页，截图会少差不多一列（可通过无痕模式模拟第一次加载）
@@ -148,8 +157,12 @@
   - 之前字体名打错了，Noto 字体其实是有这个符号的，虽然看上去还是小了，但个人已经可以接受了。
 
 - 想使用 `Web Font Loader` 但 Android 端字体完全没加载（Chrome, Firefox），原因不明
-```html 
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  - [GitHub](https://github.com/typekit/webfontloader#get-started) 教程上是 `1.6.26`，换成 [jsdelivr](https://www.jsdelivr.com/package/npm/webfontloader) 上的 `1.6.28` 移动端也加载字体了
+
+```html
+<!-- Web Font Loader -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" ></script>
 <script>
   WebFont.load({
     google: {
@@ -161,4 +174,12 @@
     }
   })
 </script>
+
+<!-- Embed -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap">
 ```

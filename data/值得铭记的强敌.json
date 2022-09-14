@@ -24,7 +24,7 @@
         }
       },
       {
-        "state": "１: 虚弱",
+        "state": "虚弱１",
         "general": "-30",
         "particular": {
           "hydro": "20"
@@ -38,7 +38,7 @@
         }
       },
       {
-        "state": "２: 虚弱",
+        "state": "虚弱２",
         "general": "-50",
         "particular": {
           "electro": "0"
