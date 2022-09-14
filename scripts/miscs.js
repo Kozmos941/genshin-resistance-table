@@ -81,3 +81,10 @@ const Download = (function () {
 function textNode(text) {
   return $.createTextNode(text)
 }
+
+async function fetchData() {
+  const url = await `./data/data.json`
+  return await fetch(url).then(
+    response => response.json()
+  )
+}
