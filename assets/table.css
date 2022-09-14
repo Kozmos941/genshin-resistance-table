@@ -3,16 +3,16 @@ table tbody td:last-child {
   padding-right: 0.2em;
 }
 
-table tbody .race {
-  width: 4em;
-  padding: 0.4em;
-}
-
 table tbody .race,
 table tbody .name,
 table tbody .state,
 table tbody .correspond {
   font-weight: 700;
+}
+
+table tbody .race {
+  width: 4em;
+  padding: 0.4em;
 }
 
 table tbody td.electro,
@@ -59,8 +59,13 @@ table .physical {
   color: var(--physical-color)
 }
 
-table tbody td.greater {
-  font-weight: 400;
+table tbody td.greater-20 {
+  font-weight: 300;
+  font-style: italic;
+}
+
+table tbody td.greater-75 {
+  font-weight: 700;
   font-style: italic;
 }
 
@@ -69,6 +74,7 @@ table tbody td.minus {
 }
 
 table tbody td.infinity {
+  font-family: 'Noto Sans SC';
   padding: 0;
   margin: 0;
   font-weight: 900;

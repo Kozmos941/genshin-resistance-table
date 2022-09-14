@@ -22,7 +22,14 @@ const _ = {
     { key: 'anemo', value: '风' },
     { key: 'geo', value: '岩' },
     { key: 'physical', value: '物' },
-  ]
+  ],
+  GitHubLink: 'https://github.com/Kozmos941/genshin-resistance-table',
+  Infinity: '∞', //♾️∞ထ８ꝏꝎ
+  Caption: '原神怪物抗性表 v3.0',
+  TFootComment: `
+    * 来自【空萤酒馆】，初版由巴别塔夜空提供，由 whrily、小明明、羽川raid 完善、修正，最后由 NGA 吾竟南宫遥保持更新。<br>
+    * 现版又经更新、重制、并会在 <strong>米游社</strong> 和 
+    <a href="https://bbs.nga.cn/read.php?tid=29649225" target="_blank"><strong>NGA</strong></a> 一直保持更新。`,
 }
 
 const fs = require('fs')
@@ -30,13 +37,28 @@ const fs = require('fs')
 fetchData().then(raw => {
   const flattened = flattenData(raw)
   const Data = tableData(flattened)
-  const json = JSON.stringify({ Data, _ })
+  const json = JSON.stringify({
+    Data, _,
+    LastUpdated: new Date()
+  })
+  const txt = '`' + JSON.stringify(json).match(/.+/g)
+    .join('').split('').sort().reduce((a, c) => {
+      return c === a.slice(-1) ? a : a + c
+    }, '') + '%' + '`'
+
+  fs.writeFile('./TEXT', txt, 'utf-8'
+    , (err) => {
+      if (err) console.log(err)
+      else console.log('TEXT 写入完成！');
+    }
+  )
 
   fs.writeFile('data.json', json, 'utf-8'
     , (err) => {
       if (err) console.log(err)
       else console.log('data.json 写入完成！');
-    })
+    }
+  )
 })
 
 async function fetchData() {
