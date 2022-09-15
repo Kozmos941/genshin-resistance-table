@@ -30,6 +30,7 @@ $.downloadButton = (function () {
   const div = $.createElement('div')
   button.id = 'download'
   button.appendChild($.createTextNode('Save As Image'))
+  // const size = localStorage.getItem('size') || '… MB'
   div.appendChild($.createTextNode('… MB'))
   button.appendChild(div)
   return button
@@ -56,14 +57,22 @@ window.onload = (async function () {
 })().then((table) => {
   setTimeout(async function () {
     const dl = new Download(table)
-    const blob = await dl.blob
-    localStorage.setItem('scale', dl.scale);
-    localStorage.setItem('blob', URL.createObjectURL(blob));
-    dl.setSize()
-    // 防止提前点击
-    $.downloadButton.addEventListener(
-      'click', () => { dl.screenShot() }
-    )
     window.setScale = dl.setScale.bind(dl)
+    if (localStorage.getItem('blob')) {
+      dl.setSize()
+      $.downloadButton.addEventListener(
+        'click', () => { dl.screenShot() }
+      )
+    } else {
+      const blob = await dl.blob
+      localStorage.setItem('size', `${(blob.size / Math.pow(2, 20)).toFixed(2)} MB`);
+      localStorage.setItem('scale', dl.scale);
+      localStorage.setItem('blob', URL.createObjectURL(blob));
+      dl.setSize()
+      // 防止提前点击
+      $.downloadButton.addEventListener(
+        'click', () => { dl.screenShot() }
+      )
+    }
   }, 0)
 })

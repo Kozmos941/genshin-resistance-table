@@ -34,11 +34,13 @@ class Download {
     }
   }
 
-  screenShot() {
+  async screenShot() {
     // https://stackoverflow.com/questions/67804382/force-showing-the-save-as-dialog-box-when-downloading-a-file
-    const blob = localStorage.getItem('scale') === this.scale ?
-      localStorage.getItem('blob') :
-      URL.createObjectURL(this.blob)
+    const blob = (
+      localStorage.getItem('scale') === this.scale ?
+        localStorage.getItem('blob') :
+        URL.createObjectURL(await this.blob)
+    )
     const saveImg = $.createElement("a");
     saveImg.href = blob
     saveImg.download = _.Caption + ".jpg";

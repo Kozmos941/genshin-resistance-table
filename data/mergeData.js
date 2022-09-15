@@ -41,10 +41,10 @@ fetchData().then(raw => {
     Data, _,
     LastUpdated: new Date()
   })
-  const txt = '`' + JSON.stringify(json).match(/.+/g)
+  const txt = JSON.stringify(json).match(/.+/g)
     .join('').split('').sort().reduce((a, c) => {
       return c === a.slice(-1) ? a : a + c
-    }, '') + '%' + '`'
+    }, '') + '%'
 
   fs.writeFile('./TEXT', txt, 'utf-8'
     , (err) => {
