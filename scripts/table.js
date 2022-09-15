@@ -37,6 +37,7 @@ function createTBody(tbody, tableData) {
           default:
             if (value < 0) td.classList.add('minus')
             else if (value >= 75) td.classList.add('greater-75')
+            else if (value >= 50) td.classList.add('greater-50')
             else if (value >= 20) td.classList.add('greater-20')
         }
         return text % 1 === 0 ? text + '%' : text

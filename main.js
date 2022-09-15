@@ -13,7 +13,7 @@ $.githubLink = (function () {
   const text = $.createElement('span')
   span.id = 'github'
   a.setAttribute('target', '_blank')
-  a.setAttribute('href', _.GitHubLink)
+  a.setAttribute('href', 'https://github.com/Kozmos941/genshin-resistance-table')
   a.setAttribute('id', 'link')
   a.setAttribute('alt', 'GithubIcon')
   img.src = './assets/GitHub.svg'

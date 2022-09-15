@@ -15,10 +15,6 @@
   --light-color: #25294a; */
 }
 
-* {
-  font-display: swap;
-}
-
 html {
   font-size: 10px;
 }
@@ -32,10 +28,6 @@ body {
 a {
   color: var(--light-color);
   text-decoration: none;
-}
-
-th {
-  font-weight: bolder;
 }
 
 table {

@@ -60,7 +60,12 @@ table .physical {
 }
 
 table tbody td.greater-20 {
-  font-weight: 300;
+  font-weight: 200;
+  font-style: italic;
+}
+
+table tbody td.greater-50 {
+  font-weight: 500;
   font-style: italic;
 }
 

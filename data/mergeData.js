@@ -23,13 +23,25 @@ const _ = {
     { key: 'geo', value: '岩' },
     { key: 'physical', value: '物' },
   ],
-  GitHubLink: 'https://github.com/Kozmos941/genshin-resistance-table',
   Infinity: '∞', //♾️∞ထ８ꝏꝎ
   Caption: '原神怪物抗性表 v3.0',
   TFootComment: `
     * 来自【空萤酒馆】，初版由巴别塔夜空提供，由 whrily、小明明、羽川raid 完善、修正，最后由 NGA 吾竟南宫遥保持更新。<br>
     * 现版又经更新、重制、并会在 <strong>米游社</strong> 和 
     <a href="https://bbs.nga.cn/read.php?tid=29649225" target="_blank"><strong>NGA</strong></a> 一直保持更新。`,
+}
+
+const WebFontConfig = {
+  google: {
+    families: [
+      // 'Noto Serif SC:200,300,400,500,600,700,900',
+      // 'Noto Sans SC:200,300,400,500,600,700,900',
+      // 'Poppins:0,100,0,200,0,300,0,400,0,500,0,600,0,700,0,800,0,900,1,100,1,200,1,300,1,400,1,500,1,600,1,700,1,800,1,900',
+      'Noto Serif SC:900',
+      'Noto Sans SC:400,700,900',
+      'Poppins:100,300,500,700,900',
+    ]
+  }
 }
 
 const fs = require('fs')
@@ -41,12 +53,41 @@ fetchData().then(raw => {
     Data, _,
     LastUpdated: new Date()
   })
+
   const txt = JSON.stringify(json).match(/.+/g)
     .join('').split('').sort().reduce((a, c) => {
       return c === a.slice(-1) ? a : a + c
-    }, '') + '%'
+    }, '')
 
-  fs.writeFile('./TEXT', txt, 'utf-8'
+  const links = WebFontConfig.google.families.reduce((a, c) => {
+    let base = 'https://fonts.googleapis.com/css2?'
+    const font = c.split(':')
+    const fn = (font) => {
+      const fontFamily = font[0].split(' ').join('+')
+      const fontWeight = font[1].split(',').join(';')
+      return (`family=${fontFamily}:wght@${fontWeight}`);
+    }
+    let text = ''
+    // encodeURIComponent
+    switch (font[0]) {
+      case 'Noto Serif SC':
+        text = `&text=` + (
+          _.THeads.map(({ _, value }) => value).join('')
+          + _.Caption.split(' ')[0]
+        )
+        break;
+      case 'Noto Sans SC':
+        text = `&text=` + (
+          txt.slice(txt.indexOf(_.Infinity))
+        )
+        break;
+    }
+    const link = `<link rel="stylesheet" href="${base}${fn(font)}&display=swap${text}">`
+    return a = a.concat(link)
+  }, [])
+
+
+  fs.writeFile('./WebFont.html', links.join('\n'), 'utf-8'
     , (err) => {
       if (err) console.log(err)
       else console.log('TEXT 写入完成！');
