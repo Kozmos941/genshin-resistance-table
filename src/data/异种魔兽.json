@@ -1,0 +1,177 @@
+[
+  {
+    "being": "*骗骗花",
+    "states": [
+      {
+        "general": 35,
+        "correspond": 75
+      },
+      {
+        "state": "眩晕",
+        "correspond": 50
+      }
+    ]
+  },
+  {
+    "being": "爆炎树",
+    "states": [
+      {
+        "general": 110,
+        "correspond": 170,
+        "physical": 130
+      },
+      {
+        "state": "倒地",
+        "correspond": 70,
+        "physical": 30
+      }
+    ]
+  },
+  {
+    "being": "掣电树",
+    "states": [
+      {
+        "general": 310,
+        "electro": 370
+      },
+      {
+        "state": "倒地",
+        "electro": 70,
+        "physical": 30
+      }
+    ]
+  },
+  {
+    "being": "急冻树",
+    "states": [
+      {
+        "general": 110,
+        "correspond": 170,
+        "physical": 130
+      },
+      {
+        "state": "倒地",
+        "correspond": 70,
+        "physical": 30
+      }
+    ]
+  },
+  {
+    "being": "幼岩龙蜥",
+    "states": [
+      {
+        "geo": 50,
+        "physical": 30
+      }
+    ]
+  },
+  {
+    "being": "岩龙蜥",
+    "states": [
+      {
+        "geo": 50,
+        "physical": 30
+      },
+      {
+        "state": "附魔",
+        "correspond": 30,
+        "geo": 50,
+        "physical": 30
+      }
+    ]
+  },
+  {
+    "being": "古岩龙蜥",
+    "states": [
+      {
+        "state": "沉睡",
+        "general": 210,
+        "correspond": 230,
+        "geo": 250,
+        "physical": 230
+      },
+      {
+        "correspond": 30,
+        "geo": 50,
+        "physical": 30
+      },
+      {
+        "state": "反弹",
+        "general": -40,
+        "correspond": -20,
+        "geo": 0,
+        "physical": -20
+      }
+    ]
+  },
+  {
+    "being": "深海龙蜥*",
+    "states": [
+      {
+        "state": "幼体",
+        "correspond": 20,
+        "physical": 30
+      },
+      {
+        "correspond": 30,
+        "physical": 30
+      },
+      {
+        "state": "BOSS",
+        "correspond": 30,
+        "physical": 30
+      }
+    ]
+  },
+  {
+    "being": "*萤",
+    "states": [
+      {
+        "correspond": 50,
+        "physical": -50
+      }
+    ]
+  },
+  {
+    "being": "*蕈兽",
+    "states": [
+      {
+        "state": "草",
+        "dendro": 25
+      },
+      {
+        "state": "其他",
+        "correspond": 20,
+        "dendro": 20
+      }
+    ]
+  },
+  {
+    "being": "*本真蕈",
+    "states": [
+      {
+        "state": "草",
+        "dendro": 40
+      },
+      {
+        "state": "其他",
+        "correspond": 30,
+        "dendro": 30
+      }
+    ]
+  },
+  {
+    "being": "翠翎恐蕈",
+    "states": [
+      {
+        "general": 25,
+        "dendro": 80
+      },
+      {
+        "state": "倒地",
+        "general": 0,
+        "dendro": 55
+      }
+    ]
+  }
+]

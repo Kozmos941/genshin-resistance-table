@@ -1,0 +1,68 @@
+[
+  {
+    "being": "*史莱姆",
+    "states": [
+      {
+        "correspond": "infinity"
+      }
+    ]
+  },
+  {
+    "being": "狂风之核",
+    "states": [
+      {
+        "anemo": "infinity"
+      }
+    ]
+  },
+  {
+    "being": "无相之*",
+    "states": [
+      {
+        "correspond": "infinity"
+      }
+    ]
+  },
+  {
+    "being": "纯水幻形",
+    "states": [
+      {
+        "state": "豕/鼠",
+        "general": 15,
+        "hydro": "infinity",
+        "pyro": -40
+      },
+      {
+        "state": "鹤/鸢",
+        "hydro": "infinity",
+        "electro": -40
+      },
+      {
+        "state": "蟹/鸭",
+        "hydro": "infinity",
+        "cryo": -40
+      },
+      {
+        "state": "雀/蛙",
+        "hydro": "infinity",
+        "geo": -40
+      }
+    ]
+  },
+  {
+    "being": "雷音权现",
+    "states": [
+      {
+        "electro": "infinity"
+      }
+    ]
+  },
+  {
+    "being": "*漂浮灵",
+    "states": [
+      {
+        "correspond": "infinity"
+      }
+    ]
+  }
+]
