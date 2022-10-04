@@ -1,0 +1,121 @@
+:root {
+  --physical-color: #ccc;
+  --anemo-color: #80ffd7;
+  --cryo-color: #5cffff;
+  --dendro-color: #13eea2;
+  --electro-color: #ffacff;
+  --geo-color: #ffe699;
+  --hydro-color: #80c0ff;
+  --pyro-color: #ff9999;
+
+  --dark-color: #25294a;
+  --light-color: #ffffff;
+
+  /* --dark-color: #ffffff;
+  --light-color: #25294a; */
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  font-size: 16px;
+}
+
+a {
+  color: var(--light-color);
+  text-decoration: none;
+}
+
+table thead th:last-child,
+table tbody td:last-child {
+  padding-right: 0.2em;
+}
+
+table tbody .race,
+table tbody .being,
+table tbody .state,
+table tbody .correspond {
+  font-weight: 700;
+}
+
+table tbody .race {
+  width: 4em;
+  padding: 0.4em;
+}
+
+table tbody .being {
+  width: 6em;
+  /* padding: 0.4em; */
+}
+
+table tbody td.electro,
+table tbody td.pyro,
+table tbody td.hydro,
+table tbody td.cryo,
+table tbody td.dendro,
+table tbody td.anemo,
+table tbody td.geo,
+table tbody td.physical,
+table tbody td.correspond {
+  font-size: 1.1em;
+}
+
+table .electro {
+  color: var(--electro-color)
+}
+
+table .pyro {
+  color: var(--pyro-color)
+}
+
+table .hydro {
+  color: var(--hydro-color)
+}
+
+table .cryo {
+  color: var(--cryo-color)
+}
+
+table .dendro {
+  color: var(--dendro-color)
+}
+
+table .anemo {
+  color: var(--anemo-color)
+}
+
+table .geo {
+  color: var(--geo-color)
+}
+
+table .physical {
+  color: var(--physical-color)
+}
+
+table tbody td.greater-20 {
+  font-weight: 300;
+}
+
+table tbody td.greater-50 {
+  font-weight: 500;
+}
+
+table tbody td.greater-75 {
+  font-weight: 700;
+  font-style: italic;
+}
+
+table tbody td.minus {
+  font-weight: 900;
+}
+
+table tbody td.infinity {
+  font-family: 'Noto Sans SC';
+  padding: 0;
+  margin: 0;
+  font-weight: 900;
+}

@@ -1,0 +1,94 @@
+[
+  {
+    "being": "裂空的魔龙"
+  },
+  {
+    "being": "北风的王狼",
+    "states": [
+      {
+        "cryo": "infinity",
+        "anemo": "infinity"
+      }
+    ]
+  },
+  {
+    "being": "「公子」",
+    "states": [
+      {
+        "state": "达达利亚",
+        "general": 0,
+        "hydro": 50
+      },
+      {
+        "state": "虚弱",
+        "general": -30,
+        "hydro": 20
+      },
+      {
+        "state": "邪眼・雷",
+        "general": 0,
+        "electro": 50
+      },
+      {
+        "state": "虚弱",
+        "general": -50,
+        "electro": 0
+      },
+      {
+        "state": "魔王武装",
+        "general": 0,
+        "electro": 70,
+        "hydro": 70
+      }
+    ]
+  },
+  {
+    "being": "若陀龙王",
+    "states": [
+      {
+        "state": "阶段１",
+        "geo": 70,
+        "physical": 40
+      },
+      {
+        "state": "阶段２",
+        "correspond": 70,
+        "geo": 70,
+        "physical": 40
+      },
+      {
+        "state": "阶段３",
+        "correspond": 60,
+        "geo": 70,
+        "physical": 40
+      }
+    ]
+  },
+  {
+    "being": "「女士」",
+    "states": [
+      {
+        "state": "邪眼・冰",
+        "cryo": 50
+      },
+      {
+        "state": "炎之魔女",
+        "pyro": 70
+      }
+    ]
+  },
+  {
+    "being": "祸津御建鸣神\n命",
+    "states": [
+      {},
+      {
+        "state": "虚弱",
+        "general": -50
+      },
+      {
+        "state": "恶曜影向天魔",
+        "general": 210
+      }
+    ]
+  }
+]
