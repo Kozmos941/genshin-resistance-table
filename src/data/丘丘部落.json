@@ -1,9 +1,9 @@
 [
   {
-    "being": "丘丘人"
+    "being": "*丘丘人"
   },
   {
-    "being": "丘丘暴徒",
+    "being": "*丘丘暴徒",
     "states": [
       {
         "physical": 30
