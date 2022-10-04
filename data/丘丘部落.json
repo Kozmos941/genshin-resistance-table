@@ -1,13 +1,24 @@
 [
   {
-    "name": "✱丘丘人"
+    "name": "丘丘人"
   },
   {
-    "name": "✱丘丘暴徒",
+    "name": "丘丘暴徒",
     "states": [
       {
         "particular": {
-          "physical": "30"
+          "physical": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "丘丘✱王",
+    "states": [
+      {
+        "particular": {
+          "correspond": 70,
+          "physical": 50
         }
       }
     ]
@@ -17,25 +28,7 @@
     "states": [
       {
         "particular": {
-          "correspond": "50"
-        }
-      }
-    ]
-  },
-  {
-    "name": "✱丘丘王",
-    "states": [
-      {
-        "particular": {
-          "correspond": "70",
-          "physical": "50"
-        }
-      },
-      {
-        "state": "盾",
-        "particular": {
-          "correspond": "70",
-          "physical": "50"
+          "correspond": 50
         }
       }
     ]

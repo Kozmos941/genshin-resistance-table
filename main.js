@@ -76,3 +76,10 @@ window.onload = (async function () {
     }
   }, 0)
 })
+
+
+// console.log(0);
+// console.log('0');
+// console.log(String(0));
+// console.log(!0);
+// console.log(!'0');

@@ -37,12 +37,15 @@ table {
   text-align: center;
   background-color: var(--dark-color);
   border-collapse: collapse;
+  width: 1160;
 }
 
 table caption {
+  position: relative;
   font-family: 'Poppins', 'Noto Serif SC', serif;
   font-weight: 900;
   font-size: 4em;
+  padding-left: .2em;
 }
 
 table thead {
@@ -90,10 +93,6 @@ table tbody tr td {
 
 table tfoot tr td {
   padding: 0.5em;
-}
-
-table {
-  width: 1150px;
 }
 
 #download {

@@ -4,7 +4,7 @@
     "states": [
       {
         "particular": {
-          "physical": "70"
+          "physical": 70
         }
       }
     ]
@@ -14,7 +14,7 @@
     "states": [
       {
         "particular": {
-          "physical": "50"
+          "physical": 50
         }
       }
     ]
@@ -24,24 +24,24 @@
     "states": [
       {
         "particular": {
-          "physical": "70"
+          "physical": 70
         }
       }
     ]
   },
   {
-    "name": "遗迹龙兽",
+    "name": "遗迹巨蛇",
     "states": [
       {
         "particular": {
-          "physical": "50"
+          "physical": 70
         }
       },
       {
-        "state": "吸收",
+        "state": "强化",
+        "general": 310,
         "particular": {
-          "correspond": "50",
-          "physical": "50"
+          "physical": 370
         }
       }
     ]
@@ -52,25 +52,25 @@
       {
         "state": "巡弋者(蜂)",
         "particular": {
-          "physical": "30"
+          "physical": 30
         }
       },
       {
         "state": "歼击者(花)",
         "particular": {
-          "physical": "30"
+          "physical": 30
         }
       },
       {
         "state": "防卫者(蛛)",
         "particular": {
-          "physical": "50"
+          "physical": 50
         }
       },
       {
         "state": "侦察者(蜇)",
         "particular": {
-          "physical": "50"
+          "physical": 50
         }
       }
     ]
@@ -80,15 +80,81 @@
     "states": [
       {
         "particular": {
-          "physical": "70"
+          "physical": 70
         }
       },
       {
         "state": "虚弱",
-        "general": "-40",
+        "general": -40,
         "particular": {
-          "physical": "20"
+          "physical": 20
         }
+      }
+    ]
+  },
+  {
+    "name": "遗迹龙兽",
+    "states": [
+      {
+        "particular": {
+          "physical": 50
+        }
+      },
+      {
+        "state": "吸收",
+        "particular": {
+          "correspond": 50,
+          "physical": 50
+        }
+      }
+    ]
+  },
+  {
+    "name": "兆载永劫龙兽",
+    "states": [
+      {
+        "state": "起身",
+        "general": 110,
+        "particular": {
+          "physical": 170
+        }
+      },
+      {
+        "particular": {
+          "physical": 70
+        }
+      },
+      {
+        "state": "吸收",
+        "general": 310,
+        "particular": {
+          "correspond": 70,
+          "physical": 70
+        }
+      }
+    ]
+  },
+  {
+    "name": "元能构装体",
+    "states": [
+      {},
+      {
+        "state": "不可视",
+        "general": 60
+      }
+    ]
+  },
+  {
+    "name": "半永恒\n统辖矩阵",
+    "states": [
+      {
+        "state": "起身",
+        "general": 110
+      },
+      {},
+      {
+        "state": "不可视",
+        "general": 210
       }
     ]
   },
@@ -99,24 +165,7 @@
       {
         "state": "分身",
         "particular": {
-          "correspond": "30"
-        }
-      }
-    ]
-  },
-  {
-    "name": "遗迹巨蛇",
-    "states": [
-      {
-        "particular": {
-          "physical": "70"
-        }
-      },
-      {
-        "state": "强化",
-        "general": "310",
-        "particular": {
-          "physical": "370"
+          "correspond": 30
         }
       }
     ]

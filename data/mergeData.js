@@ -12,6 +12,7 @@ const _ = {
   THeads: [
     { key: 'race', value: '种族' },
     { key: 'name', value: '怪物' },
+    // { key: 'phase', value: '阶段' },
     { key: 'state', value: '状态' },
     { key: 'correspond', value: '对应' },
     { key: 'electro', value: '雷' },
@@ -24,7 +25,7 @@ const _ = {
     { key: 'physical', value: '物' },
   ],
   Infinity: '∞', //♾️∞ထ８ꝏꝎ
-  Caption: '原神怪物抗性表 v3.0',
+  Caption: '原神怪物抗性表 v3.1',
   TFootComment: `
     * 来自【空萤酒馆】，初版由巴别塔夜空提供，由 whrily、小明明、羽川raid 完善、修正，最后由 NGA 吾竟南宫遥保持更新。<br>
     * 现版又经更新、重制、并会在 <strong>米游社</strong> 和 
@@ -39,7 +40,7 @@ const WebFontConfig = {
       // 'Poppins:0,100,0,200,0,300,0,400,0,500,0,600,0,700,0,800,0,900,1,100,1,200,1,300,1,400,1,500,1,600,1,700,1,800,1,900',
       'Noto Serif SC:900',
       'Noto Sans SC:400,700,900',
-      'Poppins:100,300,500,700,900',
+      'Poppins:100,200,300,400,500,600,700,800,900',
     ]
   }
 }

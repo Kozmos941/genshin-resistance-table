@@ -70,7 +70,7 @@
     {
       "state": "分身",
       "particular": {
-        "correspond": "30"
+        "correspond": 30
       }
     }
   ]
@@ -189,3 +189,6 @@
   })(document);
 </script>
 ```
+
+# TO DO
+- 目前的 RowSpan 是遍历整个表格提前记录的，看看能不能改进

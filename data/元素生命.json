@@ -20,7 +20,7 @@
     ]
   },
   {
-    "name": "✱无相元素",
+    "name": "无相之✱",
     "states": [
       {
         "particular": {
@@ -34,31 +34,31 @@
     "states": [
       {
         "state": "豕/鼠",
-        "general": "15",
+        "general": 15,
         "particular": {
           "hydro": "infinity",
-          "pyro": "-40"
+          "pyro": -40
         }
       },
       {
         "state": "鹤/鸢",
         "particular": {
           "hydro": "infinity",
-          "electro": "-40"
+          "electro": -40
         }
       },
       {
         "state": "蟹/鸭",
         "particular": {
           "hydro": "infinity",
-          "cryo": "-40"
+          "cryo": -40
         }
       },
       {
         "state": "雀/蛙",
         "particular": {
           "hydro": "infinity",
-          "geo": "-40"
+          "geo": -40
         }
       }
     ]

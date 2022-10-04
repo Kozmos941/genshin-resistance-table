@@ -3,15 +3,14 @@ function renderTable(tableData) {
   const caption = createCaption(table.caption, _.Caption)
   const tHeads = createThead(table.tHead, _.THeads)
   const tBody = createTBody(table.tBodies[0], tableData)
-  const tFootColSpan = tHeads.length
-  const tFoot = createTFoot(table.tFoot, _.TFootComment, tFootColSpan)
+  const tFoot = createTFoot(table.tFoot, tHeads.length)
   return table
 }
 
-function createTFoot(tfoot, comment, spanLength) {
+function createTFoot(tfoot, spanLength) {
   const tr = tfoot.insertRow(-1)
   const td = tr.insertCell(-1)
-  td.innerHTML = comment
+  td.innerHTML = _.TFootComment
   td.colSpan = spanLength
 }
 
@@ -22,34 +21,43 @@ function createTBody(tbody, tableData) {
     const tr = tbody.insertRow(-1)
     _.THeads.map(({ key, _ }) => {
       const celldata = rowdata[key]
-      createTCell(celldata, key)
+      const td = createTCell(celldata, key)
+      // if (key === "name") {
+      // tr.insertCell(-1)
+      // td.colSpan = 2
+      // }
     })
 
-    function createTCell(celldata, key) {
-      function check(value, key) {
-        let text = value
-        if (!value) text = 'ㅤ'
-        else switch (value) {
-          case 'infinity':
-            text = _.Infinity
-            td.classList.add(value)
-            break
-          default:
-            if (value < 0) td.classList.add('minus')
-            else if (value >= 75) td.classList.add('greater-75')
-            else if (value >= 50) td.classList.add('greater-50')
-            else if (value >= 20) td.classList.add('greater-20')
-        }
-        return text % 1 === 0 ? text + '%' : text
-      }
-
+    function createTCell(value, key) {
       const td = tr.insertCell(-1)
       td.classList.add(key)
-      td.appendChild($.createTextNode(check(celldata, key)))
+
+      let text = value
+      if (value === null) text = '' // 'ㅤ' <= 这里有个空白符
+      else switch (typeof value) {
+        case 'string':
+          if (value === 'infinity') {
+            text = _.Infinity
+            td.classList.add(value)
+          } else if (value.match(/\n/)) {
+            text = text.replace(/\n/, '<br>')
+          }
+          break
+        case 'number':
+          text += '%'
+          if (value < 0) td.classList.add('minus')
+          else if (value >= 75) td.classList.add('greater-75')
+          else if (value >= 50) td.classList.add('greater-50')
+          else if (value >= 20) td.classList.add('greater-20')
+          break
+      }
+      td.innerHTML = text
+      // td.appendChild($.createTextNode(text))
+      return td
     }
+
     return tr
   }
-
 }
 
 function createThead(thead, thData) {
@@ -64,12 +72,6 @@ function createThead(thead, thData) {
 }
 
 function createCaption(caption, text) {
-  const style = {
-    position: 'relative',
-    paddingLeft: '.2em',
-    fontSize: '4em'
-  }
-  Object.assign(caption.style, style)
   caption.appendChild($.createTextNode(text))
 }
 

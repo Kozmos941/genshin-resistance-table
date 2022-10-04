@@ -1,9 +1,9 @@
 [
   {
-    "name": "风魔龙"
+    "name": "裂空的魔龙"
   },
   {
-    "name": "北风之狼",
+    "name": "北风的王狼",
     "states": [
       {
         "particular": {
@@ -17,67 +17,67 @@
     "name": "「公子」",
     "states": [
       {
-        "state": "阶段１",
-        "general": "0",
+        "state": "达达利亚",
+        "general": 0,
         "particular": {
-          "hydro": "50"
+          "hydro": 50
         }
       },
       {
-        "state": "虚弱１",
-        "general": "-30",
+        "state": "虚弱",
+        "general": -30,
         "particular": {
-          "hydro": "20"
+          "hydro": 20
         }
       },
       {
-        "state": "阶段２",
-        "general": "0",
+        "state": "邪眼・雷",
+        "general": 0,
         "particular": {
-          "electro": "50"
+          "electro": 50
         }
       },
       {
-        "state": "虚弱２",
-        "general": "-50",
+        "state": "虚弱",
+        "general": -50,
         "particular": {
-          "electro": "0"
+          "electro": 0
         }
       },
       {
-        "state": "阶段３",
-        "general": "0",
+        "state": "魔王武装",
+        "general": 0,
         "particular": {
-          "electro": "70",
-          "hydro": "70"
+          "electro": 70,
+          "hydro": 70
         }
       }
     ]
   },
   {
-    "name": "✱若陀龙王",
+    "name": "若陀龙王",
     "states": [
       {
         "state": "阶段１",
         "particular": {
-          "geo": "70",
-          "physical": "40"
+          "geo": 70,
+          "physical": 40
         }
       },
       {
         "state": "阶段２",
         "particular": {
-          "correspond": "70",
-          "geo": "70",
-          "physical": "40"
+          "correspond": 70,
+          "geo": 70,
+          "physical": 40
         }
       },
       {
         "state": "阶段３",
         "particular": {
-          "correspond": "60",
-          "geo": "70",
-          "physical": "40"
+          "correspond": 60,
+          "geo": 70,
+          "physical": 40
         }
       }
     ]
@@ -86,30 +86,30 @@
     "name": "「女士」",
     "states": [
       {
-        "state": "冰",
+        "state": "邪眼・冰",
         "particular": {
-          "cryo": "50"
+          "cryo": 50
         }
       },
       {
-        "state": "火",
+        "state": "炎之魔女",
         "particular": {
-          "pyro": "70"
+          "pyro": 70
         }
       }
     ]
   },
   {
-    "name": "雷电将军",
+    "name": "祸津御建鸣神\n命",
     "states": [
       {},
       {
-        "state": "护盾",
-        "general": "210"
+        "state": "虚弱",
+        "general": -50
       },
       {
-        "state": "虚弱",
-        "general": "-50"
+        "state": "恶曜影向天魔",
+        "general": 210
       }
     ]
   }

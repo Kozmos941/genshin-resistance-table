@@ -1,11 +1,169 @@
 [
   {
-    "name": "✱飞萤",
+    "name": "✱骗骗花",
+    "states": [
+      {
+        "general": 35,
+        "particular": {
+          "correspond": 75
+        }
+      },
+      {
+        "state": "眩晕",
+        "particular": {
+          "correspond": 50
+        }
+      }
+    ]
+  },
+  {
+    "name": "爆炎树",
+    "states": [
+      {
+        "general": 110,
+        "particular": {
+          "correspond": 170,
+          "physical": 130
+        }
+      },
+      {
+        "state": "倒地",
+        "particular": {
+          "correspond": 70,
+          "physical": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "掣电树",
+    "states": [
+      {
+        "general": 310,
+        "particular": {
+          "electro": 370
+        }
+      },
+      {
+        "state": "倒地",
+        "particular": {
+          "electro": 70,
+          "physical": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "急冻树",
+    "states": [
+      {
+        "general": 110,
+        "particular": {
+          "correspond": 170,
+          "physical": 130
+        }
+      },
+      {
+        "state": "倒地",
+        "particular": {
+          "correspond": 70,
+          "physical": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "幼岩龙蜥",
     "states": [
       {
         "particular": {
-          "correspond": "50",
-          "physical": "-50"
+          "geo": 50,
+          "physical": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "岩龙蜥",
+    "states": [
+      {
+        "particular": {
+          "geo": 50,
+          "physical": 30
+        }
+      },
+      {
+        "state": "附魔",
+        "particular": {
+          "correspond": 30,
+          "geo": 50,
+          "physical": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "古岩龙蜥",
+    "states": [
+      {
+        "state": "沉睡",
+        "general": 210,
+        "particular": {
+          "correspond": 230,
+          "geo": 250,
+          "physical": 230
+        }
+      },
+      {
+        "particular": {
+          "correspond": 30,
+          "geo": 50,
+          "physical": 30
+        }
+      },
+      {
+        "state": "反弹",
+        "general": -40,
+        "particular": {
+          "correspond": -20,
+          "geo": 0,
+          "physical": -20
+        }
+      }
+    ]
+  },
+  {
+    "name": "深海龙蜥✱",
+    "states": [
+      {
+        "state": "幼体",
+        "particular": {
+          "correspond": 20,
+          "physical": 30
+        }
+      },
+      {
+        "particular": {
+          "correspond": 30,
+          "physical": 30
+        }
+      },
+      {
+        "state": "BOSS",
+        "particular": {
+          "correspond": 30,
+          "physical": 30
+        }
+      }
+    ]
+  },
+  {
+    "name": "✱萤",
+    "states": [
+      {
+        "particular": {
+          "correspond": 50,
+          "physical": -50
         }
       }
     ]
@@ -16,14 +174,14 @@
       {
         "state": "草",
         "particular": {
-          "dendro": "25"
+          "dendro": 25
         }
       },
       {
         "state": "其他",
         "particular": {
-          "correspond": "20",
-          "dendro": "20"
+          "correspond": 20,
+          "dendro": 20
         }
       }
     ]
@@ -34,14 +192,14 @@
       {
         "state": "草",
         "particular": {
-          "dendro": "40"
+          "dendro": 40
         }
       },
       {
         "state": "其他",
         "particular": {
-          "correspond": "30",
-          "dendro": "30"
+          "correspond": 30,
+          "dendro": 30
         }
       }
     ]
@@ -50,152 +208,16 @@
     "name": "翠翎恐蕈",
     "states": [
       {
-        "general": "25",
+        "general": 25,
         "particular": {
-          "dendro": "80"
+          "dendro": 80
         }
       },
       {
         "state": "倒地",
-        "general": "0",
+        "general": 0,
         "particular": {
-          "dendro": "55"
-        }
-      }
-    ]
-  },
-  {
-    "name": "✱骗骗花",
-    "states": [
-      {
-        "general": "35",
-        "particular": {
-          "correspond": "75"
-        }
-      },
-      {
-        "state": "眩晕",
-        "particular": {
-          "correspond": "50"
-        }
-      }
-    ]
-  },
-  {
-    "name": "爆炎/急冻树",
-    "states": [
-      {
-        "general": "110",
-        "particular": {
-          "correspond": "170",
-          "physical": "130"
-        }
-      },
-      {
-        "state": "倒地",
-        "particular": {
-          "correspond": "70",
-          "physical": "30"
-        }
-      }
-    ]
-  },
-  {
-    "name": "掣电树",
-    "states": [
-      {
-        "general": "310",
-        "particular": {
-          "electro": "370"
-        }
-      },
-      {
-        "state": "倒地",
-        "particular": {
-          "electro": "70",
-          "physical": "30"
-        }
-      }
-    ]
-  },
-  {
-    "name": "幼岩龙蜥",
-    "states": [
-      {
-        "particular": {
-          "geo": "50",
-          "physical": "30"
-        }
-      }
-    ]
-  },
-  {
-    "name": "✱岩龙蜥",
-    "states": [
-      {
-        "particular": {
-          "geo": "50",
-          "physical": "30"
-        }
-      },
-      {
-        "state": "附魔",
-        "particular": {
-          "correspond": "30",
-          "geo": "50",
-          "physical": "30"
-        }
-      }
-    ]
-  },
-  {
-    "name": "✱古岩龙蜥",
-    "states": [
-      {
-        "state": "沉睡",
-        "general": "210",
-        "particular": {
-          "correspond": "230",
-          "geo": "250",
-          "physical": "230"
-        }
-      },
-      {
-        "particular": {
-          "correspond": "30",
-          "geo": "50",
-          "physical": "30"
-        }
-      },
-      {
-        "state": "反弹",
-        "general": "-40",
-        "particular": {
-          "correspond": "-20",
-          "geo": "0",
-          "physical": "-20"
-        }
-      }
-    ]
-  },
-  {
-    "name": "深海龙蜥幼体",
-    "states": [
-      {
-        "particular": {
-          "correspond": "20",
-          "physical": "30"
-        }
-      }
-    ]
-  },
-  {
-    "name": "深海龙蜥",
-    "states": [
-      {
-        "particular": {
-          "correspond": "30",
-          "physical": "30"
+          "dendro": 55
         }
       }
     ]

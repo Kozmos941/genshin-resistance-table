@@ -1,11 +1,17 @@
 [
   {
-    "name": "✱萤之术士",
+    "name": "先遣队✱",
     "states": [
       {
         "particular": {
-          "correspond": "50",
-          "physical": "-20"
+          "physical": -20
+        }
+      },
+      {
+        "state": "盾",
+        "general": 110,
+        "particular": {
+          "physical": 80
         }
       }
     ]
@@ -15,8 +21,19 @@
     "states": [
       {
         "particular": {
-          "physical": "-20",
-          "pyro": "50"
+          "physical": -20,
+          "pyro": 50
+        }
+      }
+    ]
+  },
+  {
+    "name": "✱萤术士",
+    "states": [
+      {
+        "particular": {
+          "correspond": 50,
+          "physical": -20
         }
       }
     ]
@@ -26,25 +43,8 @@
     "states": [
       {
         "particular": {
-          "physical": "-20",
-          "hydro": "50"
-        }
-      }
-    ]
-  },
-  {
-    "name": "✱愚人众先遣队",
-    "states": [
-      {
-        "particular": {
-          "physical": "-20"
-        }
-      },
-      {
-        "state": "盾",
-        "particular": {
-          "general": "110",
-          "physical": "80"
+          "physical": -20,
+          "hydro": 50
         }
       }
     ]

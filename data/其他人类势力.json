@@ -1,20 +1,10 @@
 [
   {
-    "name": "千岩军",
-    "states": [
-      {
-        "particular": {
-          "physical": "-20"
-        }
-      }
-    ]
-  },
-  {
     "name": "盗宝团",
     "states": [
       {
         "particular": {
-          "physical": "-20"
+          "physical": -20
         }
       }
     ]
@@ -24,45 +14,36 @@
     "states": [
       {
         "particular": {
-          "physical": "-20"
+          "physical": -20
         }
       }
     ]
   },
   {
-    "name": "海乱鬼",
+    "name": "镀金旅团✱",
     "states": [
       {
         "particular": {
-          "physical": "-20"
-        }
-      }
-    ]
-  },
-  {
-    "name": "镀金旅团",
-    "states": [
-      {
-        "particular": {
-          "physical": "-20"
-        }
-      }
-    ]
-  },
-  {
-    "name": "镀金旅团精英",
-    "states": [
-      {
-        "particular": {
-          "physical": "-20"
+          "physical": -20
         }
       },
       {
         "state": "虚弱",
         "particular": {
-          "correspond": "-50",
-          "physical": "-20"
+          "correspond": -50,
+          "physical": -20
         }
+      },
+      {
+        "state": "魔化",
+        "general": 60,
+        "particular": {
+          "physical": 30
+        }
+      },
+      {
+        "state": "厄灵",
+        "correspond": -50
       }
     ]
   }
