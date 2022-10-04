@@ -17,12 +17,12 @@
     "states": [
       {
         "general": 110,
-        "correspond": 170,
+        "pyro": 170,
         "physical": 130
       },
       {
         "state": "倒地",
-        "correspond": 70,
+        "pyro": 70,
         "physical": 30
       }
     ]
@@ -46,12 +46,12 @@
     "states": [
       {
         "general": 110,
-        "correspond": 170,
+        "cryo": 170,
         "physical": 130
       },
       {
         "state": "倒地",
-        "correspond": 70,
+        "cryo": 70,
         "physical": 30
       }
     ]

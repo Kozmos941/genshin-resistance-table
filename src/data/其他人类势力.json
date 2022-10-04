@@ -1,6 +1,6 @@
 [
   {
-    "being": "盗宝团",
+    "being": "盗宝团*",
     "states": [
       {
         "physical": -20
@@ -11,6 +11,11 @@
     "being": "野伏众",
     "states": [
       {
+        "state": "野伏*",
+        "physical": -20
+      },
+      {
+        "state": "海乱鬼*",
         "physical": -20
       }
     ]
