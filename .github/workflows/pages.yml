@@ -37,6 +37,14 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Install and build
+        run: npm install && npm run build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.4.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
