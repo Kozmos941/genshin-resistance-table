@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { Races, THeads } from './src/scripts/ConfigDefault.js'
+import { Races, THeads } from './src/scripts/Config.js'
 
 const src = './src'
 
