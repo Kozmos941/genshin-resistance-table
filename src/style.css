@@ -1,121 +1,111 @@
 :root {
-  --physical-color: #ccc;
-  --anemo-color: #80ffd7;
-  --cryo-color: #5cffff;
-  --dendro-color: #13eea2;
-  --electro-color: #ffacff;
-  --geo-color: #ffe699;
-  --hydro-color: #80c0ff;
-  --pyro-color: #ff9999;
+  --color-physical: #ccc;
+  --color-anemo: #80ffd7;
+  --color-cryo: #5cffff;
+  --color-dendro: #13eea2;
+  --color-electro: #ffacff;
+  --color-geo: #ffe699;
+  --color-hydro: #80c0ff;
+  --color-pyro: #ff9999;
 
-  --dark-color: #25294a;
-  --light-color: #ffffff;
-
-  /* --dark-color: #ffffff;
-  --light-color: #25294a; */
-}
-
-html {
-  font-size: 10px;
+  --color-dark: #25294a;
+  --color-light: #ffffff;
 }
 
 body {
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  background-color: var(--color-dark);
+  color: var(--color-light);
   font-size: 16px;
 }
 
 a {
-  color: var(--light-color);
+  color: var(--color-light);
   text-decoration: none;
 }
 
-table thead th:last-child,
-table tbody td:last-child {
-  padding-right: 0.2em;
+table {
+  min-width: max-content;
+  margin: auto;
+  text-align: center;
+  border-collapse: collapse;
+  border-color: var(--color)-light;
+  background-color: var(--color-dark);
+  width: 1200px;
 }
 
-table tbody .race,
-table tbody .being,
-table tbody .state,
-table tbody .correspond {
+.electro {
+  color: var(--color-electro);
+}
+
+.pyro {
+  color: var(--color-pyro);
+}
+
+.hydro {
+  color: var(--color-hydro);
+}
+
+.cryo {
+  color: var(--color-cryo);
+}
+
+.dendro {
+  color: var(--color-dendro);
+}
+
+.anemo {
+  color: var(--color-anemo);
+}
+
+.geo {
+  color: var(--color-geo);
+}
+
+.physical {
+  color: var(--color-physical);
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 0.5rem;
+}
+
+tbody .race,
+tbody .being,
+tbody .state {
   font-weight: 700;
 }
 
-table tbody .race {
-  width: 4em;
-  padding: 0.4em;
+tbody td.electro,
+tbody td.pyro,
+tbody td.hydro,
+tbody td.cryo,
+tbody td.dendro,
+tbody td.anemo,
+tbody td.geo,
+tbody td.physical,
+tbody td.correspond {
+  font-size: 1.675rem;
 }
 
-table tbody .being {
-  width: 6em;
-  /* padding: 0.4em; */
+tbody td.infty {
+  font-family: 'Noto Sans SC';
+  font-weight: 900;
 }
 
-table tbody td.electro,
-table tbody td.pyro,
-table tbody td.hydro,
-table tbody td.cryo,
-table tbody td.dendro,
-table tbody td.anemo,
-table tbody td.geo,
-table tbody td.physical,
-table tbody td.correspond {
-  font-size: 1.1em;
+tbody td.minus {
+  font-weight: 900;
 }
 
-table .electro {
-  color: var(--electro-color)
-}
-
-table .pyro {
-  color: var(--pyro-color)
-}
-
-table .hydro {
-  color: var(--hydro-color)
-}
-
-table .cryo {
-  color: var(--cryo-color)
-}
-
-table .dendro {
-  color: var(--dendro-color)
-}
-
-table .anemo {
-  color: var(--anemo-color)
-}
-
-table .geo {
-  color: var(--geo-color)
-}
-
-table .physical {
-  color: var(--physical-color)
-}
-
-table tbody td.greater-20 {
+tbody td.gt-20 {
   font-weight: 300;
 }
 
-table tbody td.greater-50 {
+tbody td.gt-50 {
   font-weight: 500;
 }
 
-table tbody td.greater-75 {
+tbody td.gt-75 {
   font-weight: 700;
   font-style: italic;
-}
-
-table tbody td.minus {
-  font-weight: 900;
-}
-
-table tbody td.infinity {
-  font-family: 'Noto Sans SC';
-  padding: 0;
-  margin: 0;
-  font-weight: 900;
 }
