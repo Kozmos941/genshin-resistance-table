@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   ths: { type: Array, required: true },
-});
+})
 </script>
 
 <template>
@@ -15,20 +15,18 @@ const props = defineProps({
 </template>
 
 <style scoped>
-table thead {
+thead {
   font-family: 'Poppins', 'Noto Serif SC', serif;
   font-weight: 900;
-  font-size: 2.3em;
-  border-color: var(--light-color);
-  /* border-width: 0.2rem; */
+  font-size: 2.375rem;
   border-style: solid;
-  border-top-width: 0.8rem;
-  border-bottom-width: 0.4rem;
+  border-top-width: 0.5rem;
+  border-bottom-width: 0.25rem;
   border-left-width: 0;
   border-right-width: 0;
 }
 
-table thead tr th {
-  padding: 0.2em;
+th {
+  padding: 0.375rem;
 }
 </style>

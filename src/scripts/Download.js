@@ -1,11 +1,11 @@
 import html2canvas from 'html2canvas'
 
-const isMobile = navigator.userAgentData ?
-  navigator.userAgentData.mobile :
-  navigator.userAgent.match(/\Mobile/i)
+const isMobile = navigator.userAgentData
+  ? navigator.userAgentData.mobile
+  : navigator.userAgent.match(/\Mobile/i)
 
 export default class Download {
-  constructor (DOM) {
+  constructor(DOM) {
     this.node = DOM
     this.image = new Map()
 
@@ -28,7 +28,6 @@ export default class Download {
     }.bind(this)(this.node)
   }
 
-  getSize = dataURL => (
-    dataURL.length * 3.0 / 4.0 / Math.pow(2, 20)
-  ).toFixed(2)
+  getSize = dataURL =>
+    ((dataURL.length * 3.0) / 4.0 / Math.pow(2, 20)).toFixed(2)
 }
