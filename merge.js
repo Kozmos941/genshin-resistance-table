@@ -31,69 +31,88 @@ export const THEADS = [
   { key: 'physical', value: '物' },
 ]
 
-const map = new Map()
-
-THEADS.map(({ key }) => {
-  const shim = key.slice(0, 2)
-  map.set(key, shim)
-  // map.set(shim, key)
+Object.defineProperty(Map.prototype, '$set', {
+  value: function (key, value) {
+    this.set(key.slice(0, 2), value)
+  },
 })
 
-fetchData().then(raw => {
-  const Data = flattenData(raw)
-  const json = JSON.stringify(Data)
-  const path = `${__dirname}/assets/data.json`
+Object.defineProperty(Map.prototype, '$get', {
+  value: function (key) {
+    return this.get(key.slice(0, 2))
+  },
+})
 
+const RECORD_MAP = new Map()
+const SPAN_MAP = new Map()
+const DATA_ARRAY = new Array()
+
+const curr_race_span = () =>
+  DATA_ARRAY.length - RECORD_MAP.get('length')
+
+async function fetchData() {
+  return RACES.reduce(async (accumulator, race) => {
+    const basename = race.replace(/\n/, '')
+    const path = `${__dirname}/data/${basename}.json`
+    const beings = JSON.parse(
+      await fs.promises.readFile(path, 'utf-8')
+    )
+    return await accumulator.then(a => a.concat([{ race, beings }]))
+  }, Promise.resolve([]))
+}
+
+function flattenData(raw) {
+  raw.forEach(({ race: curr_race_name, beings }) => {
+    RECORD_MAP.set('length', DATA_ARRAY.length)
+    beings.forEach(({ being: curr_being_name, states }) => {
+      const $ = (item = {}) => {
+        const $MAP = createDataMap(curr_race_name, curr_being_name)
+        setDataMap($MAP, item)
+        DATA_ARRAY.push($MAP)
+      }
+      if (states) {
+        states.forEach(state_item => $(state_item))
+        if (states.length > 1)
+          SPAN_MAP.set(curr_being_name, states.length)
+      } else $()
+    })
+    SPAN_MAP.set(curr_race_name, curr_race_span())
+  })
+}
+
+function createDataMap(race, being) {
+  const $map = new Map()
+  if (RECORD_MAP.get('race') !== race) {
+    RECORD_MAP.set('race', race)
+    $map.$set('race', race)
+  }
+  if (RECORD_MAP.get('being') !== being) {
+    RECORD_MAP.set('being', being)
+    $map.$set('being', being)
+  }
+  $map.$set('state', null)
+  $map.$set('correspond', null)
+  return $map
+}
+
+function setDataMap($map, item) {
+  const ITEM_MAP = new Map(Object.entries(item))
+  if (!ITEM_MAP.has('general')) ITEM_MAP.set('general', 10)
+  THEADS.slice(4).forEach(({ key }) =>
+    $map.$set(key, ITEM_MAP.get('general'))
+  )
+  ITEM_MAP.delete('general')
+  for (const [key, value] of ITEM_MAP) $map.$set(key, value)
+}
+
+fetchData().then(raw => {
+  flattenData(raw)
+  const data = DATA_ARRAY.map(item => Object.fromEntries(item))
+  const rowspan = Object.fromEntries(SPAN_MAP)
+  const json = JSON.stringify({ data, rowspan })
+  const path = `${__dirname}/assets/data.json`
   fs.writeFile(path, json, 'utf-8', err => {
     if (err) console.log(err)
     else console.log('data.json 写入完成！')
   })
 })
-
-async function fetchData() {
-  return RACES.reduce(async (accumulator, race) => {
-    const file = race.replace(/\n/, '')
-    const path = `${__dirname}/data/${file}.json`
-    const json = JSON.parse(await fs.promises.readFile(path, 'utf-8'))
-    return await accumulator.then(a =>
-      a.concat([{ race, beings: json }])
-    )
-  }, Promise.resolve([]))
-}
-
-function flattenData(raw) {
-  return raw
-    .map(({ race, beings }) => {
-      return beings
-        .map(being_item => {
-          let { being, states } = being_item
-          if (!states) states = new Array({})
-          return states.map(state_item => {
-            function destructor(obj) {
-              const { general = 10 } = obj
-              delete obj.general
-              const tmp = THEADS.reduce((a, { key, _ }) => {
-                a[key] = null
-                return a
-              }, {})
-              const particular = THEADS.slice(4).reduce(
-                (a, { key, _ }) => {
-                  a[key] = general
-                  return a
-                },
-                {}
-              )
-              return Object.assign(
-                tmp,
-                { race, being },
-                particular,
-                obj
-              )
-            }
-            return destructor(state_item)
-          })
-        })
-        .flat()
-    })
-    .flat()
-}

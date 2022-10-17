@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Data from '@/assets/data.json'
-import { THItem, THKey, TDValue, TRow } from '$types'
+import { data, rowspan } from '@/assets/data.json'
+import { THItem, TDValue } from '$types'
 
 interface Props {
   sign: { [key: string]: string }
@@ -9,33 +9,16 @@ interface Props {
 const { ths, sign } = defineProps<Props>()
 const { INFINITY: infty, ASTERISK: aster } = sign
 
-const { data, rowSpan } = (function (data: TRow[]) {
-  const DataMap = data.map(
-    v => new Map(Object.entries(v) as [THKey, TDValue][])
-  )
-  const tmpMap = new Map()
-  const keys = ths.slice(0, 2).map(({ key }) => key) as THKey[]
-  keys.map(k => tmpMap.set(k, ''))
-  const spanMap = new Map()
-  return {
-    data: DataMap.map(row => {
-      keys.map(k => {
-        const v = row.get(k)
-        if (tmpMap.get(k) !== v) {
-          tmpMap.set(k, v)
-          spanMap.set(v, 1)
-        } else {
-          spanMap.set(v, spanMap.get(v) + 1)
-          row.delete(k)
-        }
-      })
-      return row
-    }),
-    rowSpan: spanMap,
-  }
-})(Data as TRow[])
+const ROW_SPAN = new Map(Object.entries(rowspan))
+const DATA = data.map(item => new Map(Object.entries(item)))
+const keyMap = ths.reduce(
+  (map, { key }) => map.set(key.slice(0, 2), key),
+  new Map()
+)
+
 const row_key = (i: number) => 'row' + i
-const set_span = (k: TDValue) => (rowSpan.has(k) ? rowSpan.get(k) : 1)
+const set_span = (k: string) =>
+  ROW_SPAN.has(k) ? ROW_SPAN.get(k) : 1
 const add_class = (v: TDValue) => {
   let c = []
   switch (typeof v) {
@@ -72,11 +55,11 @@ const check_data = (v: TDValue) => {
 
 <template>
   <tbody>
-    <tr v-for="(row, index) in data" :key="row_key(index)">
+    <tr v-for="(row, index) in DATA" :key="row_key(index)">
       <td
         v-for="[key, value] in row"
         :rowSpan="set_span(value)"
-        :class="[key, add_class(value)]"
+        :class="[keyMap.get(key), add_class(value)]"
         v-html="check_data(value)"></td>
     </tr>
   </tbody>
