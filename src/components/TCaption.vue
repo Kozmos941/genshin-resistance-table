@@ -1,23 +1,22 @@
-<script setup>
+<script setup lang="ts">
 import GithubCorner from '@/components/GithubCorner.vue'
 
-const props = defineProps({
-  text: { type: String, default: '原神抗性表' },
-})
-
-const githubParams = {
-  url: 'https://github.com/Kozmos941/genshin-resistance-table',
+interface Props {
+  title: string
 }
+
+const { title } = defineProps<Props>()
 </script>
 
 <template>
   <caption>
-    <span>{{ props.text }}</span>
-    <GithubCorner v-bind="githubParams" />
+    <span>{{ title }}</span>
+    <GithubCorner
+      url="https://github.com/Kozmos941/genshin-resistance-table" />
   </caption>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 caption {
   position: relative;
   font-family: 'Poppins', 'Noto Serif SC', serif;

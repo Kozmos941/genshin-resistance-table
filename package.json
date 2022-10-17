@@ -1,13 +1,12 @@
 {
   "name": "genshin-resistance-table",
-  "author": "Kozmos941",
-  "homepage": "https://github.com/Kozmos941/genshin-resistance-table",
   "private": true,
-  "version": "3.1.3",
+  "version": "3.1.4",
   "type": "module",
   "scripts": {
-    "dev": "node merge.js && vite",
-    "build": "node merge.js && vite build",
+    "merge": "node merge.js",
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,7 +15,13 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@types/node": "^18.8.0",
+    "@types/webfontloader": "^1.6.35",
     "@vitejs/plugin-vue": "^3.1.0",
-    "vite": "^3.1.0"
+    "postcss-nesting": "^10.2.0",
+    "typescript": "^4.6.4",
+    "user-agent-data-types": "^0.3.0",
+    "vite": "^3.1.0",
+    "vue-tsc": "^0.40.4"
   }
 }

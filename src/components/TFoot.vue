@@ -1,19 +1,21 @@
-<script setup>
-const props = defineProps({
-  colSpan: { type: Number, required: true },
-  comment: { type: String, required: true },
-})
+<script setup lang="ts">
+interface Props {
+  colSpan?: number
+  comments?: string
+}
+
+const { colSpan, comments } = defineProps<Props>()
 </script>
 
 <template>
   <tfoot>
     <tr>
-      <td :colSpan="props.colSpan" v-html="props.comment"></td>
+      <td :colSpan="colSpan" v-html="comments"></td>
     </tr>
   </tfoot>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 tfoot {
   font-family: 'Poppins', 'Noto Sans SC', sans-serif;
   border-style: solid;
@@ -21,9 +23,8 @@ tfoot {
   border-bottom-width: 0.5rem;
   border-left-width: 0;
   border-right-width: 0;
-}
-
-td {
-  padding: 0.5rem;
+  & td {
+    padding: 0.5rem;
+  }
 }
 </style>
