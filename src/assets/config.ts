@@ -36,4 +36,4 @@ export const TFOOT_COMMENTS = `
   * 现版又经更新、重制、并会在 <strong>米游社</strong> 和 <a href="https://bbs.nga.cn/read.php?tid=29649225" target="_blank"><strong>NGA</strong></a>一直保持更新。
   `
 
-export const CAPTION_TITLE = `原神抗性表v${__APP_VERSION__}`
+export const CAPTION_TITLE = `原神抗性表 v${__APP_VERSION__}`

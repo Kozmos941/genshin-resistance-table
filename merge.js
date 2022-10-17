@@ -45,18 +45,15 @@ Object.defineProperty(Map.prototype, '$get', {
 
 const RECORD_MAP = new Map()
 const SPAN_MAP = new Map()
-const DATA_ARRAY = new Array()
+const DATA_ARRAY = []
 
-const curr_race_span = () =>
-  DATA_ARRAY.length - RECORD_MAP.get('length')
+const curr_race_span = () => DATA_ARRAY.length - RECORD_MAP.get('length')
 
 async function fetchData() {
   return RACES.reduce(async (accumulator, race) => {
     const basename = race.replace(/\n/, '')
     const path = `${__dirname}/data/${basename}.json`
-    const beings = JSON.parse(
-      await fs.promises.readFile(path, 'utf-8')
-    )
+    const beings = JSON.parse(await fs.promises.readFile(path, 'utf-8'))
     return await accumulator.then(a => a.concat([{ race, beings }]))
   }, Promise.resolve([]))
 }
@@ -72,8 +69,7 @@ function flattenData(raw) {
       }
       if (states) {
         states.forEach(state_item => $(state_item))
-        if (states.length > 1)
-          SPAN_MAP.set(curr_being_name, states.length)
+        if (states.length > 1) SPAN_MAP.set(curr_being_name, states.length)
       } else $()
     })
     SPAN_MAP.set(curr_race_name, curr_race_span())
@@ -98,9 +94,7 @@ function createDataMap(race, being) {
 function setDataMap($map, item) {
   const ITEM_MAP = new Map(Object.entries(item))
   if (!ITEM_MAP.has('general')) ITEM_MAP.set('general', 10)
-  THEADS.slice(4).forEach(({ key }) =>
-    $map.$set(key, ITEM_MAP.get('general'))
-  )
+  THEADS.slice(4).forEach(({ key }) => $map.$set(key, ITEM_MAP.get('general')))
   ITEM_MAP.delete('general')
   for (const [key, value] of ITEM_MAP) $map.$set(key, value)
 }

@@ -11,14 +11,10 @@ const { INFINITY: infty, ASTERISK: aster } = sign
 
 const ROW_SPAN = new Map(Object.entries(rowspan))
 const DATA = data.map(item => new Map(Object.entries(item)))
-const keyMap = ths.reduce(
-  (map, { key }) => map.set(key.slice(0, 2), key),
-  new Map()
-)
+const keyMap = ths.reduce((map, { key }) => map.set(key.slice(0, 2), key), new Map())
 
 const row_key = (i: number) => 'row' + i
-const set_span = (k: string) =>
-  ROW_SPAN.has(k) ? ROW_SPAN.get(k) : 1
+const set_span = (k: string) => (ROW_SPAN.has(k) ? ROW_SPAN.get(k) : 1)
 const add_class = (v: TDValue) => {
   let c = []
   switch (typeof v) {
@@ -35,18 +31,16 @@ const add_class = (v: TDValue) => {
   return c
 }
 const check_data = (v: TDValue) => {
-  let t: any = v
+  let t = ''
   switch (typeof v) {
-    case 'object':
-      if (v === null) t = ''
-      break
     case 'number':
-      t += '%'
+      t = v + '%'
       break
     case 'string':
       if (v === 'infinity') t = infty
-      else if (v.match(/\*/)) t = t.replace(/\*/, aster)
-      else if (v.match(/\n/)) t = t.replace(/\n/, '<br>')
+      else if (v.match(/\*/)) t = v.replace(/\*/, aster)
+      else if (v.match(/\n/)) t = v.replace(/\n/, '<br>')
+      else t = v
       break
   }
   return t
@@ -56,11 +50,8 @@ const check_data = (v: TDValue) => {
 <template>
   <tbody>
     <tr v-for="(row, index) in DATA" :key="row_key(index)">
-      <td
-        v-for="[key, value] in row"
-        :rowSpan="set_span(value)"
-        :class="[keyMap.get(key), add_class(value)]"
-        v-html="check_data(value)"></td>
+      <td v-for="[key, value] in row" :key="key+index" :rowSpan="set_span(value)"
+        :class="[keyMap.get(key), add_class(value)]" v-html="check_data(value)"></td>
     </tr>
   </tbody>
 </template>
@@ -70,6 +61,7 @@ tbody {
   font-family: 'Poppins', 'Noto Sans SC', sans-serif;
   font-weight: 100;
   font-size: 1.5rem;
+
   & td {
     padding: 0.1rem;
     border-color: var(--color-light);
