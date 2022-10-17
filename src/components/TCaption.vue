@@ -11,8 +11,7 @@ const { title } = defineProps<Props>()
 <template>
   <caption>
     <span>{{ title }}</span>
-    <GithubCorner
-      url="https://github.com/Kozmos941/genshin-resistance-table" />
+    <GithubCorner url="https://github.com/Kozmos941/genshin-resistance-table" />
   </caption>
 </template>
 

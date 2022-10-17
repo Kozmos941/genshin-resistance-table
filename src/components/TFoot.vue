@@ -23,6 +23,7 @@ tfoot {
   border-bottom-width: 0.5rem;
   border-left-width: 0;
   border-right-width: 0;
+
   & td {
     padding: 0.5rem;
   }

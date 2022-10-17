@@ -2,12 +2,9 @@ import WebFont from 'webfontloader'
 import * as _ from '@/assets/config'
 import data from '@/assets/data.json'
 
-const SERIF_TEXT =
-  _.THEADS.map(({ value }) => value).join('') + _.CAPTION_TITLE
+const SERIF_TEXT = _.THEADS.map(({ value }) => value).join('') + _.CAPTION_TITLE
 
-const SANS_TEXT = Array.from(
-  new Set(JSON.stringify(data) + _.TFOOT_COMMENTS)
-)
+const SANS_TEXT = Array.from(new Set(JSON.stringify(data) + _.TFOOT_COMMENTS))
   .concat(Object.values(_.SIGN))
   .join('')
 

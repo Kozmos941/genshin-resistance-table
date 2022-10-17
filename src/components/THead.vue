@@ -28,6 +28,7 @@ thead {
   border-bottom-width: 0.25rem;
   border-left-width: 0;
   border-right-width: 0;
+
   & th {
     padding: 0.375rem;
   }
