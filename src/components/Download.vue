@@ -1,30 +1,36 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import Download from '@/scripts/Download'
-import { CaptionText } from '@config.js'
 
-const size = ref('…')
-const button = ref(null)
+interface Props {
+  title: string
+}
+
+const { title } = defineProps<Props>()
+
+const size = ref<string>('…')
+const button = ref<HTMLButtonElement | null>(null)
+const image = ref<{ [key: string]: string }>({})
 
 function saveAs() {
   const a = document.createElement('a')
-  a.href = localStorage.getItem('dataURL')
-  const ext = localStorage.getItem('type').split('/')[1]
-  a.download = `${CaptionText}.${ext}`
+  a.href = image.value.dataURL
+  const ext = image.value.type.split('/')[1]
+  a.download = `${title}.${ext}`
   a.click()
 }
 
 onMounted(async () => {
-  const node = document.querySelector('table')
-  if (localStorage.getItem('dataURL')) {
-    size.value = localStorage.getItem('size')
-    button.value.onclick = saveAs
-  } else {
+  if (!localStorage.getItem('image')) {
+    const node = document.querySelector('table') as HTMLTableElement
     const dl = new Download(node)
     await dl.dataURL
-    size.value = localStorage.getItem('size')
-    button.value.onclick = saveAs
+    const json = JSON.stringify(Object.fromEntries(dl.image))
+    localStorage.setItem('image', json)
   }
+  image.value = JSON.parse(localStorage.getItem('image') as string)
+  size.value = image.value.size
+  button.value?.addEventListener('click', saveAs)
 })
 </script>
 
@@ -35,7 +41,7 @@ onMounted(async () => {
   </button>
 </template>
 
-<style scope>
+<style scope lang="postcss">
 button {
   position: absolute;
   top: 1rem;
