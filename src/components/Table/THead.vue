@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { THItem } from '$types'
 
-interface Props {
+const { ths } = defineProps<{
   ths: THItem[]
-}
-
-const { ths } = defineProps<Props>()
+}>()
 </script>
 
 <template>
@@ -20,17 +18,21 @@ const { ths } = defineProps<Props>()
 
 <style scoped lang="postcss">
 thead {
-  font-family: 'Poppins', 'Noto Serif SC', serif;
+  position: sticky;
+  top: 0;
+  font-family: var(--font-serif);
   font-weight: 900;
   font-size: 2.375rem;
-  border-style: solid;
-  border-top-width: 0.5rem;
-  border-bottom-width: 0.25rem;
-  border-left-width: 0;
-  border-right-width: 0;
+  background-color: var(--color-dark);
 
   & th {
     padding: 0.375rem;
+    border-style: solid;
+    border-color: var(--color-light);
+    border-top-width: 0.5rem;
+    border-bottom-width: 0.25rem;
+    border-left-width: 0;
+    border-right-width: 0;
   }
 }
 </style>

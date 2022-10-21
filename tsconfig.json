@@ -10,16 +10,24 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "$config": ["src/assets/config.ts"],
-      "$types": ["src/scripts/types.ts"]
+      "@/*": [
+        "src/*"
+      ],
+      "$/*": [
+        "src/scripts/*"
+      ],
     },
-    "types": ["node", "./node_modules/user-agent-data-types"],
-    "allowJs": true
+    "types": [
+      "node",
+      "./node_modules/user-agent-data-types"
+    ],
   },
   "include": [
     "src/**/*.ts",
@@ -27,5 +35,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

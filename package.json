@@ -1,7 +1,7 @@
 {
   "name": "genshin-resistance-table",
   "private": true,
-  "version": "3.1.5",
+  "version": "3.1.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,10 +12,12 @@
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
+    "lodash": "^4.17.21",
     "vue": "^3.2.37",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.186",
     "@types/node": "^18.8.0",
     "@types/webfontloader": "^1.6.35",
     "@typescript-eslint/eslint-plugin": "^5.40.0",

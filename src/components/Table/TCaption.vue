@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import GithubCorner from '@/components/GithubCorner.vue'
 
-interface Props {
+const { title } = defineProps<{
   title: string
-}
+}>()
 
-const { title } = defineProps<Props>()
 </script>
 
 <template>
@@ -17,11 +16,12 @@ const { title } = defineProps<Props>()
 
 <style scoped lang="postcss">
 caption {
+  /* Box */
   position: relative;
-  font-family: 'Poppins', 'Noto Serif SC', serif;
-  font-weight: 900;
-  vertical-align: middle;
-  font-size: 4rem;
   padding-left: 1.75rem;
+  /* Font */
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  font-weight: 900;
 }
 </style>

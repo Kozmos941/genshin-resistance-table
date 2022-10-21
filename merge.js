@@ -47,11 +47,9 @@ const RECORD_MAP = new Map()
 const SPAN_MAP = new Map()
 const DATA_ARRAY = []
 
-const curr_race_span = () => DATA_ARRAY.length - RECORD_MAP.get('length')
-
 async function fetchData() {
-  return RACES.reduce(async (accumulator, race) => {
-    const basename = race.replace(/\n/, '')
+  return RACES.reduce(async (accumulator, race, index) => {
+    const basename = (index + 1) + '-' + race.replace(/\n/, '')
     const path = `${__dirname}/data/${basename}.json`
     const beings = JSON.parse(await fs.promises.readFile(path, 'utf-8'))
     return await accumulator.then(a => a.concat([{ race, beings }]))
@@ -68,10 +66,11 @@ function flattenData(raw) {
         DATA_ARRAY.push($MAP)
       }
       if (states) {
-        states.forEach(state_item => $(state_item))
         if (states.length > 1) SPAN_MAP.set(curr_being_name, states.length)
+        states.forEach(state_item => $(state_item))
       } else $()
     })
+    const curr_race_span = () => DATA_ARRAY.length - RECORD_MAP.get('length')
     SPAN_MAP.set(curr_race_name, curr_race_span())
   })
 }
@@ -104,9 +103,9 @@ fetchData().then(raw => {
   const data = DATA_ARRAY.map(item => Object.fromEntries(item))
   const rowspan = Object.fromEntries(SPAN_MAP)
   const json = JSON.stringify({ data, rowspan })
-  const path = `${__dirname}/assets/data.json`
+  const path = `${__dirname}/data/table.json`
   fs.writeFile(path, json, 'utf-8', err => {
     if (err) console.log(err)
-    else console.log('data.json 写入完成！')
+    else console.log('table.json 写入完成！')
   })
 })

@@ -1,6 +1,23 @@
-# genshin-resistance-table
+## genshin-resistance-table
 
  原神怪物抗性表
+
+- [genshin-resistance-table](#genshin-resistance-table)
+- [Vue 3 + TypeScript + Vite](#vue-3--typescript--vite)
+  - [Recommended IDE Setup](#recommended-ide-setup)
+  - [Type Support For `.vue` Imports in TS](#type-support-for-vue-imports-in-ts)
+- [数据](#数据)
+  - [存储](#存储)
+- [数据处理](#数据处理)
+- [配置](#配置)
+  - [Vite](#vite)
+    - [define](#define)
+    - [PostCSS](#postcss)
+  - [TypeScript](#typescript)
+  - [ESLint](#eslint)
+  - [CSS](#css)
+- [TO LEARN](#to-learn)
+- [TO DO](#to-do)
 
 ## Vue 3 + TypeScript + Vite
 
@@ -18,6 +35,7 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
 
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+
 
 ## 数据
 
@@ -146,5 +164,122 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
   // ...
 ]
 ```
-# TO DO
-- 目前的 RowSpan 是遍历整个表格提前记录的，看看能不能改进
+
+## 配置
+
+项目换成 TypeScript 了，顺便尝试了一些插件
+
+### Vite
+
+```ts
+// alias
+import { resolve } from 'path'
+
+resolve: {
+  extensions: ['.ts', '.js', '.vue'],
+  alias: [
+    {
+      find: '@',
+      replacement: resolve(__dirname, 'src'),
+    }
+  ],
+}
+
+// server
+server: {
+  host: '0.0.0.0',
+}
+```
+
+#### define
+
+```ts
+// vite-env.d.ts
+declare const __APP_VERSION__: string
+
+// vite.config.ts
+define: {
+  __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+},
+```
+
+#### PostCSS
+
+- 配置 `vite.config.ts`
+```ts
+import postcssNesting from 'postcss-nesting'
+
+css: {
+  postcss: {
+    plugins: [postcssNesting()],
+  },
+},
+```
+
+- 使用
+ - 全局引入 `.postcss` 文件 
+ - `.vue` 中 `<style lang="postcss">`
+
+### TypeScript
+
+```json
+// 配合 vite.config.ts 的 alias 使用
+"paths": {
+  "@/*": ["src/*"],
+  "$config": ["src/assets/config.ts"],
+  "$types": ["src/scripts/types.ts"]
+}
+```
+
+### ESLint
+
+```json
+// 禁用插件
+"vue/no-setup-props-destructure": "off"
+```
+
+|                 |               |
+| --------------- | ------------- |
+| max-len         | 行长度        |
+| indent          | 缩进          |
+| linebreak-style | 换行 LF or CR |
+| quotes          | 引号          |
+| semi            | 分号          |
+| comma-spacing   | 逗号空格      |
+| comma-style     |               |
+| comma-dangle    | 尾逗号        |
+
+### CSS
+- 禁用选择 [stackoverflow](https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
+```css
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+```
+
+## TO LEARN
+
+- Flexbox
+  - 如何控制单个盒子大小，比如某些固定，某些自适应
+
+- Grid Layout
+
+- TypeScript
+  - 语法、类型等
+
+- Storage
+  - Cookie
+  - IndexedDB
+
+- Web Worker
+  - 了解下用法和作用
+
+## TO DO
+
+- 移动端样式

@@ -21,3 +21,9 @@ export interface TRow {
 export type THKey = keyof TRow
 
 export type THItem = { key: string; value: string }
+
+declare global {
+  interface Window {
+    isMobile: () => boolean
+  }
+}

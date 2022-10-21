@@ -20,6 +20,7 @@
   ],
   "overrides": [],
   "parser": "vue-eslint-parser",
+  // "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
     "ecmaVersion": "latest",
@@ -32,6 +33,12 @@
   "rules": {
     "vue/no-setup-props-destructure": [
       "off"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
     ],
     "max-len": [
       "off",
