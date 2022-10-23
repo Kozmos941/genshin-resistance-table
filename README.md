@@ -320,15 +320,15 @@ onMounted(() => {
 ## TO DO
 
 - 无穷符号 ∞, 字体都没这个符号, 看上去不和谐
- - 使用 Emoji ♾️ 可惜不能改变颜色
- - 试着用 `transform: rotate(-90degree)` 将全角 `８` 旋转
-   - 网页看上去没问题, 但截图中 `td` 的 `border` 也旋转了
-   - 貌似是 html2canvas 不支持 `transform`
- - 原来是字体名打错了, Noto 字体是有这个符号的, 虽然感觉还是小了点, 但个人已经可以接受了
+   - 使用 Emoji ♾️ 可惜不能改变颜色
+   - 试着用 `transform: rotate(-90degree)` 将全角 `８` 旋转
+      - 网页看上去没问题, 但截图中 `td` 的 `border` 也旋转了
+      - 貌似是 html2canvas 不支持 `transform`
+   - 原来是字体名打错了, Noto 字体是有这个符号的, 虽然感觉还是小了点, 但个人已经可以接受了
 
 - 第一次加载网页, 截图会少差不多一列
- - 貌似是因为字体渲染导致的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体完全渲染后的小
- - 直接设置一个固定宽度 `width: 1200`, 暂时解决了
+   - 貌似是因为字体渲染导致的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体完全渲染后的小
+   - 直接设置一个固定宽度 `width: 1200`, 暂时解决了
 
 - 侧边栏锚点标签随着滚动即时改变背景颜色
   - 用 id 和 `<a>` 标签定位, 但效果达不到预期, 遂放弃
