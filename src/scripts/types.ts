@@ -21,3 +21,5 @@ export interface TRow {
 export type THKey = keyof TRow
 
 export type THItem = { key: string; value: string }
+
+export type ScrollBehavior = 'auto' | 'smooth'

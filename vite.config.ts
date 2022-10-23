@@ -17,6 +17,7 @@ export default defineConfig({
   },
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    __LAST_UPDATE__: new Date(),
   },
   server: {
     host: '0.0.0.0',
@@ -30,12 +31,12 @@ export default defineConfig({
         replacement: resolve(__dirname, 'src'),
       },
       {
-        find: '$config',
-        replacement: resolve(__dirname, 'src/assets/config'),
+        find: '$',
+        replacement: resolve(__dirname, 'src/scripts'),
       },
       {
-        find: '$types',
-        replacement: resolve(__dirname, 'src/scripts/types'),
+        find: '#',
+        replacement: resolve(__dirname, 'src/components'),
       },
     ],
   },

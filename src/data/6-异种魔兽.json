@@ -91,6 +91,11 @@
         "physical": 230
       },
       {
+        "geo": 50,
+        "physical": 30
+      },
+      {
+        "state": "附魔",
         "correspond": 30,
         "geo": 50,
         "physical": 30
@@ -113,6 +118,7 @@
         "physical": 30
       },
       {
+        "state": "成体",
         "correspond": 30,
         "physical": 30
       },

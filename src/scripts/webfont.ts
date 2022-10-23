@@ -1,29 +1,28 @@
 import WebFont from 'webfontloader'
-import * as _ from '@/assets/config'
-import data from '@/assets/data.json'
+import * as _ from '$/config'
+import data from '@/data/table.json'
 
-const SERIF_TEXT = _.THEADS.map(({ value }) => value).join('') + _.CAPTION_TITLE
+const SERIF_TEXT = textDeduplicate(''.concat(
+  ..._.TABLE_HEADS.map(({ value }) => value),
+  ..._.RACES.map(r => r),
+  _.TABLE_CAPTION,
+))
 
-const SANS_TEXT = Array.from(new Set(JSON.stringify(data) + _.TFOOT_COMMENTS))
-  .concat(Object.values(_.SIGN))
-  .join('')
+const SANS_TEXT = textDeduplicate(''.concat(
+  JSON.stringify(data),
+  SERIF_TEXT,
+  ...Object.values(_.SIGN_REPLACE),
+))
 
-WebFont.load({
-  google: {
-    families: ['Noto Sans SC:100,200,300,400,500,600,700,900'],
-    text: SANS_TEXT,
-  },
-})
+loadGoogleWebFont('Noto Serif SC', SERIF_TEXT)
+loadGoogleWebFont('Poppins')
+loadGoogleWebFont('Noto Sans SC', SANS_TEXT)
 
-WebFont.load({
-  google: {
-    families: ['Noto Serif SC:100,200,300,400,500,600,700,900'],
-    text: SERIF_TEXT,
-  },
-})
+export function textDeduplicate(text: string) {
+  return Array.from(new Set(text)).join('')
+}
 
-WebFont.load({
-  google: {
-    families: ['Poppins:100,200,300,400,500,600,700,800,900'],
-  },
-})
+export function loadGoogleWebFont(font: string, text?: string) {
+  const family = `${font}:100,200,300,400,500,600,700,900`
+  WebFont.load({ google: { families: [family], text: text } })
+}

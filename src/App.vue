@@ -1,19 +1,42 @@
 <script setup lang="ts">
-import Download from '@/components/DownloadButton.vue'
-import TCaption from '@/components/TCaption.vue'
-import THead from '@/components/THead.vue'
-import TBody from '@/components/TBody.vue'
-import TFoot from '@/components/TFoot.vue'
-import * as _ from '$config'
-document.title = _.CAPTION_TITLE
+import SiderBar from '#/SiderBar.vue'
+import MainView from '#/MainView.vue'
+import { ref, onMounted, computed } from 'vue'
+import { debounce } from 'lodash'
+import { TABLE_WIDTH } from '$/config'
+/* Sidebar */
+const scrollY = ref(0)
+// v-show
+const width = ref(window.innerWidth)
+const height = ref(window.innerHeight)
+const SideVisibility = computed(() => {
+  const w = TABLE_WIDTH + 50
+  return width.value >= w && height.value >= w / 2
+})
+
+/* Life Hooks */
+const roundY = computed(() => Math.round(window.scrollY))
+onMounted(() => {
+  /* onResize */
+  window.addEventListener('resize', debounce(() => {
+    width.value = window.innerWidth
+    height.value = window.innerHeight
+  }, 20, { 'leading': false, 'trailing': true }))
+
+  /* onScroll */
+  window.addEventListener('scroll', debounce(() => {
+    scrollY.value = roundY.value
+    sessionStorage.setItem('scrollY', `${scrollY.value}`)
+  }, 100, { 'leading': false, 'trailing': true }))
+})
+
 </script>
 
 <template>
-  <download :title="_.CAPTION_TITLE" />
-  <table>
-    <t-caption :title="_.CAPTION_TITLE" />
-    <t-head :ths="_.THEADS" />
-    <t-body :sign="_.SIGN" :ths="_.THEADS" />
-    <t-foot :col-span="_.THEADS_LENGTH" :comments="_.TFOOT_COMMENTS" />
-  </table>
+  <!-- Aside -->
+  <Transition name="sidebar">
+    <sider-bar v-if="SideVisibility" :Y="scrollY" />
+  </Transition>
+  <!-- Main Table -->
+  <main-view />
 </template>

@@ -16,19 +16,19 @@ export const RACES = [
   '值得铭记\n的强敌',
 ]
 
-export const THEADS = [
-  { key: 'race', value: '种族' },
-  { key: 'being', value: '生物' },
-  { key: 'state', value: '状态' },
-  { key: 'correspond', value: '对应' },
-  { key: 'electro', value: '雷' },
-  { key: 'pyro', value: '火' },
-  { key: 'hydro', value: '水' },
-  { key: 'cryo', value: '冰' },
-  { key: 'dendro', value: '草' },
-  { key: 'anemo', value: '风' },
-  { key: 'geo', value: '岩' },
-  { key: 'physical', value: '物' },
+export const TABLE_HEADS = [
+  { key: 'race', value: '种族', color: '' },
+  { key: 'being', value: '生物', color: '' },
+  { key: 'state', value: '状态', color: '' },
+  { key: 'correspond', value: '对应', color: '' },
+  { key: 'electro', value: '雷', color: '#ffacff' },
+  { key: 'pyro', value: '火', color: '#ff9999' },
+  { key: 'hydro', value: '水', color: '#80c0ff' },
+  { key: 'cryo', value: '冰', color: '#5cffff' },
+  { key: 'dendro', value: '草', color: '#13eea2' },
+  { key: 'anemo', value: '风', color: '#80ffd7' },
+  { key: 'geo', value: '岩', color: '#ffe699' },
+  { key: 'physical', value: '物', color: '#cccccc' },
 ]
 
 Object.defineProperty(Map.prototype, '$set', {
@@ -47,11 +47,9 @@ const RECORD_MAP = new Map()
 const SPAN_MAP = new Map()
 const DATA_ARRAY = []
 
-const curr_race_span = () => DATA_ARRAY.length - RECORD_MAP.get('length')
-
 async function fetchData() {
-  return RACES.reduce(async (accumulator, race) => {
-    const basename = race.replace(/\n/, '')
+  return RACES.reduce(async (accumulator, race, index) => {
+    const basename = (index + 1) + '-' + race.replace(/\n/, '')
     const path = `${__dirname}/data/${basename}.json`
     const beings = JSON.parse(await fs.promises.readFile(path, 'utf-8'))
     return await accumulator.then(a => a.concat([{ race, beings }]))
@@ -68,10 +66,11 @@ function flattenData(raw) {
         DATA_ARRAY.push($MAP)
       }
       if (states) {
-        states.forEach(state_item => $(state_item))
         if (states.length > 1) SPAN_MAP.set(curr_being_name, states.length)
+        states.forEach(state_item => $(state_item))
       } else $()
     })
+    const curr_race_span = () => DATA_ARRAY.length - RECORD_MAP.get('length')
     SPAN_MAP.set(curr_race_name, curr_race_span())
   })
 }
@@ -94,19 +93,20 @@ function createDataMap(race, being) {
 function setDataMap($map, item) {
   const ITEM_MAP = new Map(Object.entries(item))
   if (!ITEM_MAP.has('general')) ITEM_MAP.set('general', 10)
-  THEADS.slice(4).forEach(({ key }) => $map.$set(key, ITEM_MAP.get('general')))
+  TABLE_HEADS.slice(4).forEach(({ key }) => $map.$set(key, ITEM_MAP.get('general')))
   ITEM_MAP.delete('general')
   for (const [key, value] of ITEM_MAP) $map.$set(key, value)
 }
 
 fetchData().then(raw => {
   flattenData(raw)
+  console.log(SPAN_MAP)
   const data = DATA_ARRAY.map(item => Object.fromEntries(item))
   const rowspan = Object.fromEntries(SPAN_MAP)
   const json = JSON.stringify({ data, rowspan })
-  const path = `${__dirname}/assets/data.json`
+  const path = `${__dirname}/data/table.json`
   fs.writeFile(path, json, 'utf-8', err => {
     if (err) console.log(err)
-    else console.log('data.json 写入完成！')
+    else console.log('table.json 写入完成！')
   })
 })
