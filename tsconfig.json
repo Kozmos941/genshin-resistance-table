@@ -23,6 +23,9 @@
       "$/*": [
         "src/scripts/*"
       ],
+      "#/*": [
+        "src/components/*"
+      ],
     },
     "types": [
       "node",

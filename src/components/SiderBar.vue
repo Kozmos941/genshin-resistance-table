@@ -1,116 +1,71 @@
 <script setup lang="ts">
-import { ref, onBeforeUpdate, onMounted } from 'vue'
-import { RACES, THEADS } from '$/config'
-// shuffle colors
-const colors = THEADS
+import { ref, onMounted } from 'vue'
+import { RACES, TABLE_HEADS } from '$/config'
+import { ScrollBehavior } from '$/types'
+
+// Table Head Offset Height
+const H = ref(0)
+onMounted(() => {
+  const thead = document.querySelector('thead') as HTMLTableSectionElement
+  H.value = thead.offsetHeight
+})
+
+/* Shuffle Colors */
+const colors = TABLE_HEADS
   .filter(({ color }) => color)
   .map(({ color }) => color)
   .sort(() => Math.random() - 0.5)
-// window.scrollY
-const { y } = defineProps<{
-  y: number
-}>()
-const scrollBottom = ref<number>(0)
-// List of each td.race's scrollY
-const tdRaceTop = ref<number[]>([])
-// Index of last span.anchor.active
-const anchorIndex = ref<number>(0)
-// List of span.anchor
-const anchorList = ref<HTMLSpanElement[]>([])
-// clickHandler to scrollTo 
-function scrollTo(e: MouseEvent) {
-  const path = (e.composedPath() as HTMLElement[])
-  const span = path.filter(e => {
-    const list = String(e.className).split(' ')
-    return list.includes('anchor')
-  })[0]
-  // click scrollTo first row of correspond race
-  const index = anchorList.value.indexOf(span)
-  const scrollY = tdRaceTop.value[index] + 4
-  window.scrollTo({ top: scrollY, behavior: 'smooth' })
 
-  if (span.classList.contains('top')) {
-    // click top anchor scrollTo Top
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  } else if (span.classList.contains('bottom')) {
-    window.scrollTo({ top: scrollBottom.value, behavior: 'smooth' })
+/* clickHandler to scrollTo */
+function scrollTo(e: MouseEvent) {
+  function scrollIntoViewOffset(element: Element,
+    { behavior = 'smooth', offset = 0 }: { behavior?: ScrollBehavior, offset?: number },
+  ) {
+    const { top: elementTop } = element.getBoundingClientRect()
+    const top = elementTop + window.scrollY - offset
+    window.scrollTo({ top, behavior })
+  }
+
+  const path = (e.composedPath() as HTMLElement[])
+  const span = path.filter(e => e.className).at(0) as HTMLElement
+  const index = Number(span.dataset.index as string)
+
+  switch (index) {
+    case Number.NEGATIVE_INFINITY: {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      break
+    }
+    case Number.POSITIVE_INFINITY: {
+      const bottom = document.body.scrollHeight - window.innerHeight
+      window.scrollTo({ top: bottom, behavior: 'smooth' })
+      break
+    }
+    default: {
+      const td = document.querySelectorAll('td.race')[index]
+      scrollIntoViewOffset(td, { offset: H.value })
+      break
+    }
   }
 }
-
-onMounted(() => {
-  scrollBottom.value = document.body.scrollHeight - window.innerHeight
-  // THead OffsetHeight
-  const thead = document.querySelector('thead') as HTMLTableSectionElement
-  // Set tdRaceTop
-  document.querySelectorAll('td.race').forEach(tdRace => {
-    const { top }: { top: number } = tdRace.getBoundingClientRect()
-    console.log(y);
-    
-    tdRaceTop.value.push(top + y - thead.offsetHeight)
-  })
-  // Set anchorList
-  anchorList.value = Array
-    .from(document.querySelectorAll('.anchor'))
-    .slice(1, -1) as HTMLSpanElement[]
-  // Set Initial span.active
-  const asp = sessionStorage.getItem('arp_scroll_position')
-  if (asp !== null) {
-    const postion = +asp
-    window.scrollTo({ top: postion })
-
-    const index = tdRaceTop.value.concat(y).sort((a, b) => a - b).indexOf(y)
-
-    if (index >= tdRaceTop.value.length) {
-      anchorIndex.value = tdRaceTop.value.length-1
-    }
-    else anchorIndex.value = index
-
-  }
-  anchorList.value[anchorIndex.value].classList.add('active')
-})
-
-onBeforeUpdate(() => {
-  function set_active(index: number) {
-    const lastIndex = index - 1
-    anchorList.value[lastIndex].classList.remove('active')
-    anchorList.value[index].classList.add('active')
-  }
-  const index = anchorIndex.value =
-    tdRaceTop.value.concat(y).sort((a, b) => a - b).indexOf(y)
-  if (index >= tdRaceTop.value.length) { }
-  else if (index <= 0) { }
-  else set_active(index - 1)
-})
 </script>
 
 <template>
   <aside @click="scrollTo">
-    <span class="anchor top"><span>▲</span></span>
-    <span v-for="(r,i) in RACES" :key="r" class="anchor" :style="{'color':colors.at(i)}">
+    <div class="top" :data-index="Number.NEGATIVE_INFINITY">
+      <span>▲</span>
+    </div>
+    <div v-for="(r,i) in RACES" :key="r" class="anchor" :style="{'color':colors.at(i)}" :data-index="i">
       <span>{{r}}</span>
-    </span>
-    <span class="anchor bottom"><span>▼</span></span>
+    </div>
+    <div class="bottom" :data-index="Number.POSITIVE_INFINITY">
+      <span>▼</span>
+    </div>
   </aside>
-  <div class="top-data">
-    <span v-for="num in tdRaceTop" :key="num">{{num.toFixed(2)}}</span>
-  </div>
 </template>
 
 <style scoped lang="postcss">
-div.top-data {
-  position: fixed;
-  right: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-
-  & span {
-    color: white;
-    font-size: 1rem;
-  }
-}
-
 aside {
+  z-index: var(--zindex-fixed);
   user-select: none;
   /* Box */
   position: fixed;
@@ -124,30 +79,34 @@ aside {
   font-family: 'Noto Sans SC';
   font-weight: 700;
   background-color: var(--color-dark2);
-}
 
-.anchor {
-  flex: auto;
-  display: flex;
-  align-items: center;
-  font-size: 0.75rem;
-  cursor: pointer;
-  margin: 0.0625rem 0;
-  padding: 0 0.125rem;
+  &>div {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    margin: 0 0;
+    padding: 0 0.125rem;
+    cursor: pointer;
+    border-width: 2px 0;
+    border-style: solid;
+    border-color: var(--color-dark2);
 
-  &.active,
-  &:hover {
-    background-color: var(--color-light);
+    &.active,
+    &:hover {
+      background-color: var(--color-light);
 
-    & span {
-      color: var(--color-dark)
+      & span {
+        color: var(--color-dark)
+      }
     }
-  }
 
-  &.top,
-  &.bottom {
-    color: var(--color-dark);
-    background-color: var(--color-light);
+    &.top,
+    &.bottom {
+      border-width: 0;
+      color: var(--color-dark);
+      background-color: var(--color-light);
+    }
   }
 }
 </style>

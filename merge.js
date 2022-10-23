@@ -16,19 +16,19 @@ export const RACES = [
   '值得铭记\n的强敌',
 ]
 
-export const THEADS = [
-  { key: 'race', value: '种族' },
-  { key: 'being', value: '生物' },
-  { key: 'state', value: '状态' },
-  { key: 'correspond', value: '对应' },
-  { key: 'electro', value: '雷' },
-  { key: 'pyro', value: '火' },
-  { key: 'hydro', value: '水' },
-  { key: 'cryo', value: '冰' },
-  { key: 'dendro', value: '草' },
-  { key: 'anemo', value: '风' },
-  { key: 'geo', value: '岩' },
-  { key: 'physical', value: '物' },
+export const TABLE_HEADS = [
+  { key: 'race', value: '种族', color: '' },
+  { key: 'being', value: '生物', color: '' },
+  { key: 'state', value: '状态', color: '' },
+  { key: 'correspond', value: '对应', color: '' },
+  { key: 'electro', value: '雷', color: '#ffacff' },
+  { key: 'pyro', value: '火', color: '#ff9999' },
+  { key: 'hydro', value: '水', color: '#80c0ff' },
+  { key: 'cryo', value: '冰', color: '#5cffff' },
+  { key: 'dendro', value: '草', color: '#13eea2' },
+  { key: 'anemo', value: '风', color: '#80ffd7' },
+  { key: 'geo', value: '岩', color: '#ffe699' },
+  { key: 'physical', value: '物', color: '#cccccc' },
 ]
 
 Object.defineProperty(Map.prototype, '$set', {
@@ -93,13 +93,14 @@ function createDataMap(race, being) {
 function setDataMap($map, item) {
   const ITEM_MAP = new Map(Object.entries(item))
   if (!ITEM_MAP.has('general')) ITEM_MAP.set('general', 10)
-  THEADS.slice(4).forEach(({ key }) => $map.$set(key, ITEM_MAP.get('general')))
+  TABLE_HEADS.slice(4).forEach(({ key }) => $map.$set(key, ITEM_MAP.get('general')))
   ITEM_MAP.delete('general')
   for (const [key, value] of ITEM_MAP) $map.$set(key, value)
 }
 
 fetchData().then(raw => {
   flattenData(raw)
+  console.log(SPAN_MAP)
   const data = DATA_ARRAY.map(item => Object.fromEntries(item))
   const rowspan = Object.fromEntries(SPAN_MAP)
   const json = JSON.stringify({ data, rowspan })

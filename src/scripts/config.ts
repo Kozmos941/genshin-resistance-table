@@ -9,7 +9,7 @@ export const RACES = [
   '值得铭记\n的强敌',
 ]
 
-export const THEADS = [
+export const TABLE_HEADS = [
   { key: 'race', value: '种族', color: '' },
   { key: 'being', value: '生物', color: '' },
   { key: 'state', value: '状态', color: '' },
@@ -24,15 +24,25 @@ export const THEADS = [
   { key: 'physical', value: '物', color: '#cccccc' },
 ]
 
-export const THEADS_LENGTH = THEADS.length
+export const THEADS_LENGTH = TABLE_HEADS.length
 
-export const SIGN = {
+export const SIGN_REPLACE = {
   INFINITY: '∞', //♾️∞ထ８ꝏꝎ
   ASTERISK: '✱',
+  LINEFEED: '<br>',
 }
 
-export const CAPTION_TITLE = `原神抗性表 v${__APP_VERSION__}`
+export const TABLE_CAPTION = `原神抗性表 v${__APP_VERSION__}`
 
 export const TABLE_WIDTH = 1200
 
-export const LAST_UPDATE = __LAST_UPDATE__
+/* Init Document */
+/* Set Document Title */
+document.title = TABLE_CAPTION
+
+/* Set CSS element color variables */
+const root = document.querySelector(':root') as HTMLElement
+TABLE_HEADS.forEach(({ key, color }) => {
+  if (color) root.style.setProperty(`--color-${key}`, color)
+})
+

@@ -1,43 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted, inject } from 'vue'
-import { throttle } from 'lodash'
-import Download from '@/scripts/Download'
-// Inject
-import { MobileKey } from '$/keys'
-const isMobile = inject<boolean>(MobileKey)
-// Emit
-const emit = defineEmits<{
-  (e: 'openModal'): void
-}>()
-// Props
-const { left = 0 } = defineProps<{
-  left?: number
-}>()
-// Data
-const size = ref<string>('…')
-const button = ref<HTMLButtonElement | null>(null)
-const image = ref<{ [key: string]: string }>({})
+import { ref } from 'vue'
 
-onMounted(async () => {
-  const btn = button.value as HTMLButtonElement
-  if (!localStorage.getItem('image')) {
-    const node = document.querySelector('table') as HTMLTableElement
-    const dl = new Download(node, isMobile)
-    await dl.dataURL
-    const json = JSON.stringify(Object.fromEntries(dl.image))
-    localStorage.setItem('image', json)
-  }
-  image.value = JSON.parse(localStorage.getItem('image') as string)
-  size.value = image.value.size
-  btn.addEventListener('click', throttle(
-    () => { emit('openModal') },
-    300, { leading: true, trailing: false },
-  ))
+/* Props */
+const { size = '...' } = defineProps<{
+  size: string
+}>()
+
+const buttonRef = ref<HTMLButtonElement>()
+defineExpose({
+  buttonRef,
 })
 </script>
 
 <template>
-  <button ref="button">
+  <button ref="buttonRef">
     Save As Image
     <div>{{ size }} MB</div>
   </button>
@@ -49,7 +25,7 @@ button {
   /* Box */
   position: absolute;
   top: 0;
-  left: v-bind('left+"px"');
+  left: 0;
   width: 5rem;
   height: 5rem;
   margin: 0;

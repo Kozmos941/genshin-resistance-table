@@ -1,3 +1,3 @@
 import type { InjectionKey } from 'vue'
 
-export const MobileKey = Symbol() as InjectionKey<boolean>
+export const Mobile = Symbol('Mobile') as InjectionKey<boolean>

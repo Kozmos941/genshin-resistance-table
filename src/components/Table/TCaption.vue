@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import GithubCorner from '@/components/GithubCorner.vue'
-
 const { title } = defineProps<{
   title: string
 }>()
@@ -10,7 +8,6 @@ const { title } = defineProps<{
 <template>
   <caption>
     <span>{{ title }}</span>
-    <GithubCorner url="https://github.com/Kozmos941/genshin-resistance-table" />
   </caption>
 </template>
 

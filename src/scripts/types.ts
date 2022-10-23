@@ -22,8 +22,4 @@ export type THKey = keyof TRow
 
 export type THItem = { key: string; value: string }
 
-declare global {
-  interface Window {
-    isMobile: () => boolean
-  }
-}
+export type ScrollBehavior = 'auto' | 'smooth'

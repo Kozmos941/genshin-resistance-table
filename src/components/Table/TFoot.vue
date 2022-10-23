@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { loadGoogleWebFont, textDeduplicate } from '@/scripts/webfont'
+import { loadGoogleWebFont, textDeduplicate } from '$/webfont'
 
 const { colSpan } = defineProps<{
   colSpan?: number
 }>()
 
-const tr = ref<HTMLTableRowElement | null>(null)
+const trRef = ref<HTMLTableRowElement>()
 
 onMounted(() => {
-  const text = (tr.value as HTMLTableRowElement).innerText
+  const text = (trRef.value as HTMLTableRowElement).innerText
   loadGoogleWebFont('Noto Sans SC', textDeduplicate(text))
 })
 </script>
 
 <template>
   <tfoot>
-    <tr ref="tr">
+    <tr ref="trRef">
       <td :colSpan="colSpan">
         <p>* 来自【空萤酒馆】，初版由巴别塔夜空提供，由 whrily、小明明、羽川raid 完善、修正，最后由 NGA 吾竟南宫遥保持更新。</p>
         <p>* 现版又经更新、重制、并会在 <strong>米游社</strong> 和 <a href="https://bbs.nga.cn/read.php?tid=29649225"

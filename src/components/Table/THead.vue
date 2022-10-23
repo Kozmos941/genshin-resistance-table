@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { THItem } from '$types'
+import { THItem } from '$/types'
 
 const { ths } = defineProps<{
   ths: THItem[]
 }>()
+
 </script>
 
 <template>
-  <thead>
+  <thead ref="theadRef">
     <tr>
       <th v-for="th in ths" :key="th.key" :class="th.key">
         {{ th.value }}

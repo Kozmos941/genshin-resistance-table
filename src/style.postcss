@@ -1,6 +1,6 @@
 :root {
   --red-accent2: #ff5252;
-  --blue-lighten2: #64B5F6;
+  --blue-lighten2: #64b5f6;
   --color-dark: #25294a;
   --color-dark2: #2d325a;
   --color-light: #ffffff;
@@ -33,88 +33,14 @@ p {
   margin: 0;
 }
 
-table {
-  min-width: max-content;
-  margin: auto;
-  text-align: center;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-color: var(--color-light);
-  background-color: var(--color-dark);
-
-  & .electro {
-    color: var(--color-electro);
-  }
-
-  & .pyro {
-    color: var(--color-pyro);
-  }
-
-  & .hydro {
-    color: var(--color-hydro);
-  }
-
-  & .cryo {
-    color: var(--color-cryo);
-  }
-
-  & .dendro {
-    color: var(--color-dendro);
-  }
-
-  & .anemo {
-    color: var(--color-anemo);
-  }
-
-  & .geo {
-    color: var(--color-geo);
-  }
-
-  & .physical {
-    color: var(--color-physical);
-  }
+.sidebar-enter-active,
+.sidebar-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-td {
-  &.race,
-  &.being,
-  &.state {
-    font-weight: 700;
-  }
-
-  &.electro,
-  &.pyro,
-  &.hydro,
-  &.cryo,
-  &.dendro,
-  &.anemo,
-  &.geo,
-  &.physical,
-  &.correspond {
-    font-size: 1.675rem;
-  }
-
-  &.minus {
-    font-weight: 900;
-  }
-
-  &.gt-20 {
-    font-weight: 300;
-  }
-
-  &.gt-50 {
-    font-weight: 500;
-  }
-
-  &.gt-75 {
-    font-weight: 700;
-    font-style: italic;
-  }
-
-  &.infty {
-    font-family: 'Noto Sans SC';
-    font-weight: 900;
-  }
+.sidebar-enter-from,
+.sidebar-leave-to {
+  opacity: 0;
 }
 
 /* the entire scrollbar */

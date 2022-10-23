@@ -3,14 +3,15 @@ import * as _ from '$/config'
 import data from '@/data/table.json'
 
 const SERIF_TEXT = textDeduplicate(''.concat(
-  ..._.THEADS.map(({ value }) => value),
+  ..._.TABLE_HEADS.map(({ value }) => value),
   ..._.RACES.map(r => r),
-  _.CAPTION_TITLE,
+  _.TABLE_CAPTION,
 ))
 
 const SANS_TEXT = textDeduplicate(''.concat(
   JSON.stringify(data),
-  ...Object.values(_.SIGN),
+  SERIF_TEXT,
+  ...Object.values(_.SIGN_REPLACE),
 ))
 
 loadGoogleWebFont('Noto Serif SC', SERIF_TEXT)

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "vue": "^3.2.37",
     "webfontloader": "^1.6.28"
