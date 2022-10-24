@@ -1,9 +1,9 @@
 // https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 import fs from 'fs'
 import { fileURLToPath } from 'url'
-import { dirname } from 'path'
+import path from 'path'
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename) + '/src'
+const __dirname = path.dirname(__filename) + '/src'
 
 export const RACES = [
   '元素生命',
@@ -31,17 +31,8 @@ export const TABLE_HEADS = [
   { key: 'physical', value: '物', color: '#cccccc' },
 ]
 
-Object.defineProperty(Map.prototype, '$set', {
-  value: function (key, value) {
-    this.set(key.slice(0, 2), value)
-  },
-})
-
-Object.defineProperty(Map.prototype, '$get', {
-  value: function (key) {
-    return this.get(key.slice(0, 2))
-  },
-})
+// https://nodejs.org/en/knowledge/command-line/how-to-parse-command-line-arguments/
+const isNoSpan = new RegExp(/\bnoSpan\b/i).test(process.argv.slice(2)) ?? false
 
 const RECORD_MAP = new Map()
 const SPAN_MAP = new Map()
@@ -61,9 +52,9 @@ function flattenData(raw) {
     RECORD_MAP.set('length', DATA_ARRAY.length)
     beings.forEach(({ being: curr_being_name, states }) => {
       const $ = (item = {}) => {
-        const $MAP = createDataMap(curr_race_name, curr_being_name)
-        setDataMap($MAP, item)
-        DATA_ARRAY.push($MAP)
+        const map = createDataMap(curr_race_name, curr_being_name)
+        setDataMap(map, item)
+        DATA_ARRAY.push(map)
       }
       if (states) {
         if (states.length > 1) SPAN_MAP.set(curr_being_name, states.length)
@@ -76,37 +67,51 @@ function flattenData(raw) {
 }
 
 function createDataMap(race, being) {
-  const $map = new Map()
-  if (RECORD_MAP.get('race') !== race) {
-    RECORD_MAP.set('race', race)
-    $map.$set('race', race)
-  }
-  if (RECORD_MAP.get('being') !== being) {
-    RECORD_MAP.set('being', being)
-    $map.$set('being', being)
-  }
-  $map.$set('state', null)
-  $map.$set('correspond', null)
-  return $map
+  const map = new Map()
+  map.set('race', race)
+  map.set('being', being)
+  map.set('state', null)
+  map.set('correspond', null)
+  return map
 }
 
-function setDataMap($map, item) {
+function setDataMap(map, item) {
   const ITEM_MAP = new Map(Object.entries(item))
   if (!ITEM_MAP.has('general')) ITEM_MAP.set('general', 10)
-  TABLE_HEADS.slice(4).forEach(({ key }) => $map.$set(key, ITEM_MAP.get('general')))
+  TABLE_HEADS.slice(4).forEach(({ key }) => map.set(key, ITEM_MAP.get('general')))
   ITEM_MAP.delete('general')
-  for (const [key, value] of ITEM_MAP) $map.$set(key, value)
+  for (const [key, value] of ITEM_MAP) map.set(key, value)
+}
+
+function replacer(key, value) {
+  switch (key) {
+    case 'race':
+    case 'being': {
+      if (RECORD_MAP.get(key) === value) return
+      else RECORD_MAP.set(key, value)
+      break
+    }
+  }
+  return value
+}
+
+function writeFile(name, txt) {
+  const dir = path.normalize(`${__dirname}/data/${name}`)
+  fs.writeFile(dir, txt, 'utf-8', err => {
+    if (err) console.log(err)
+    else console.log(`${dir} 写入完成！`)
+  })
 }
 
 fetchData().then(raw => {
   flattenData(raw)
-  console.log(SPAN_MAP)
   const data = DATA_ARRAY.map(item => Object.fromEntries(item))
   const rowspan = Object.fromEntries(SPAN_MAP)
-  const json = JSON.stringify({ data, rowspan })
-  const path = `${__dirname}/data/table.json`
-  fs.writeFile(path, json, 'utf-8', err => {
-    if (err) console.log(err)
-    else console.log('table.json 写入完成！')
-  })
+  const json = JSON.stringify({ data, rowspan }, replacer, 2)
+  writeFile('table.json', json)
+  if (isNoSpan) {
+    const json = JSON.stringify(data, null, 2)
+    writeFile('data.json', json)
+  }
 })
+

@@ -3,7 +3,7 @@ import { data, rowspan } from '@/data/table.json'
 import { THItem, TDValue } from '$/types'
 
 /* Props */
-const { ths, sign } = defineProps<{
+const { sign } = defineProps<{
   sign: { [key: string]: string }
   ths: THItem[]
 }>()
@@ -12,7 +12,6 @@ const { INFINITY: infty, ASTERISK: aster, LINEFEED: br } = sign
 /* Data */
 const ROW_SPAN = new Map(Object.entries(rowspan))
 const DATA = data.map(item => new Map(Object.entries(item)))
-const keyMap = ths.reduce((map, { key }) => map.set(key.slice(0, 2), key), new Map())
 const set_span = (k: string) => (ROW_SPAN.has(k) ? ROW_SPAN.get(k) : 1)
 
 /* Methods */
@@ -50,9 +49,9 @@ const check_data = (v: TDValue) => {
 
 <template>
   <tbody>
-    <tr v-for="(row, index) in DATA" :key="'row'+index">
-      <td v-for="[key, value] in row" :key="key+index" :rowSpan="set_span(value)"
-        :class="[keyMap.get(key), add_class(value)]" v-html="check_data(value)"></td>
+    <tr v-for="(row, index) in DATA" :key="'row' + index">
+      <td v-for="[key, value] in row" :key="key + index" :rowspan="set_span(value)" :class="[key, add_class(value)]"
+        v-html="check_data(value)"></td>
     </tr>
   </tbody>
 </template>
