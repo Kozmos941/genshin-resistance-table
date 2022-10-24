@@ -13,13 +13,13 @@
     - [PostCSS](#postcss)
   - [TypeScript](#typescript)
   - [ESLint](#eslint)
-  - [CSS](#css)
 - [TO LEARN](#to-learn)
   - [Vue](#vue)
-  - [CSS](#css-1)
+  - [CSS](#css)
   - [TypeScript](#typescript-1)
   - [Web Storage](#web-storage)
 - [TO DO](#to-do)
+- [Done](#done)
 
 ## 数据
 
@@ -109,50 +109,51 @@
 
 2. `flattedData()` 处理数据, 设置给定值, 没有则设置默认值, 并记录表格的 `rowspan`, 
 
-- 表格数据存储在 `DATA_ARRAY` 中, 以 `元素生命` 为例, 数据将被处理符合表格的形式
+- 表格数据存储在 `DATA_ARRAY` 中, 以 `元素生命` 为例
+  - 数据将被处理成符合表格的形式, 即考虑前面数据的 rowspan, 删除对应列
+    - (可以通过 `npm run merge -- noSpan` 生成各行完整的数据)
   - 每一项即表格的一行, `Map` 类型 (单纯就是想用一下 `Map`)
-  - 键名为完整键名的前两个字符 (主要是想缩减 `table.json` 的大小, 不知道数据文件大小对性能有多大影响？)
 
 ```js
 [
   Map(12) {
-    'ra' => '元素生命', 
-    'be' => '*史莱姆', 
-    'st' => null, 
-    'co' => 'infinity', 
-    'el' => 10, 
-    'py' => 10, 
-    'hy' => 10, 
-    'cr' => 10, 
-    'de' => 10,
-    'an' => 10,
-    'ge' => 10,
-    'ph' => 10
+    'race' => '元素生命', 
+    'being' => '*史莱姆', 
+    'state' => null, 
+    'correspond' => 'infinity', 
+    'electro' => 10, 
+    'pyro' => 10, 
+    'hydro' => 10, 
+    'cryo' => 10, 
+    'dendro' => 10,
+    'anemo' => 10,
+    'geo' => 10,
+    'physical' => 10
   },
   Map(11) {
-    'be' => '狂风之核', 'st' => null, //...
+    'being' => '狂风之核', 'state' => null, //...
   },
   //...
   Map(11) {
-    'be' => '纯水幻形', 'st' => '豕/鼠', //...
+    'being' => '纯水幻形', 'state' => '豕/鼠', //...
   },
   Map(10) {
-    'st' => '鹤/鸢', //...
+    'state' => '鹤/鸢', //...
   },
   Map(10) {
-    'st' => '蟹/鸭', //...
+    'state' => '蟹/鸭', //...
   },
   Map(10) {
-    'st' => '雀/蛙', //...
+    'state' => '雀/蛙', //...
   },
   Map(11) {
-    'be' => '雷音权现', //...
+    'being' => '雷音权现', //...
   },
   //...
 ]
 ```
 
-3. `rowspan` 数据记录在 `SPAN_MAP` 中, 形式如下
+1. `rowspan` 数据记录在 `SPAN_MAP` 中, 形式如下
 
 ```js
 Map() {
@@ -240,8 +241,6 @@ css: {
 // 配合 vite.config.ts 的 alias 使用
 "paths": {
   "@/*": ["src/*"],
-  "$config": ["src/assets/config.ts"],
-  "$types": ["src/scripts/types.ts"]
 }
 ```
 
@@ -263,21 +262,23 @@ css: {
 | comma-style     |               |
 | comma-dangle    | 尾逗号        |
 
-### CSS
-- 禁用选择 [stackoverflow](https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
-
 ## TO LEARN
 
-- 这个项目主要是为了学习、尝试各种东西
+- 这个项目主要目的是,在避免引入过多依赖的前提下学习、尝试各种东西
+  - 尽量不使用 CSS/UI framework, Vuex 等
+    - 找时间了解下如何自己实现一个简单的状态管理
   - 使用 React, Svelte 编写项目
   - 了解 Web Worker, Unit Test 等的用法及作用
 
 ### Vue
 
-- v-bind in CSS [Vuejs](https://vuejs.org/api/sfc-css-features.html#v-bind-in-css)
-  - 通过 因为`html2canvas`
+- [v-bind in CSS](https://vuejs.org/api/sfc-css-features.html#v-bind-in-css)
+  - 需求：下载按钮要对齐表格左上角,  用 `html2canvas` 转换 `<table>` 时图片上不能有按钮
+    - 这意味着不能把 `<button>` 作为 `<table>` 的子结点, 从而使用 `position: absolute`
+    - 利用 `onresize` 即时检测 `<table>` 的 `left` 属性, 并 v-bind 给 `<button>`
+    - 做完后反应过来了, 根本不用那么麻烦, 直接 `<table>` 外再套一层一样宽的 `<div>` 的就行了
 
-- Template Ref [Vuejs](https://vuejs.org/guide/typescript/composition-api.html#typing-component-template-refs)
+- [Template Ref](https://vuejs.org/guide/typescript/composition-api.html#typing-component-template-refs)
   - 如何在 Component 上配合 `<script setup lang="ts">` 使用
   - `defineExpose({})` 传入的是 `{}`, 第一次用没注意, 一直获取不到实例
 
@@ -298,11 +299,17 @@ onMounted(() => {
 
 ### CSS
 
+- [禁用选择](https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
+  - `user-select: none;`
+
+- 改变选中区域的背景色 
+  - `::selection { background: #000; }`
+
 - Flexbox
   - 如何控制单个盒子大小, 比如某些固定, 某些自适应
 
 - Grid Layout
-  - 在 `DModal.vue` 组件中尝试了下
+  - 在 `DModal.vue` 组件中试了下
 
 ### TypeScript
 
@@ -319,18 +326,25 @@ onMounted(() => {
 
 ## TO DO
 
+- 侧边栏锚点标签随着滚动即时改变背景颜色
+  - 用 id 和 `<a>` 标签定位, 但效果达不到预期, 遂放弃
+  - 利用 `onscroll` 粗略实现了但是有问题, 而且代码很乱, 打算重写
+  - 目前先搁置, 看看有什么更好的方法
+
+- JSON.stringify(value[, replacer [, space]])
+  - 改用 replacer 来处理数据
+
+- 让用户可以指定图片保存时的文件名
+
+## Done
+
 - 无穷符号 ∞, 字体都没这个符号, 看上去不和谐
  - 使用 Emoji ♾️ 可惜不能改变颜色
  - 试着用 `transform: rotate(-90degree)` 将全角 `８` 旋转
    - 网页看上去没问题, 但截图中 `td` 的 `border` 也旋转了
    - 貌似是 html2canvas 不支持 `transform`
- - 原来是字体名打错了, Noto 字体是有这个符号的, 虽然感觉还是小了点, 但个人已经可以接受了
+ - 原来是字体名打错了, Noto 字体是有这个符号的, 虽然感觉还是小了点, 但看上去和谐多了
 
 - 第一次加载网页, 截图会少差不多一列
- - 貌似是因为字体渲染导致的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体完全渲染后的小
- - 直接设置一个固定宽度 `width: 1200`, 暂时解决了
-
-- 侧边栏锚点标签随着滚动即时改变背景颜色
-  - 用 id 和 `<a>` 标签定位, 但效果达不到预期, 遂放弃
-  - 利用 `onscroll` 粗略实现了但是有问题, 而且代码很乱, 打算重写
-  - 目前先搁置, 看看有什么更好的方法
+ - 疑似加载字体后出现的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体渲染前大了
+ - 直接设置一个固定宽度 `width: 1200;`, 暂时解决了
