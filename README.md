@@ -331,9 +331,6 @@ onMounted(() => {
   - 利用 `onscroll` 粗略实现了但是有问题, 而且代码很乱, 打算重写
   - 目前先搁置, 看看有什么更好的方法
 
-- JSON.stringify(value[, replacer [, space]])
-  - 改用 replacer 来处理数据
-
 - 让用户可以指定图片保存时的文件名
 
 ## Done
@@ -348,3 +345,8 @@ onMounted(() => {
 - 第一次加载网页, 截图会少差不多一列
  - 疑似加载字体后出现的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体渲染前大了
  - 直接设置一个固定宽度 `width: 1200;`, 暂时解决了
+ 
+- JSON.stringify(value[, replacer [, space]])
+ - 之前生成的数据写入文件后只有一行，每次 git diff 都是整个文件
+ - 发现 stringify 可以返回 formatted 的数据，顺便改用 replacer 来去除被 rowspan 覆盖掉的列
+ - `merge.js` 现在可以传一个 `noSpan` 的参数来生成结构完整的数据
