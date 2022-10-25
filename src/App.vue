@@ -3,20 +3,25 @@ import SiderBar from '#/SiderBar.vue'
 import MainView from '#/MainView.vue'
 import { ref, onMounted, computed } from 'vue'
 import { debounce } from 'lodash'
-import { TABLE_WIDTH } from '$/config'
 /* Sidebar */
 const scrollY = ref(0)
 // v-show
+const tableWidth = ref(1120)
 const width = ref(window.innerWidth)
 const height = ref(window.innerHeight)
 const SideVisibility = computed(() => {
-  const w = TABLE_WIDTH + 50
+  const w = tableWidth.value + 50
   return width.value >= w && height.value >= w / 2
 })
 
 /* Life Hooks */
+const mViewRef = ref<InstanceType<typeof MainView>>()
 const roundY = computed(() => Math.round(window.scrollY))
 onMounted(() => {
+  const mView = mViewRef.value as InstanceType<typeof MainView>
+  const table = mView.tViewRef?.tableRef as HTMLTableElement
+  tableWidth.value = table.offsetWidth
+
   /* onResize */
   window.addEventListener('resize', debounce(() => {
     width.value = window.innerWidth
@@ -38,5 +43,5 @@ onMounted(() => {
     <sider-bar v-if="SideVisibility" :Y="scrollY" />
   </Transition>
   <!-- Main Table -->
-  <main-view />
+  <main-view ref="mViewRef" />
 </template>

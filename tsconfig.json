@@ -29,7 +29,7 @@
     },
     "types": [
       "node",
-      "./node_modules/user-agent-data-types"
+      "user-agent-data-types"
     ],
   },
   "include": [

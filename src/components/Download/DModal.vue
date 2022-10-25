@@ -1,36 +1,27 @@
 <script setup lang="ts">
 import MToken from './MToken.vue'
 import MButton from './MButton.vue'
-import { ref, computed, onMounted, inject } from 'vue'
-import { loadGoogleWebFont, textDeduplicate } from '@/scripts/webfont'
-import { imageForage } from '$/forage'
+import { ref } from 'vue'
+import { loadWebFont } from '$/webfont'
+import { imageForage, isMobile, usePiniaStore } from '$/store'
+import { storeToRefs } from 'pinia'
 
-/* Inject */
-import { Mobile } from '$/keys'
-const isMobile = inject<boolean>(Mobile)
+const store = usePiniaStore()
+const { size } = storeToRefs(store)
+const { fileName } = store
+
+/* Load Font */
+const section = ref<HTMLElement>()
+loadWebFont('Noto Sans SC', section)
 
 /* Emit */
-const emit = defineEmits<{
-  (e: 'closeModal'): void
-}>()
-
-/* Props */
-const { name, size, type } = defineProps<{
-  name: string,
-  size: string,
-  type: string
-}>()
+const emit = defineEmits<{ (e: 'closeModal'): void }>()
 
 /* Click Handler */
-const filename = computed(() => {
-  const ext = type.split('/').at(-1)
-  return `${name}.${ext}`
-})
-
 async function saveAs() {
   const a = document.createElement('a')
   a.href = await imageForage.getItem('dataURL') as string
-  a.download = filename.value
+  a.download = fileName
   a.click()
   emit('closeModal')
 }
@@ -44,24 +35,17 @@ function clearCache() {
   }
 }
 
-/* Load Font */
-const section = ref<HTMLElement>()
-onMounted(() => {
-  const text = (section.value as HTMLElement).innerText
-  loadGoogleWebFont('Noto Sans SC', textDeduplicate(text))
-})
-
 </script>
 
 <template>
   <div class="modal" @dblclick="emit('closeModal')">
-    <section @dblclick.prevent ref="section">
+    <section @dblclick.stop ref="section">
       <h1>保存图片</h1>
-      <m-token class="mobile" :class="isMobile?'is':null">MOBILE</m-token>
-      <m-token class="cache" @dblclick.prevent="clearCache">CACHE</m-token>
+      <m-token class="mobile" :class="isMobile ? 'is' : null">MOBILE</m-token>
+      <m-token class="cache" @dblclick="clearCache">CACHE</m-token>
       <article>
         <p>* 若发现图片与网页内容排版明显不一致，可尝试双击上面 <strong>CACHE</strong> 字样清除缓存并刷新</p>
-        <p style="align-self: center;"><strong>{{filename}} ({{size}} MB)</strong></p>
+        <p style="align-self: center;"><strong>{{ fileName }} ({{ size }} MB)</strong></p>
       </article>
       <m-button class="confirm" @click="saveAs()">确 定</m-button>
       <m-button class="cancel" @click="emit('closeModal')">取 消</m-button>
@@ -83,7 +67,7 @@ section {
   grid-template:
     "head head mobl  clr " auto
     "text text text  text" auto
-    ".    .    .     .   " 0.5rem
+    ".    .    .     .   " auto
     ".    .    cnfm  cncl" auto / 1fr 1fr 1fr 1fr;
 
   row-gap: 1rem;

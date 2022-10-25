@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { loadGoogleWebFont, textDeduplicate } from '$/webfont'
+import { ref } from 'vue'
+import { loadWebFont } from '$/webfont'
 
 const { colSpan } = defineProps<{
   colSpan?: number
 }>()
 
 const trRef = ref<HTMLTableRowElement>()
+loadWebFont('Noto Sans SC', trRef)
 
-onMounted(() => {
-  const text = (trRef.value as HTMLTableRowElement).innerText
-  loadGoogleWebFont('Noto Sans SC', textDeduplicate(text))
-})
 </script>
 
 <template>

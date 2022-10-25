@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { usePiniaStore } from '$/store'
+import { storeToRefs } from 'pinia'
 
-/* Props */
-const { size = '...' } = defineProps<{
-  size: string
-}>()
+const { size } = storeToRefs(usePiniaStore())
 
 const buttonRef = ref<HTMLButtonElement>()
 defineExpose({

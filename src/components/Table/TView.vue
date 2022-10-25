@@ -8,7 +8,6 @@ import {
   TABLE_CAPTION,
   TABLE_HEADS,
   SIGN_REPLACE,
-  TABLE_WIDTH,
 } from '$/config'
 
 const tableRef = ref<HTMLTableElement>()
@@ -28,7 +27,7 @@ defineExpose({
 
 <style scoped lang="postcss">
 table {
-  width: v-bind('`${TABLE_WIDTH}px`');
+  width: inherit;
   min-width: max-content;
   margin: auto;
   text-align: center;

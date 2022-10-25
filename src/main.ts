@@ -1,12 +1,10 @@
 import { createApp } from 'vue'
-import { Mobile } from '$/keys'
-import './scripts/webfont'
+import { createPinia } from 'pinia'
 import './style.postcss'
 import App from './App.vue'
 
-const isMobile = navigator.userAgentData?.mobile ?? !!navigator.userAgent.match(/Mobile/i)
-
+const pinia = createPinia()
 const app = createApp(App)
-app
-  .provide(Mobile, isMobile)
-  .mount('#app')
+
+app.use(pinia)
+app.mount('#app')

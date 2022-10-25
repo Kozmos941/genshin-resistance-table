@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { RACES, TABLE_HEADS } from '$/config'
-import { ScrollBehavior } from '$/types'
-
-// Table Head Offset Height
-const H = ref(0)
-onMounted(() => {
-  const thead = document.querySelector('thead') as HTMLTableSectionElement
-  H.value = thead.offsetHeight
-})
+import { SidebarEventDelegation } from '@/scripts/classes'
 
 /* Shuffle Colors */
 const colors = TABLE_HEADS
@@ -16,48 +9,26 @@ const colors = TABLE_HEADS
   .map(({ color }) => color)
   .sort(() => Math.random() - 0.5)
 
-/* clickHandler to scrollTo */
-function scrollTo(e: MouseEvent) {
-  function scrollIntoViewOffset(element: Element,
-    { behavior = 'smooth', offset = 0 }: { behavior?: ScrollBehavior, offset?: number },
-  ) {
-    const { top: elementTop } = element.getBoundingClientRect()
-    const top = elementTop + window.scrollY - offset
-    window.scrollTo({ top, behavior })
-  }
+/* OnMounted */
+const asideRef = ref<HTMLElement>()
+onMounted(() => {
+  const aside = asideRef.value as HTMLElement
+  const thead = document.querySelector('thead') as HTMLTableSectionElement
+  const tds = document.querySelectorAll('td.race') as NodeListOf<HTMLTableCellElement>
+  new SidebarEventDelegation(aside, thead.offsetHeight, tds)
+})
 
-  const path = (e.composedPath() as HTMLElement[])
-  const span = path.filter(e => e.className).at(0) as HTMLElement
-  const index = Number(span.dataset.index as string)
-
-  switch (index) {
-    case Number.NEGATIVE_INFINITY: {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      break
-    }
-    case Number.POSITIVE_INFINITY: {
-      const bottom = document.body.scrollHeight - window.innerHeight
-      window.scrollTo({ top: bottom, behavior: 'smooth' })
-      break
-    }
-    default: {
-      const td = document.querySelectorAll('td.race')[index]
-      scrollIntoViewOffset(td, { offset: H.value })
-      break
-    }
-  }
-}
 </script>
 
 <template>
-  <aside @click="scrollTo">
-    <div class="top" :data-index="Number.NEGATIVE_INFINITY">
+  <aside ref="asideRef">
+    <div class="top" data-index="TOP">
       <span>▲</span>
     </div>
-    <div v-for="(r,i) in RACES" :key="r" class="anchor" :style="{'color':colors.at(i)}" :data-index="i">
-      <span>{{r}}</span>
+    <div v-for="(r, i) in RACES" :key="r" class="anchor" :style="{ 'color': colors.at(i) }" :data-index="i">
+      <span>{{ r }}</span>
     </div>
-    <div class="bottom" :data-index="Number.POSITIVE_INFINITY">
+    <div class="bottom" data-index="BOTTOM">
       <span>▼</span>
     </div>
   </aside>
