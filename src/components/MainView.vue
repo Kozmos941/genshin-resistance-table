@@ -3,45 +3,32 @@ import DModal from '#/Download/DModal.vue'
 import DButton from '#/Download/DButton.vue'
 import GithubCorner from '#/GithubCorner.vue'
 import TView from '#/Table/TView.vue'
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { throttle } from 'lodash'
-import Download from '$/Download'
-import { imageForage } from '$/forage'
-import { TABLE_WIDTH, TABLE_CAPTION } from '$/config'
-
-/* Inject */
-import { Mobile } from '$/keys'
-const isMobile = inject<boolean>(Mobile) as boolean
-
-/* Data */
-const size = ref<string>('…')
-const options = {
-  scale: isMobile ? 1.0 : 1.25,
-  type: isMobile ? 'image/jpeg' : 'image/png',
-  quality: isMobile ? 0.92 : undefined,
-}
+import { Download } from '$/classes'
+import { imageForage, fileOptions } from '$/store'
+import { TABLE_WIDTH } from '$/config'
 
 /* OnMounted */
 const tViewRef = ref<InstanceType<typeof TView>>()
 const dButtonRef = ref<InstanceType<typeof DButton>>()
-  
+
 onMounted(async () => {
   if (await imageForage.keys()) {
     const tView = tViewRef.value as InstanceType<typeof TView>
     const table = tView.tableRef as HTMLTableElement
-    const download = new Download(table, options)
-    Object.entries(download.options).forEach(([key, value]) => {
-      imageForage.setItem(key, value)
-    })
+    const download = new Download(table, fileOptions)
+    Object.entries(download.options).forEach(
+      ([key, value]) => imageForage.setItem(key, value))
     const dataURL = await download.dataURL
+    const sizeMB = 3 / 4 * dataURL.length / Math.pow(2, 20)
+    fileOptions.size = sizeMB.toFixed(2)
     imageForage.setItem('dataURL', dataURL)
     imageForage.setItem('length', dataURL.length)
-    const sizeMB = 3 / 4 * dataURL.length / Math.pow(2, 20)
-    size.value = sizeMB.toFixed(2)
-    imageForage.setItem('size', size.value)
+    imageForage.setItem('size', fileOptions.size)
   }
   else {
-    size.value = await imageForage.getItem('size') as string
+    fileOptions.size = await imageForage.getItem('size') as string
   }
   const dButton = dButtonRef.value as InstanceType<typeof DButton>
   const button = dButton.buttonRef as HTMLButtonElement
@@ -57,21 +44,27 @@ function displayDModal(visible = true) {
   DModalVisibility.value = visible
 }
 
+const getWidth = computed(() => {
+  if (isNaN(TABLE_WIDTH))
+    return TABLE_WIDTH + ''
+  else return TABLE_WIDTH + 'px'
+})
+
 </script>
 
 <template>
-  <d-modal :name="TABLE_CAPTION" :size="size" :type="options.type" v-show="DModalVisibility"
+  <d-modal :name="fileOptions.name" :size="fileOptions.size" :type="fileOptions.type" v-show="DModalVisibility"
     @close-modal="displayDModal(false)" />
   <main>
-    <d-button :size="size" ref="dButtonRef" />
+    <d-button :size="fileOptions.size" ref="dButtonRef" />
     <GithubCorner url="https://github.com/Kozmos941/genshin-resistance-table" />
-    <t-view ref="tViewRef" />
+    <t-view ref="tViewRef" :width='getWidth' />
   </main>
 </template>
 
 <style scoped lang="postcss">
 main {
-  width: v-bind('`${TABLE_WIDTH}px`');
+  width: v-bind(getWidth);
   position: relative;
   margin: 0 auto;
   background-color: transparent;

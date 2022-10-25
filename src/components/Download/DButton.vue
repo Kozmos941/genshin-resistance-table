@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 /* Props */
-const { size = '...' } = defineProps<{
+const { size } = defineProps<{
   size: string
 }>()
 

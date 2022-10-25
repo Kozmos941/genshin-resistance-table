@@ -31,6 +31,9 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "no-undef": [
+      "off"
+    ],
     "vue/no-setup-props-destructure": [
       "off"
     ],

@@ -1,7 +1,6 @@
 export type Name = string
-export type Element = number | 'infinity'
 
-export type TDValue = Element | Name | null
+export type Element = number | 'infinity'
 
 export interface TRow {
   race?: Name
@@ -18,8 +17,8 @@ export interface TRow {
   physical: Element
 }
 
+export type TDValue = Element | Name | null
+
 export type THKey = keyof TRow
 
 export type THItem = { key: string; value: string }
-
-export type ScrollBehavior = 'auto' | 'smooth'

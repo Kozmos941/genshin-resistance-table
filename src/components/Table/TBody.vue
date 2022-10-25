@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { data, rowspan } from '@/data/table.json'
-import { THItem, TDValue } from '$/types'
+import type { THItem, TDValue } from '$/types'
 
 /* Props */
 const { sign } = defineProps<{

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { THItem } from '$/types'
+import type { THItem } from '$/types'
 
 const { ths } = defineProps<{
   ths: THItem[]

@@ -146,10 +146,10 @@
   Map(10) {
     'state' => '雀/蛙', //...
   },
-  Map(11) {
-    'being' => '雷音权现', //...
-  },
   //...
+  Map(11) {
+    'being' => '*漂浮灵', //...
+  }
 ]
 ```
 
@@ -282,6 +282,14 @@ css: {
   - 如何在 Component 上配合 `<script setup lang="ts">` 使用
   - `defineExpose({})` 传入的是 `{}`, 第一次用没注意, 一直获取不到实例
 
+- [Event Handling](https://vuejs.org/guide/essentials/event-handling.html#event-modifiers)
+  - 修饰符  
+| modifiers | native                  |
+| --------- | ----------------------- |
+| .stop     | Event.stopPropagation() |
+| .prevent  | Event.preventDefault()  |
+  - [事件委托](https://zh.javascript.info/event-delegation)
+
 ```ts
 /* TView.vue */
 const tableRef = ref<HTMLTableElement>()
@@ -325,6 +333,10 @@ onMounted(() => {
   - 感觉原生 API 好麻烦啊, 先使用 `localforage`
 
 ## TO DO
+- 现在 commit 就是乱写，先定个大致的规矩
+  - commit message 先参考 vue 的写法 `release:``chore:``feat:` 等
+  - version 的更新以生成的图片为标准，即只要图片内容有变，就算一个新版本
+    - 比如修改数据、样式，虽然只是小修改，但只要图片变化就更新版本 `release: [new version]`
 
 - 侧边栏锚点标签随着滚动即时改变背景颜色
   - 用 id 和 `<a>` 标签定位, 但效果达不到预期, 遂放弃
@@ -336,17 +348,17 @@ onMounted(() => {
 ## Done
 
 - 无穷符号 ∞, 字体都没这个符号, 看上去不和谐
- - 使用 Emoji ♾️ 可惜不能改变颜色
- - 试着用 `transform: rotate(-90degree)` 将全角 `８` 旋转
-   - 网页看上去没问题, 但截图中 `td` 的 `border` 也旋转了
-   - 貌似是 html2canvas 不支持 `transform`
- - 原来是字体名打错了, Noto 字体是有这个符号的, 虽然感觉还是小了点, 但看上去和谐多了
+  - 使用 Emoji ♾️ 可惜不能改变颜色
+  - 试着用 `transform: rotate(-90degree)` 将全角 `８` 旋转
+    - 网页看上去没问题, 但截图中 `td` 的 `border` 也旋转了
+    - 貌似是 html2canvas 不支持 `transform`
+  - 原来是字体名打错了, Noto 字体是有这个符号的, 虽然感觉还是小了点, 但看上去和谐多了
 
 - 第一次加载网页, 截图会少差不多一列
- - 疑似加载字体后出现的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体渲染前大了
- - 直接设置一个固定宽度 `width: 1200;`, 暂时解决了
+  - 疑似加载字体后出现的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体渲染前大了
+  - 直接设置一个固定宽度 `width: 1200;`, 暂时解决了
  
 - JSON.stringify(value[, replacer [, space]])
- - 之前生成的数据写入文件后只有一行，每次 git diff 都是整个文件
- - 发现 stringify 可以返回 formatted 的数据，顺便改用 replacer 来去除被 rowspan 覆盖掉的列
- - `merge.js` 现在可以传一个 `noSpan` 的参数来生成结构完整的数据
+  - 之前生成的数据写入文件后只有一行，每次 git diff 都是整个文件
+  - 发现 stringify 可以返回 formatted 的数据，顺便改用 replacer 来去除被 rowspan 覆盖掉的列
+  - `merge.js` 现在可以传一个 `noSpan` 的参数来生成结构完整的数据

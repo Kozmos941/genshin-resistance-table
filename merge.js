@@ -5,39 +5,38 @@ import path from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename) + '/src'
 
-export const RACES = [
-  '元素生命',
-  '丘丘部落',
-  '深渊',
-  '愚人众',
-  '其他\n人类势力',
-  '异种魔兽',
-  '自律机关',
-  '值得铭记\n的强敌',
-]
-
-export const TABLE_HEADS = [
-  { key: 'race', value: '种族', color: '' },
-  { key: 'being', value: '生物', color: '' },
-  { key: 'state', value: '状态', color: '' },
-  { key: 'correspond', value: '对应', color: '' },
-  { key: 'electro', value: '雷', color: '#ffacff' },
-  { key: 'pyro', value: '火', color: '#ff9999' },
-  { key: 'hydro', value: '水', color: '#80c0ff' },
-  { key: 'cryo', value: '冰', color: '#5cffff' },
-  { key: 'dendro', value: '草', color: '#13eea2' },
-  { key: 'anemo', value: '风', color: '#80ffd7' },
-  { key: 'geo', value: '岩', color: '#ffe699' },
-  { key: 'physical', value: '物', color: '#cccccc' },
-]
-
 // https://nodejs.org/en/knowledge/command-line/how-to-parse-command-line-arguments/
-const isNoSpan = new RegExp(/\bnoSpan\b/i).test(process.argv.slice(2)) ?? false
+const NO_SPAN = new RegExp(/\bnoSpan\b/i).test(process.argv.slice(2)) ?? false
 
+const [RACES, TABLE_HEADS] = await config()
 const RECORD_MAP = new Map()
 const SPAN_MAP = new Map()
 const DATA_ARRAY = []
+main.call()
 
+/* Main Function */
+async function main() {
+  flatten(await fetchData())
+  const data = DATA_ARRAY.map(item => Object.fromEntries(item))
+  if (NO_SPAN) {
+    const json = JSON.stringify(data, null, 2)
+    writeFile('data.json', json)
+  } else {
+    const rowspan = Object.fromEntries(SPAN_MAP)
+    const json = JSON.stringify({ data, rowspan }, replacer, 2)
+    writeFile('table.json', json)
+  }
+}
+
+function writeFile(name, txt) {
+  const dir = path.normalize(`${__dirname}/data/${name}`)
+  fs.writeFile(dir, txt, 'utf-8', err => {
+    if (err) console.log(err)
+    else console.log(`File: ${dir} 写入完成！\n`)
+  })
+}
+
+/* Data Merge */
 async function fetchData() {
   return RACES.reduce(async (accumulator, race, index) => {
     const basename = (index + 1) + '-' + race.replace(/\n/, '')
@@ -47,7 +46,7 @@ async function fetchData() {
   }, Promise.resolve([]))
 }
 
-function flattenData(raw) {
+function flatten(raw) {
   raw.forEach(({ race: curr_race_name, beings }) => {
     RECORD_MAP.set('length', DATA_ARRAY.length)
     beings.forEach(({ being: curr_being_name, states }) => {
@@ -95,23 +94,25 @@ function replacer(key, value) {
   return value
 }
 
-function writeFile(name, txt) {
-  const dir = path.normalize(`${__dirname}/data/${name}`)
-  fs.writeFile(dir, txt, 'utf-8', err => {
-    if (err) console.log(err)
-    else console.log(`${dir} 写入完成！`)
-  })
-}
+/* Set Config */
+async function config() {
+  const utf8 = await fs.promises.readFile('./src/scripts/config.ts', 'utf-8')
 
-fetchData().then(raw => {
-  flattenData(raw)
-  const data = DATA_ARRAY.map(item => Object.fromEntries(item))
-  const rowspan = Object.fromEntries(SPAN_MAP)
-  const json = JSON.stringify({ data, rowspan }, replacer, 2)
-  writeFile('table.json', json)
-  if (isNoSpan) {
-    const json = JSON.stringify(data, null, 2)
-    writeFile('data.json', json)
+  function arraySlice(txt, count) {
+    const lefts = [...utf8.matchAll(/\[\n/g)]
+    const rights = [...utf8.matchAll(/\]\n/g)]
+    const array = []
+    for (let i = 0; i < count; i++) {
+      const l = lefts[i].index
+      const r = rights[i].index + 1
+      const json = txt.slice(l, r)
+        .replace(/(\w+):/g, '"$1":')
+        .replace(/'/g, '"')
+        .replace(/,\n\]$/, '\n]')
+      array.push(JSON.parse(json))
+    }
+    return array
   }
-})
 
+  return arraySlice(utf8, 2)
+}
