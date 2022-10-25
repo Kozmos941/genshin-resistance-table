@@ -10,10 +10,6 @@ import {
   SIGN_REPLACE,
 } from '$/config'
 
-const { width } = defineProps<{
-  width: string
-}>()
-
 const tableRef = ref<HTMLTableElement>()
 defineExpose({
   tableRef,
@@ -31,7 +27,7 @@ defineExpose({
 
 <style scoped lang="postcss">
 table {
-  width: v-bind(width);
+  width: inherit;
   min-width: max-content;
   margin: auto;
   text-align: center;

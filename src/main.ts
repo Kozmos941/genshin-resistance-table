@@ -1,8 +1,10 @@
 import { createApp } from 'vue'
-import './scripts/webfont'
+import { createPinia } from 'pinia'
 import './style.postcss'
 import App from './App.vue'
 
+const pinia = createPinia()
 const app = createApp(App)
-app
-  .mount('#app')
+
+app.use(pinia)
+app.mount('#app')

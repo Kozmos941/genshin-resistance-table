@@ -1,25 +1,27 @@
 <script setup lang="ts">
 import MToken from './MToken.vue'
 import MButton from './MButton.vue'
-import { ref, computed, onMounted, toRefs } from 'vue'
-import { loadGoogleWebFont, textDeduplicate } from '@/scripts/webfont'
-import { imageForage, fileOptions, isMobile } from '$/store'
+import { ref } from 'vue'
+import { loadWebFont } from '$/webfont'
+import { imageForage, isMobile, usePiniaStore } from '$/store'
+import { storeToRefs } from 'pinia'
 
-const { name, size, type } = toRefs(fileOptions)
+const store = usePiniaStore()
+const { size } = storeToRefs(store)
+const { fileName } = store
+
+/* Load Font */
+const section = ref<HTMLElement>()
+loadWebFont('Noto Sans SC', section)
 
 /* Emit */
 const emit = defineEmits<{ (e: 'closeModal'): void }>()
 
 /* Click Handler */
-const filename = computed(() => {
-  const ext = type.value.split('/').at(-1)
-  return `${name.value}.${ext}`
-})
-
 async function saveAs() {
   const a = document.createElement('a')
   a.href = await imageForage.getItem('dataURL') as string
-  a.download = filename.value
+  a.download = fileName
   a.click()
   emit('closeModal')
 }
@@ -33,13 +35,6 @@ function clearCache() {
   }
 }
 
-/* Load Font */
-const section = ref<HTMLElement>()
-onMounted(() => {
-  const text = (section.value as HTMLElement).innerText
-  loadGoogleWebFont('Noto Sans SC', textDeduplicate(text))
-})
-
 </script>
 
 <template>
@@ -50,7 +45,7 @@ onMounted(() => {
       <m-token class="cache" @dblclick="clearCache">CACHE</m-token>
       <article>
         <p>* 若发现图片与网页内容排版明显不一致，可尝试双击上面 <strong>CACHE</strong> 字样清除缓存并刷新</p>
-        <p style="align-self: center;"><strong>{{ filename }} ({{ size }} MB)</strong></p>
+        <p style="align-self: center;"><strong>{{ fileName }} ({{ size }} MB)</strong></p>
       </article>
       <m-button class="confirm" @click="saveAs()">确 定</m-button>
       <m-button class="cancel" @click="emit('closeModal')">取 消</m-button>

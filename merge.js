@@ -19,6 +19,9 @@ async function main() {
   flatten(await fetchData())
   const data = DATA_ARRAY.map(item => Object.fromEntries(item))
   if (NO_SPAN) {
+    for (const item of data) {
+      item.being = item.being.replace(/\n/, '')
+    }
     const json = JSON.stringify(data, null, 2)
     writeFile('data.json', json)
   } else {
@@ -39,7 +42,7 @@ function writeFile(name, txt) {
 /* Data Merge */
 async function fetchData() {
   return RACES.reduce(async (accumulator, race, index) => {
-    const basename = (index + 1) + '-' + race.replace(/\n/, '')
+    const basename = (index + 1) + '-' + race
     const path = `${__dirname}/data/${basename}.json`
     const beings = JSON.parse(await fs.promises.readFile(path, 'utf-8'))
     return await accumulator.then(a => a.concat([{ race, beings }]))

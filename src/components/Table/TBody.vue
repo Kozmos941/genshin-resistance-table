@@ -66,7 +66,15 @@ td {
   border-left-width: 0;
   border-right-width: 0;
 
-  &.race,
+  &.race {
+    font-family: var(--font-serif);
+    font-weight: 900;
+    font-size: 2rem;
+    line-height: 2rem;
+    padding: 0 1.8rem;
+    width: 2rem;
+  }
+
   &.being,
   &.state {
     font-weight: 700;

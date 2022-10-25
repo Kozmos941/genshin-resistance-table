@@ -1,11 +1,11 @@
 {
   "name": "genshin-resistance-table",
   "private": true,
-  "version": "3.1.6",
+  "version": "3.1.7",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "npm run merge && vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "merge": "node merge.js",
     "lint": "eslint --fix ."
@@ -14,6 +14,7 @@
     "html2canvas": "^1.4.1",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
+    "pinia": "^2.0.23",
     "vue": "^3.2.37",
     "webfontloader": "^1.6.28"
   },

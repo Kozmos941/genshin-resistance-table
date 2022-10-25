@@ -1,17 +1,25 @@
 import localforage from 'localforage'
-import { reactive } from 'vue'
+import { defineStore } from 'pinia'
 import { TABLE_CAPTION } from '$/config'
 
 /* Is Mobile */
 export const isMobile = navigator.userAgentData?.mobile ?? !!navigator.userAgent.match(/Mobile/i)
 
-/* Image Information */
-export const fileOptions = reactive({
-  name: TABLE_CAPTION,
-  size: '…',
-  scale: isMobile ? 1.0 : 1.25,
-  type: isMobile ? 'image/jpeg' : 'image/png',
-  quality: isMobile ? 0.92 : undefined,
+export const usePiniaStore = defineStore('pinia', {
+  state: () => ({
+    count: 0,
+    name: TABLE_CAPTION,
+    size: '…',
+    scale: isMobile ? 1 : 1.25,
+    type: isMobile ? 'image/jpeg' : 'image/png',
+    quality: isMobile ? 0.92 : undefined,
+  }),
+  getters: {
+    fileName: (state) => {
+      const ext = state.type.split('/').at(-1)
+      return `${state.name}.${ext}`
+    },
+  },
 })
 
 /* Image Localforage */

@@ -3,10 +3,10 @@ export const RACES = [
   '丘丘部落',
   '深渊',
   '愚人众',
-  '其他\n人类势力',
+  '其他人类势力',
   '异种魔兽',
   '自律机关',
-  '值得铭记\n的强敌',
+  '值得铭记的强敌',
 ]
 
 export const TABLE_HEADS = [
@@ -34,7 +34,7 @@ export const SIGN_REPLACE = {
 
 export const TABLE_CAPTION = `原神抗性表 v${__APP_VERSION__}`
 
-export const TABLE_WIDTH = 1200
+export const MAIN_WIDTH = 1120 + 'px'
 
 /* Init Document */
 /* Set Document Title */

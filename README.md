@@ -3,6 +3,7 @@
  原神怪物抗性表
 
 - [genshin-resistance-table](#genshin-resistance-table)
+- [开发](#开发)
 - [数据](#数据)
   - [数据存储](#数据存储)
   - [数据处理](#数据处理)
@@ -20,6 +21,27 @@
   - [Web Storage](#web-storage)
 - [TO DO](#to-do)
 - [Done](#done)
+
+## 开发
+
+```
+# Start Development Server
+> npm run dev
+
+# Building for Production
+> npm run build
+
+# Locally Preview Production Build
+> npm run preview
+
+# Merge Several Data Files into One
+> npm run merge
+# Pass a 'noSpan' argument can generate data without considering rowspan (may be used for other projects)
+> npm run merge -- noSpan
+
+# ESLint
+> npm run lint
+```
 
 ## 数据
 
@@ -153,7 +175,7 @@
 ]
 ```
 
-1. `rowspan` 数据记录在 `SPAN_MAP` 中, 形式如下
+3. `rowspan` 数据记录在 `SPAN_MAP` 中, 形式如下
 
 ```js
 Map() {
@@ -172,12 +194,12 @@ Map() {
 
 | constant      | meaning    | description                             |
 | ------------- | ---------- | --------------------------------------- |
-| RACES         | 种族名     | 数据的 '\n' 是为了在网页渲染中换行      |
+| RACES         | 种族名     |                                         |
 | TABLE_HEADS   | 表格头     | 控制表格的列和颜色                      |
 | THEADS_LENGTH | 表格头长度 |                                         |
 | SIGN_REPLACE  | 替换符号   | 数据中 '*', 'infinity', '\n' 的替换符号 |
 | TABLE_CAPTION | 表格标题   |                                         |
-| TABLE_WIDTH   | 表格宽度   |                                         |
+| MAIN_WIDTH    | 表格宽度   |                                         |
 
 
 ## 项目配置
@@ -266,7 +288,8 @@ css: {
 
 - 这个项目主要目的是,在避免引入过多依赖的前提下学习、尝试各种东西
   - 尽量不使用 CSS/UI framework, Vuex 等
-    - 找时间了解下如何自己实现一个简单的状态管理
+    - 了解下如何自己实现一个简单的状态管理
+    - 所以最后还是用了 Pinia
   - 使用 React, Svelte 编写项目
   - 了解 Web Worker, Unit Test 等的用法及作用
 
@@ -343,7 +366,9 @@ onMounted(() => {
   - 利用 `onscroll` 粗略实现了但是有问题, 而且代码很乱, 打算重写
   - 目前先搁置, 看看有什么更好的方法
 
-- 让用户可以指定图片保存时的文件名
+- 可以设定图片保存时的文件名，以及自定义缩放，图片类型、质量等
+
+- 尝试 i18n
 
 ## Done
 
