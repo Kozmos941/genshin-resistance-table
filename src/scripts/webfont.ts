@@ -6,7 +6,7 @@ import * as _ from '$/config'
 
 const SERIF_TEXT = textDeduplicate(''.concat(
   ..._.TABLE_HEADS.map(({ value }) => value),
-  ..._.RACES.map(r => r),
+  ..._.RACES.map(({ value }) => value),
   _.TABLE_CAPTION,
 ))
 

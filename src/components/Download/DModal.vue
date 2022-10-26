@@ -38,7 +38,7 @@ function clearCache() {
 </script>
 
 <template>
-  <div class="modal" @dblclick="emit('closeModal')">
+  <div class="modal" @dblclick.prevent="emit('closeModal')">
     <section @dblclick.stop ref="section">
       <h1>保存图片</h1>
       <m-token class="mobile" :class="isMobile ? 'is' : null">MOBILE</m-token>
@@ -112,6 +112,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  touch-action: manipulation;
 }
 
 .cache {

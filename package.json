@@ -8,7 +8,8 @@
     "build": "npm run merge && vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "merge": "node merge.js",
-    "lint": "eslint --fix ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

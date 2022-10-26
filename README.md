@@ -3,26 +3,15 @@
  原神怪物抗性表
 
 - [genshin-resistance-table](#genshin-resistance-table)
-- [开发](#开发)
-- [数据](#数据)
-  - [数据存储](#数据存储)
-  - [数据处理](#数据处理)
-  - [表格配置](#表格配置)
-- [项目配置](#项目配置)
-  - [Vite](#vite)
-    - [define](#define)
-    - [PostCSS](#postcss)
-  - [TypeScript](#typescript)
-  - [ESLint](#eslint)
-- [TO LEARN](#to-learn)
-  - [Vue](#vue)
-  - [CSS](#css)
-  - [TypeScript](#typescript-1)
-  - [Web Storage](#web-storage)
+- [Development](#development)
+- [Directory Structure](#directory-structure)
+- [Data](#data)
+  - [Store](#store)
+  - [Process](#process)
+  - [Config](#config)
 - [TO DO](#to-do)
-- [Done](#done)
 
-## 开发
+## Development
 
 ```
 # Start Development Server
@@ -36,16 +25,51 @@
 
 # Merge Several Data Files into One
 > npm run merge
+
 # Pass a 'noSpan' argument can generate data without considering rowspan (may be used for other projects)
 > npm run merge -- noSpan
 
 # ESLint
 > npm run lint
+> npm run lint:fix
 ```
 
-## 数据
+## Directory Structure 
 
-### 数据存储
+```
+genshin-resistance-table/
+├─ ...                     ##
+├─ src/                    ##
+│  ├─ components/          ##
+│  │  ├─ Download/         ## Image Save
+│  │  │  ├─ DButton.vue    ## Download Button
+│  │  │  ├─ DModal.vue     ## Download Modal
+│  │  │  └─ ...            ## 
+│  │  ├─ Table/            ## Table Related
+│  │  │  ├─ ...            ## 
+│  │  │  └─ TView.vue      ## Table
+│  │  ├─ GithubCorner.vue  ## 
+│  │  ├─ MainView.vue      ## Table + Button + GitHub
+│  │  └─ Sidebar.vue       ## 
+│  ├─ data/                ##
+│  │  ├─ ...               ##
+│  │  └─ table.json        ## Data for Rendering Table
+│  ├─ scripts              ##
+│  │  ├─ classes.ts        ## Class for Download & Sider Event Handling
+│  │  ├─ config.ts         ## Table Config (Constant)
+│  │  ├─ store.ts          ## Pinia & localforage
+│  │  ├─ types.ts          ## 
+│  │  └─ webfont.ts        ## Web Font Subsetting
+│  ├─ App.vue              ## Sidebar + MainView
+│  └─ main.ts              ##
+├─ db.json                 ##
+├─ merge.js                ## Merge data files into table.json
+└─ ...
+```
+
+## Data
+
+### Store
 
 - 数据存储在 `src/data` 文件夹中, 每一项完整数据如下所示
 
@@ -65,14 +89,16 @@
       "anemo": "",
       "geo": "",
       "physical": ""
-    }
+    },
+    {/* …… */},
+    /* …… */
   ]
 }
 ```
 
 |    key     | required? |         type         |   default    |     meaning      |
 | :--------: | :-------: | :------------------: | :----------: | :--------------: |
-|    name    |     ✅     |        String        |  (required)  |     怪物名称     |
+|   being    |     ✅     |        String        |  (required)  |     怪物名称     |
 |   states   |    *❌     |        Array         |     null     |     状态列表     |
 |   state    |     ❌     |        String        |     null     |       状态       |
 | correspond |     ❌     | Number or 'infinity' |     null     |  对应属性的抗性  |
@@ -86,15 +112,15 @@
 |    geo     |     ❌     |        Number        | this.general |    地元素抗性    |
 |  physical  |     ❌     |        Number        | this.general |     物理抗性     |
 
-- 除 `name` 属性, 其他均可省略, 如
+- 除 `being` 外, 其他均可省略, 如
 
 ```json
 {
-  "name": "✱丘丘人"
+  "being": "✱丘丘人"
 }
 
 {
-  "name": "风魔龙"
+  "being": "风魔龙"
 }
 ```
 
@@ -102,7 +128,7 @@
 
 ```json
 {
-  "name": "魔偶剑鬼",
+  "being": "魔偶剑鬼",
   "states": [
     {}, // 该空对象不能省略
     {
@@ -113,7 +139,7 @@
 }
 ```
 
-### 数据处理
+### Process
 
 - 在本地通过 `merge.js` 将原数据合并 `data/table.json`
    - 需安装 `node.js`, 执行 `npm run merge` 或 `node merge`
@@ -123,13 +149,13 @@
 
 ```js
 [
-  { race:'元素生命', raw:[ {...}, ...] },
-  { race:'丘丘部落', raw:[ {...}, ...] },
-  ...
+  { race:'元素生命', raw:[ {/* …… */ }, /* …… */ ] },
+  { race:'丘丘部落', raw:[ {/* …… */ }, /* …… */ ] },
+  /* …… */
 ]
 ```
 
-2. `flattedData()` 处理数据, 设置给定值, 没有则设置默认值, 并记录表格的 `rowspan`, 
+2. `flattedData()` 处理数据, 设置给定值, 没有则设置默认值, 并记录表格的 `rowspan`,
 
 - 表格数据存储在 `DATA_ARRAY` 中, 以 `元素生命` 为例
   - 数据将被处理成符合表格的形式, 即考虑前面数据的 rowspan, 删除对应列
@@ -139,38 +165,38 @@
 ```js
 [
   Map(12) {
-    'race' => '元素生命', 
-    'being' => '*史莱姆', 
-    'state' => null, 
-    'correspond' => 'infinity', 
-    'electro' => 10, 
-    'pyro' => 10, 
-    'hydro' => 10, 
-    'cryo' => 10, 
+    'race' => '元素生命',
+    'being' => '*史莱姆',
+    'state' => null,
+    'correspond' => 'infinity',
+    'electro' => 10,
+    'pyro' => 10,
+    'hydro' => 10,
+    'cryo' => 10,
     'dendro' => 10,
     'anemo' => 10,
     'geo' => 10,
     'physical' => 10
   },
   Map(11) {
-    'being' => '狂风之核', 'state' => null, //...
+    'being' => '狂风之核', 'state' => null, ///* …… */
   },
-  //...
+  ///* …… */
   Map(11) {
-    'being' => '纯水幻形', 'state' => '豕/鼠', //...
+    'being' => '纯水幻形', 'state' => '豕/鼠', ///* …… */
   },
   Map(10) {
-    'state' => '鹤/鸢', //...
+    'state' => '鹤/鸢', ///* …… */
   },
   Map(10) {
-    'state' => '蟹/鸭', //...
+    'state' => '蟹/鸭', ///* …… */
   },
   Map(10) {
-    'state' => '雀/蛙', //...
+    'state' => '雀/蛙', ///* …… */
   },
-  //...
+  ///* …… */
   Map(11) {
-    'being' => '*漂浮灵', //...
+    'being' => '*漂浮灵', ///* …… */
   }
 ]
 ```
@@ -185,12 +211,12 @@ Map() {
   '*兽境幼兽' => 2,
   '*兽境猎犬' => 2,
   '黄金王兽' => 3,
-  // ...
+  // /* …… */
 }
 ```
-### 表格配置
+### Config
 
-- 文件 `src/scripts/config.ts` 为表格的配置文件 
+- 文件 `src/scripts/config.ts` 为表格的配置文件
 
 | constant      | meaning    | description                             |
 | ------------- | ---------- | --------------------------------------- |
@@ -199,161 +225,8 @@ Map() {
 | THEADS_LENGTH | 表格头长度 |                                         |
 | SIGN_REPLACE  | 替换符号   | 数据中 '*', 'infinity', '\n' 的替换符号 |
 | TABLE_CAPTION | 表格标题   |                                         |
-| MAIN_WIDTH    | 表格宽度   |                                         |
+| MAIN_WIDTH    | 表格宽度   | 表格及表格外容器的宽度                  |
 
-
-## 项目配置
-
-项目换成 TypeScript 了, 顺便尝试了一些插件
-
-### Vite
-
-```ts
-// alias
-import { resolve } from 'path'
-
-resolve: {
-  extensions: ['.ts', '.js', '.vue'],
-  alias: [
-    {
-      find: '@',
-      replacement: resolve(__dirname, 'src'),
-    }
-  ],
-}
-
-// server
-server: {
-  host: '0.0.0.0',
-}
-```
-
-#### define
-
-```ts
-// vite-env.d.ts
-declare const __APP_VERSION__: string
-
-// vite.config.ts
-define: {
-  __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
-},
-```
-
-#### PostCSS
-
-- 配置 `vite.config.ts`
-```ts
-import postcssNesting from 'postcss-nesting'
-
-css: {
-  postcss: {
-    plugins: [postcssNesting()],
-  },
-},
-```
-
-- 使用
- - `main.ts` 中引入 `*.postcss` 文件 
- - `.vue` 中 `<style lang="postcss">`
-
-### TypeScript
-
-```json
-// 配合 vite.config.ts 的 alias 使用
-"paths": {
-  "@/*": ["src/*"],
-}
-```
-
-### ESLint
-
-```json
-// 禁用插件
-"vue/no-setup-props-destructure": "off"
-```
-
-|                 |               |
-| --------------- | ------------- |
-| max-len         | 行长度        |
-| indent          | 缩进          |
-| linebreak-style | 换行 LF or CR |
-| quotes          | 引号          |
-| semi            | 分号          |
-| comma-spacing   | 逗号空格      |
-| comma-style     |               |
-| comma-dangle    | 尾逗号        |
-
-## TO LEARN
-
-- 这个项目主要目的是,在避免引入过多依赖的前提下学习、尝试各种东西
-  - 尽量不使用 CSS/UI framework, Vuex 等
-    - 了解下如何自己实现一个简单的状态管理
-    - 所以最后还是用了 Pinia
-  - 使用 React, Svelte 编写项目
-  - 了解 Web Worker, Unit Test 等的用法及作用
-
-### Vue
-
-- [v-bind in CSS](https://vuejs.org/api/sfc-css-features.html#v-bind-in-css)
-  - 需求：下载按钮要对齐表格左上角,  用 `html2canvas` 转换 `<table>` 时图片上不能有按钮
-    - 这意味着不能把 `<button>` 作为 `<table>` 的子结点, 从而使用 `position: absolute`
-    - 利用 `onresize` 即时检测 `<table>` 的 `left` 属性, 并 v-bind 给 `<button>`
-    - 做完后反应过来了, 根本不用那么麻烦, 直接 `<table>` 外再套一层一样宽的 `<div>` 的就行了
-
-- [Template Ref](https://vuejs.org/guide/typescript/composition-api.html#typing-component-template-refs)
-  - 如何在 Component 上配合 `<script setup lang="ts">` 使用
-  - `defineExpose({})` 传入的是 `{}`, 第一次用没注意, 一直获取不到实例
-
-- [Event Handling](https://vuejs.org/guide/essentials/event-handling.html#event-modifiers)
-  - 修饰符  
-| modifiers | native                  |
-| --------- | ----------------------- |
-| .stop     | Event.stopPropagation() |
-| .prevent  | Event.preventDefault()  |
-  - [事件委托](https://zh.javascript.info/event-delegation)
-
-```ts
-/* TView.vue */
-const tableRef = ref<HTMLTableElement>()
-defineExpose({
-  tableRef,
-})
-
-/* MainView.vue */
-const tViewRef = ref<InstanceType<typeof TView>>()
-onMounted(() => {
-  const tView = tViewRef.value as InstanceType<typeof TView>
-  const table = tView.tableRef as HTMLTableElement
-})
-```
-
-### CSS
-
-- [禁用选择](https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
-  - `user-select: none;`
-
-- 改变选中区域的背景色 
-  - `::selection { background: #000; }`
-
-- Flexbox
-  - 如何控制单个盒子大小, 比如某些固定, 某些自适应
-
-- Grid Layout
-  - 在 `DModal.vue` 组件中试了下
-
-### TypeScript
-
-- 找个时间深入学习下语法、类型等
-
-### Web Storage
-
--  Cookie
-   - 原来 `arp_scroll_position` 这个 cookie 是 Chrome Extension 设置的
-     - arp 即 Auto Refresh Plus
-
-- IndexedDB
-  - 感觉原生 API 好麻烦啊, 先使用 `localforage`
 
 ## TO DO
 - 现在 commit 就是乱写，先定个大致的规矩
@@ -369,21 +242,3 @@ onMounted(() => {
 - 可以设定图片保存时的文件名，以及自定义缩放，图片类型、质量等
 
 - 尝试 i18n
-
-## Done
-
-- 无穷符号 ∞, 字体都没这个符号, 看上去不和谐
-  - 使用 Emoji ♾️ 可惜不能改变颜色
-  - 试着用 `transform: rotate(-90degree)` 将全角 `８` 旋转
-    - 网页看上去没问题, 但截图中 `td` 的 `border` 也旋转了
-    - 貌似是 html2canvas 不支持 `transform`
-  - 原来是字体名打错了, Noto 字体是有这个符号的, 虽然感觉还是小了点, 但看上去和谐多了
-
-- 第一次加载网页, 截图会少差不多一列
-  - 疑似加载字体后出现的 Layout Shifting 让 `table` 的 `offsetWidth` 比字体渲染前大了
-  - 直接设置一个固定宽度 `width: 1200;`, 暂时解决了
- 
-- JSON.stringify(value[, replacer [, space]])
-  - 之前生成的数据写入文件后只有一行，每次 git diff 都是整个文件
-  - 发现 stringify 可以返回 formatted 的数据，顺便改用 replacer 来去除被 rowspan 覆盖掉的列
-  - `merge.js` 现在可以传一个 `noSpan` 的参数来生成结构完整的数据
