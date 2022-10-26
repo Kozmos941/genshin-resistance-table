@@ -25,8 +25,9 @@ onMounted(() => {
     <div class="top" data-index="TOP">
       <span>▲</span>
     </div>
-    <div v-for="(r, i) in RACES" :key="r" class="anchor" :style="{ 'color': colors.at(i) }" :data-index="i">
-      <span>{{ r }}</span>
+    <div v-for="(race, i) in RACES" :key="race.key" class="anchor" :style="'--color-random:' + colors.at(i)"
+      :data-index="i">
+      <span>{{ race.value }}</span>
     </div>
     <div class="bottom" data-index="BOTTOM">
       <span>▼</span>
@@ -38,6 +39,7 @@ onMounted(() => {
 aside {
   z-index: var(--zindex-fixed);
   user-select: none;
+  cursor: pointer;
   /* Box */
   position: fixed;
   left: 0;
@@ -47,34 +49,36 @@ aside {
   display: flex;
   flex-direction: column;
   /* Font */
-  font-family: 'Noto Sans SC';
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-weight: 900;
   background-color: var(--color-dark2);
 
-  &>div {
+  & div {
+    /* Box */
+    margin: 0;
     flex: auto;
+    padding: 0 0.125rem;
+    /* Flex */
     display: flex;
     align-items: center;
+    /* Font */
     font-size: 0.75rem;
-    margin: 0 0;
-    padding: 0 0.125rem;
-    cursor: pointer;
+    line-height: 1rem;
+    color: var(--color-dark);
+    background-color: var(--color-light);
+    /* Border */
     border-width: 2px 0;
     border-style: solid;
     border-color: var(--color-dark2);
 
     &.active,
     &:hover {
-      background-color: var(--color-light);
-
-      & span {
-        color: var(--color-dark)
-      }
+      color: var(--color-random);
+      background-color: var(--color-dark2);
     }
 
     &.top,
     &.bottom {
-      border-width: 0;
       color: var(--color-dark);
       background-color: var(--color-light);
     }

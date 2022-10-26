@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import SiderBar from '#/SiderBar.vue'
 import MainView from '#/MainView.vue'
+import FView from '#/Footer/FView.vue'
 import { ref, onMounted, computed } from 'vue'
 import { debounce } from 'lodash'
+import { RACES } from '$/config'
 /* Sidebar */
 const scrollY = ref(0)
 // v-show
@@ -10,8 +12,14 @@ const tableWidth = ref(1120)
 const width = ref(window.innerWidth)
 const height = ref(window.innerHeight)
 const SideVisibility = computed(() => {
-  const w = tableWidth.value + 50
-  return width.value >= w && height.value >= w / 2
+  const minWidth = tableWidth.value + 50
+  const charLength = RACES.map(({ value }) => value).join('').length + 2
+  const [isLandscape, isEnoughWidth, isEnoughHeight] = [
+    width.value > height.value,
+    width.value >= minWidth,
+    height.value >= charLength * 18,
+  ]
+  return isLandscape && isEnoughWidth && isEnoughHeight
 })
 
 /* Life Hooks */
@@ -40,8 +48,9 @@ onMounted(() => {
 <template>
   <!-- Aside -->
   <Transition name="sidebar">
-    <sider-bar v-if="SideVisibility" :Y="scrollY" />
+    <sider-bar v-show="SideVisibility" :Y="scrollY" />
   </Transition>
   <!-- Main Table -->
   <main-view ref="mViewRef" />
+  <f-view />
 </template>
