@@ -96,7 +96,6 @@ function setDataMap(map, item) {
   for (const [key, value] of ITEM_MAP) map.set(key, value)
 }
 
-
 function writeFile(name, txt, outDir) {
   const dir = outDir ?? `${__dirname}/data/`
   const file = path.normalize(dir + name)

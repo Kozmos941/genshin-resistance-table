@@ -14,12 +14,12 @@ export const TABLE_HEADS = [
   { key: 'being', value: '生物', color: '' },
   { key: 'state', value: '状态', color: '' },
   { key: 'correspond', value: '对应', color: '' },
-  { key: 'electro', value: '雷', color: '#ffacff' },
   { key: 'pyro', value: '火', color: '#ff9999' },
   { key: 'hydro', value: '水', color: '#80c0ff' },
-  { key: 'cryo', value: '冰', color: '#5cffff' },
-  { key: 'dendro', value: '草', color: '#13eea2' },
   { key: 'anemo', value: '风', color: '#80ffd7' },
+  { key: 'electro', value: '雷', color: '#ffacff' },
+  { key: 'dendro', value: '草', color: '#13eea2' },
+  { key: 'cryo', value: '冰', color: '#5cffff' },
   { key: 'geo', value: '岩', color: '#ffe699' },
   { key: 'physical', value: '物', color: '#cccccc' },
 ]
@@ -34,7 +34,7 @@ export const SIGN_REPLACE = {
 
 export const TABLE_CAPTION = `原神抗性表 v${__APP_VERSION__}`
 
-export const MAIN_WIDTH = 1120 + 'px'
+export const MAIN_WIDTH = 1200 + 'px'
 
 /* Init Document */
 /* Set Document Title */

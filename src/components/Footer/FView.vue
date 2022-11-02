@@ -6,13 +6,13 @@ import { loadWebFont } from '$/webfont'
 import FItem from '#/Footer/FItem.vue'
 
 const footerRef = ref<HTMLElement>()
-loadWebFont('Noto Sans SC', footerRef)
+loadWebFont('Noto Serif SC', footerRef)
 
 const items = [
   { title: '数据来源', links: [{ value: 'NGA', url: 'https://nga.178.com/read.php?tid=29649225' }] },
   { title: '字体来源', links: [{ value: 'Google Fonts', url: 'https://fonts.google.com/' }] },
   { title: '页面样式参考', links: [{ value: 'Paimon.moe', url: 'https://paimon.moe/' }] },
-  { title: '抗性函数图像', links: [{ value: 'Desmos', url: 'https://www.desmos.com/calculator/shxsigwsmr' }] },
+  { title: '抗性函数图像', links: [{ value: 'Desmos', url: 'https://www.desmos.com/calculator/sjdowwipam' }] },
 ]
 </script>
 

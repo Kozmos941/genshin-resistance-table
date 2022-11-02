@@ -28,9 +28,11 @@ section {
   margin-left: 1rem;
   border-left: 1px solid;
   border-color: inherit;
-}
 
-span {
-  color: rgb(160 174 192);
+  & span {
+    color: rgb(160 174 192);
+    font-family: var(--font-serif);
+    font-weight: 700;
+  }
 }
 </style>
