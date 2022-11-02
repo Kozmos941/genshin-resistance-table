@@ -27,14 +27,14 @@
         "physical": -20
       },
       {
-        "state": "虚弱",
-        "correspond": -50,
-        "physical": -20
-      },
-      {
         "state": "魔化",
         "general": 60,
         "physical": 30
+      },
+      {
+        "state": "虚弱",
+        "correspond": -50,
+        "physical": -20
       },
       {
         "state": "厄灵",

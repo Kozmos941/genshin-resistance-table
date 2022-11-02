@@ -14,6 +14,7 @@ const { href = '/' } = defineProps<{
 a {
   color: inherit;
   text-decoration: none;
+  font-weight: 500;
 
   &:hover {
     color: rgb(78 124 255);

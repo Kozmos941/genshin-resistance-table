@@ -6,6 +6,7 @@
     "being": "北风的王狼",
     "states": [
       {
+        "state": "奔狼的领主",
         "cryo": "infinity",
         "anemo": "infinity"
       }
@@ -88,6 +89,30 @@
       {
         "state": "恶曜影向天魔",
         "general": 210
+      }
+    ]
+  },
+  {
+    "being": "「正机之神」",
+    "states": [
+      {
+        "state": "阶段１",
+        "electro": 50
+      },
+      {
+        "state": "阶段２・带盾",
+        "general": 230,
+        "electro": 290
+      },
+      {
+        "state": "阶段２・瘫痪",
+        "general": -140,
+        "electro": -80
+      },
+      {
+        "state": "阶段２・无盾",
+        "general": 30,
+        "electro": 90
       }
     ]
   }
