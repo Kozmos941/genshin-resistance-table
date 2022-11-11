@@ -1,24 +1,16 @@
 <script setup lang="ts">
+import { TABLE_HEADS, SIGN_REPLACE } from '$/config'
 import TCaption from '#/Table/TCaption.vue'
 import THead from '#/Table/THead.vue'
 import TBody from '#/Table/TBody.vue'
 import TFoot from '#/Table/TFoot.vue'
-import { ref } from 'vue'
-import {
-  TABLE_CAPTION,
-  TABLE_HEADS,
-  SIGN_REPLACE,
-} from '$/config'
-
-const tableRef = ref<HTMLTableElement>()
-defineExpose({
-  tableRef,
-})
+import { usePiniaStore } from '$/store'
+const pinia = usePiniaStore()
 </script>
 
 <template>
-  <table ref="tableRef">
-    <t-caption :title="TABLE_CAPTION" />
+  <table :ref="e => (pinia.table = e as HTMLTableElement)">
+    <t-caption :title="pinia.TABLE_CAPTION" />
     <t-head :ths="TABLE_HEADS" />
     <t-body :ths="TABLE_HEADS" :sign="SIGN_REPLACE" />
     <t-foot :col-span="TABLE_HEADS.length" />
@@ -27,9 +19,7 @@ defineExpose({
 
 <style scoped lang="postcss">
 table {
-  width: inherit;
   min-width: max-content;
-  margin: auto;
   text-align: center;
   border-collapse: separate;
   border-spacing: 0;

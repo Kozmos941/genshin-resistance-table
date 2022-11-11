@@ -7,13 +7,13 @@ import * as _ from '$/config'
 const SERIF_TEXT = textDeduplicate(''.concat(
   ..._.TABLE_HEADS.map(({ value }) => value),
   ..._.RACES.map(({ value }) => value),
-  _.TABLE_CAPTION,
+  '原神抗性表',
 ))
 
 const SANS_TEXT = textDeduplicate(''.concat(
+  ..._.SIGN_REPLACE.map(({ replace }) => replace),
   JSON.stringify(data),
   SERIF_TEXT,
-  ...Object.values(_.SIGN_REPLACE),
 ))
 
 loadGoogleWebFont('Noto Serif SC', SERIF_TEXT)
@@ -25,7 +25,7 @@ function textDeduplicate(text: string) {
 }
 
 function loadGoogleWebFont(font: string, text?: string) {
-  const family = `${font}:100,200,300,400,500,600,700,900`
+  const family = `${font}:100,200,300,400,500,600,700,800,900`
   WebFont.load({ google: { families: [family], text: text } })
 }
 

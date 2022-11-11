@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { RACES, TABLE_HEADS } from '$/config'
-import { SidebarEventDelegation } from '@/scripts/classes'
+import { SidebarEventDelegation } from '$/classes'
+import { usePiniaStore } from '$/store'
+const pinia = usePiniaStore()
 
 /* Shuffle Colors */
 const colors = TABLE_HEADS
@@ -11,12 +13,23 @@ const colors = TABLE_HEADS
 
 /* OnMounted */
 const asideRef = ref<HTMLElement>()
+const { tCellRaces } = pinia
 onMounted(() => {
+  const { THEAD_HEIGHT } = pinia
   const aside = asideRef.value as HTMLElement
-  const thead = document.querySelector('thead') as HTMLTableSectionElement
-  const tds = document.querySelectorAll('td.race') as NodeListOf<HTMLTableCellElement>
-  new SidebarEventDelegation(aside, thead.offsetHeight, tds)
+  new SidebarEventDelegation(aside, THEAD_HEIGHT, tCellRaces)
 })
+
+function isActive(key: string) {
+  let active = false
+  if (tCellRaces.size !== 0) {
+    const td = tCellRaces.get(key) as HTMLTableCellElement
+    const { THEAD_HEIGHT, scrollY } = pinia
+    const { top, bottom } = td.getBoundingClientRect()
+    active = (top - 1) <= THEAD_HEIGHT && THEAD_HEIGHT < (bottom)
+  }
+  return active
+}
 
 </script>
 
@@ -26,7 +39,7 @@ onMounted(() => {
       <span>▲</span>
     </div>
     <div v-for="(race, i) in RACES" :key="race.key" class="anchor" :style="'--color-random:' + colors.at(i)"
-      :data-index="i">
+      :data-index="race.key" :class="isActive(race.key) ? 'active' : null">
       <span>{{ race.value }}</span>
     </div>
     <div class="bottom" data-index="BOTTOM">
@@ -50,7 +63,7 @@ aside {
   flex-direction: column;
   /* Font */
   font-family: var(--font-sans);
-  font-weight: 900;
+  font-weight: 700;
   background-color: var(--color-dark2);
 
   & div {
@@ -63,7 +76,7 @@ aside {
     align-items: center;
     /* Font */
     font-size: 0.75rem;
-    line-height: 1rem;
+    line-height: 0.75rem;
     color: var(--color-dark);
     background-color: var(--color-light);
     /* Border */
@@ -81,6 +94,14 @@ aside {
     &.bottom {
       color: var(--color-dark);
       background-color: var(--color-light);
+    }
+
+    &.top {
+      border-top: 0;
+    }
+
+    &.bottom {
+      border-bottom: 0;
     }
   }
 }

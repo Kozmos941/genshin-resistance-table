@@ -1,11 +1,18 @@
 :root {
+  /* Color */
   --red-accent2: #ff5252;
   --blue-lighten2: #64b5f6;
   --color-dark: #25294a;
   --color-dark2: #2d325a;
   --color-light: #ffffff;
+  /* Font Family */
   --font-serif: 'Poppins', 'Noto Serif SC', serif;
   --font-sans: 'Poppins', 'Noto Sans SC', sans-serif;
+  /* Border */
+  --border-width: 1px;
+  --border-width-outer: 8px;
+  --border-width-inner: 4px;
+  /* Z-Index */
   --zindex: 999;
   --zindex-dropdown: 1000;
   --zindex-sticky: 1020;
@@ -43,28 +50,20 @@ p {
   opacity: 0;
 }
 
-/* the entire scrollbar */
+/* Scroll Bar */
 ::-webkit-scrollbar {
-  width: 0.625rem;
-  height: 0.625rem;
+  width: 10px;
+  height: 10px;
 }
-
-/* the buttons on the scrollbar */
-/* ::-webkit-scrollbar-button {
-} */
 
 /* Track */
 ::-webkit-scrollbar-track {
   background: var(--color-dark2);
 }
 
-::-webkit-scrollbar-track-piece {
-  /* background: var(--color-light); */
-}
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  border-radius: 0.5rem;
+  border-radius: 5px;
   background: var(--color-hydro);
 
   /* Handle on hover */
@@ -72,10 +71,3 @@ p {
     background: var(--color-anemo);
   }
 }
-
-/* ::-webkit-scrollbar-corner {
-} */
-
-/* ::-webkit-resizer {
-  background: var(--color-pyro);
-} */

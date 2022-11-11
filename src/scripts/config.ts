@@ -24,24 +24,10 @@ export const TABLE_HEADS = [
   { key: 'physical', value: '物', color: '#cccccc' },
 ]
 
-export const THEADS_LENGTH = TABLE_HEADS.length
-
-export const SIGN_REPLACE = {
-  INFINITY: '∞', //♾️∞ထ８ꝏꝎ
-  ASTERISK: '✱',
-  LINEFEED: '<br>',
-}
-
-export const TABLE_CAPTION = `原神抗性表 v${__APP_VERSION__}`
-
-export const MAIN_WIDTH = 1200 + 'px'
-
-/* Init Document */
-/* Set Document Title */
-document.title = TABLE_CAPTION
-
-/* Set CSS element color variables */
-const root = document.querySelector(':root') as HTMLElement
-TABLE_HEADS.forEach(({ key, color }) => {
-  if (color) root.style.setProperty(`--color-${key}`, color)
-})
+export const SIGN_REPLACE = [
+  { pattern: /infinity/, replace: '∞' }, //♾️∞ထ８ꝏꝎ
+  { pattern: /\*/, replace: '✱' },
+  { pattern: /\n/, replace: '<br>' },
+  { pattern: /\//, replace: '｜' },
+  { pattern: /·/, replace: '・' },
+]

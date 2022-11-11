@@ -26,7 +26,7 @@
         "hydro": 20
       },
       {
-        "state": "邪眼・雷",
+        "state": "邪眼·雷",
         "general": 0,
         "electro": 50
       },
@@ -69,7 +69,7 @@
     "being": "「女士」",
     "states": [
       {
-        "state": "邪眼・冰",
+        "state": "邪眼·冰",
         "cryo": 50
       },
       {
@@ -100,17 +100,17 @@
         "electro": 50
       },
       {
-        "state": "阶段２・带盾",
+        "state": "阶段２·带盾",
         "general": 230,
         "electro": 290
       },
       {
-        "state": "阶段２・瘫痪",
+        "state": "阶段２·瘫痪",
         "general": -140,
         "electro": -80
       },
       {
-        "state": "阶段２・无盾",
+        "state": "阶段２·无盾",
         "general": 30,
         "electro": 90
       }

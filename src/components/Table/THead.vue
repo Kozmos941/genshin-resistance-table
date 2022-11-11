@@ -8,7 +8,7 @@ const { ths } = defineProps<{
 </script>
 
 <template>
-  <thead ref="theadRef">
+  <thead>
     <tr>
       <th v-for="th in ths" :key="th.key" :class="th.key">
         {{ th.value }}
@@ -27,11 +27,11 @@ thead {
   background-color: var(--color-dark);
 
   & th {
-    padding: 0.375rem;
+    padding: 0.375rem 0;
     border-style: solid;
     border-color: var(--color-light);
-    border-top-width: 0.5rem;
-    border-bottom-width: 0.25rem;
+    border-top-width: var(--border-width-outer);
+    border-bottom-width: var(--border-width-inner);
     border-left-width: 0;
     border-right-width: 0;
   }

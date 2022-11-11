@@ -29,6 +29,11 @@ section {
   border-left: 1px solid;
   border-color: inherit;
 
+  & div {
+    display: flex;
+    gap: 1rem;
+  }
+
   & span {
     color: rgb(160 174 192);
     font-family: var(--font-serif);

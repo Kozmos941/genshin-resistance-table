@@ -1127,7 +1127,7 @@
       "physical": -30
     },
     {
-      "state": "邪眼・雷",
+      "state": "邪眼·雷",
       "correspond": null,
       "pyro": 0,
       "hydro": 0,
@@ -1201,7 +1201,7 @@
     },
     {
       "being": "「女士」",
-      "state": "邪眼・冰",
+      "state": "邪眼·冰",
       "correspond": null,
       "pyro": 10,
       "hydro": 10,
@@ -1275,7 +1275,7 @@
       "physical": 10
     },
     {
-      "state": "阶段２・带盾",
+      "state": "阶段２·带盾",
       "correspond": null,
       "pyro": 230,
       "hydro": 230,
@@ -1287,7 +1287,7 @@
       "physical": 230
     },
     {
-      "state": "阶段２・瘫痪",
+      "state": "阶段２·瘫痪",
       "correspond": null,
       "pyro": -140,
       "hydro": -140,
@@ -1299,7 +1299,7 @@
       "physical": -140
     },
     {
-      "state": "阶段２・无盾",
+      "state": "阶段２·无盾",
       "correspond": null,
       "pyro": 30,
       "hydro": 30,
