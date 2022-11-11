@@ -1,0 +1,62 @@
+:root {
+  /* Color */
+  --red-accent2: #ff5252;
+  --blue-lighten2: #64b5f6;
+  --color-light: #ffffff;
+  --color-dark: #25294a;
+  --color-dark2: #2d325a;
+  --color-pyro: #ff9999;
+  --color-hydro: #80c0ff;
+  --color-anemo: #80ffd7;
+  --color-electro: #ffacff;
+  --color-dendro: #13eea2;
+  --color-cryo: #5cffff;
+  --color-geo: #ffe699;
+  --color-physical: #cccccc;
+  /* Font Family */
+  --font-serif: 'Poppins', 'Noto Serif SC', serif;
+  --font-sans: 'Poppins', 'Noto Sans SC', sans-serif;
+  /* Border */
+  --border-width: 1px;
+  --border-width-outer: 8px;
+  --border-width-inner: 4px;
+  /* Z-Index */
+  --zindex: 999;
+  --zindex-dropdown: 1000;
+  --zindex-sticky: 1020;
+  --zindex-fixed: 1030;
+  --zindex-modal-backdrop: 1040;
+  --zindex-modal: 1050;
+  --zindex-popover: 1060;
+  --zindex-tooltip: 1070;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  font-size: 16px;
+  margin: 0;
+}
+
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-dark2);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: var(--color-hydro);
+
+  /* Handle on hover */
+  &:hover {
+    background: var(--color-anemo);
+  }
+}
