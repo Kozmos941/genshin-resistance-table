@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { usePiniaStore } from '$/store'
 import { storeToRefs } from 'pinia'
+import { useImageStore, usePiniaStore } from '$/store'
 
-const { size } = storeToRefs(usePiniaStore())
+const { size } = storeToRefs(useImageStore())
+const pinia = usePiniaStore()
 
-const buttonRef = ref<HTMLButtonElement>()
-defineExpose({
-  buttonRef,
-})
 </script>
 
 <template>
-  <button ref="buttonRef">
+  <button :ref="(e) => { pinia.button = e as HTMLButtonElement }">
     Save As Image
     <div>{{ size }} MB</div>
   </button>

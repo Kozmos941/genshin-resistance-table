@@ -1,7 +1,7 @@
 // https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
 import fs from 'fs'
-import { fileURLToPath } from 'url'
 import path from 'path'
+import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename) + '/src'
 
@@ -10,14 +10,21 @@ const __dirname = path.dirname(__filename) + '/src'
 // https://stackoverflow.com/questions/1751301/regex-match-entire-words-only
 // https://stackoverflow.com/questions/494035/how-do-you-use-a-variable-in-a-regular-expression
 class Arguments {
+  #validToken = ['BOTH', 'NOSPAN']
+  #token = []
   constructor (args) {
     this.args = args
-    this.NO_SPAN = this.test('nospan')
-    this.BOTH = this.test('both')
+    this.#token = this.#validToken.map(t => this.#test(t))
   }
-  test(word) {
+  #test(word) {
     const regexp = String.raw`\b${word}\b`
     return new RegExp(regexp, 'i').test(this.args)
+  }
+  has(token) {
+    return this.#token[0] || this.#test(token)
+  }
+  noArgs() {
+    return this.#token[0] || this.#token.every(b => !b)
   }
 }
 
@@ -106,30 +113,34 @@ function writeFile(name, txt, outDir) {
 }
 
 function replacer(key, value) {
+  let v
   switch (key) {
     case 'race':
     case 'being': {
-      if (RECORD_MAP.get(key) === value) return
-      else RECORD_MAP.set(key, value)
+      if (RECORD_MAP.get(key) !== value) {
+        RECORD_MAP.set(key, value)
+        v = value
+      }
       break
     }
+    default: v = value
   }
-  return value
+  return v
 }
 
 /* Main Function */
 async function main() {
   flatten(await fetchData())
   const data = DATA_ARRAY.map(item => Object.fromEntries(item))
-  if (TOKEN.NO_SPAN || TOKEN.BOTH) {
-    const d = RACES.reduce((a, { key, value }) => {
-      a[key] = data.filter(item => item.race === value)
-      return a
+  if (TOKEN.has('nospan')) {
+    const d = RACES.reduce((object, { key, value }) => {
+      object[key] = data.filter(item => item.race === value)
+      return object
     }, {})
     const json = JSON.stringify(d, null, 2)
     writeFile('data.json', json)
   }
-  if (!TOKEN.NO_SPAN || TOKEN.BOTH) {
+  if (TOKEN.noArgs()) {
     const rowspan = Object.fromEntries(SPAN_MAP)
     const json = JSON.stringify({ data, rowspan }, replacer, 2)
     writeFile('table.json', json)

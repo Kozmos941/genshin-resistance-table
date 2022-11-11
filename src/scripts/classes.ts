@@ -1,5 +1,5 @@
 import html2canvas from 'html2canvas'
-import { Options as HOptions } from 'html2canvas'
+import type { Options as HOptions } from 'html2canvas'
 
 interface DOptions {
   scale?: number,
@@ -37,17 +37,17 @@ export class Download {
 export class SidebarEventDelegation {
   element: HTMLElement
   offset: number
-  list: NodeListOf<HTMLElement>
-  constructor(el: HTMLElement, headOffset = 0, nodeList: NodeListOf<HTMLElement>) {
+  map: Map<string, HTMLElement>
+  constructor(el: HTMLElement, offset = 0, nodeMap: Map<string, HTMLElement>) {
     this.element = el
-    this.offset = headOffset
-    this.list = nodeList
-    el.onclick = this.onClick.bind(this)
+    this.offset = offset
+    this.map = nodeMap
+    el.onmouseup = this.onClick.bind(this)
   }
   onClick(event: MouseEvent) {
     if (event.target instanceof HTMLElement) {
       const div = event.target.closest('div') as HTMLDivElement
-      const index = div.dataset.index
+      const index = div.dataset.index as string
       switch (index) {
         case 'TOP': {
           window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -59,16 +59,16 @@ export class SidebarEventDelegation {
           break
         }
         default: {
-          const td = this.list[Number(index)] as HTMLTableCellElement
-          this.scrollIntoViewOffset(td)
+          const td = this.map.get(index) as HTMLTableCellElement
+          this.scrollIntoViewOffset(td, this.offset)
           break
         }
       }
     }
   }
-  scrollIntoViewOffset(element: Element) {
+  scrollIntoViewOffset(element: Element, offset = 0) {
     const { top: elementTop } = element.getBoundingClientRect()
-    const top = elementTop + window.scrollY - this.offset
+    const top = Math.round(elementTop + window.scrollY - offset)
     window.scrollTo({ top, behavior: 'smooth' })
   }
 }

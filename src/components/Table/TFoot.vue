@@ -26,13 +26,14 @@ loadWebFont('Noto Sans SC', trRef)
 <style scoped lang="postcss">
 tfoot {
   font-family: var(--font-sans);
+  font-size: 1rem;
 }
 
 td {
   padding: 0.5rem;
   border-style: solid;
-  border-top-width: 0.25rem;
-  border-bottom-width: 0.5rem;
+  border-top-width: var(--border-width-inner);
+  border-bottom-width: var(--border-width-outer);
   border-left-width: 0;
   border-right-width: 0;
 }

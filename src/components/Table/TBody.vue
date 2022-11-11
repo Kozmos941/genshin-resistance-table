@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import { data, rowspan } from '@/data/table.json'
 import type { THItem, TDValue } from '$/types'
+import { data, rowspan } from '@/data/table.json'
+import { RACES } from '$/config'
+import { usePiniaStore } from '$/store'
+const pinia = usePiniaStore()
 
 /* Props */
 const { sign } = defineProps<{
-  sign: { [key: string]: string }
+  sign: { pattern: RegExp, replace: string }[]
   ths: THItem[]
 }>()
-const { INFINITY: infty, ASTERISK: aster, LINEFEED: br } = sign
 
-/* Data */
+/* Table Cell Setting */
 const ROW_SPAN = new Map(Object.entries(rowspan))
 const DATA = data.map(item => new Map(Object.entries(item)))
-const set_span = (k: string) => (ROW_SPAN.has(k) ? ROW_SPAN.get(k) : 1)
 
-/* Methods */
+const set_span = (k: string) => ROW_SPAN.get(k)
 const add_class = (v: TDValue) => {
   let c = []
   switch (typeof v) {
@@ -23,9 +24,9 @@ const add_class = (v: TDValue) => {
       break
     case 'number':
       if (v < 0) c.push('minus')
-      else if (v >= 75) c.push('gt-75')
-      else if (v >= 50) c.push('gt-50')
-      else if (v >= 20) c.push('gt-20')
+      if (v >= 75) c.push('gt-75')
+      if (v >= 50) c.push('gt-50')
+      if (v >= 20) c.push('gt-20')
       break
   }
   return c
@@ -37,21 +38,30 @@ const check_data = (v: TDValue) => {
       t = v + '%'
       break
     case 'string':
-      if (v === 'infinity') t = infty
-      else if (v.match(/\*/)) t = v.replace(/\*/, aster)
-      else if (v.match(/\n/)) t = v.replace(/\n/, br)
-      else t = v
+      t = v
+      sign.forEach(({ pattern, replace }) => {
+        if (v.match(pattern)) t = t.replace(pattern, replace)
+      })
       break
   }
   return t
 }
+
+function TCellRef(e: HTMLTableCellElement) {
+  if (e.classList.contains('race')) {
+    const [{ key }] = RACES.filter(({ value }) => value === e.innerText)
+    pinia.tCellRaces.set(key, e)
+    e.dataset.key = key
+  }
+}
+
 </script>
 
 <template>
   <tbody>
     <tr v-for="(row, index) in DATA" :key="'row' + index">
       <td v-for="[key, value] in row" :key="key + index" :rowspan="set_span(value)" :class="[key, add_class(value)]"
-        v-html="check_data(value)"></td>
+        v-html="check_data(value)" :ref="e => TCellRef(e as HTMLTableCellElement)"></td>
     </tr>
   </tbody>
 </template>
@@ -61,18 +71,19 @@ td {
   padding: 0.1rem;
   border-color: var(--color-light);
   border-style: solid;
-  border-top-width: 0.0625rem;
-  border-bottom-width: 0.0625rem;
+  border-top-width: var(--border-width);
+  border-bottom-width: var(--border-width);
   border-left-width: 0;
   border-right-width: 0;
 
   &.race {
+    --size: 2rem;
     font-family: var(--font-serif);
     font-weight: 900;
-    font-size: 2rem;
-    line-height: 2rem;
-    padding: 0 1.8rem;
-    width: 2rem;
+    padding: 0 1.5rem;
+    width: var(--size);
+    font-size: var(--size);
+    line-height: var(--size);
   }
 
   &.being,
@@ -99,7 +110,6 @@ td {
   }
 
   &.infty {
-    font-family: 'Noto Sans SC';
     font-weight: 900;
   }
 }

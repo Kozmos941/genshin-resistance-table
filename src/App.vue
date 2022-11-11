@@ -1,56 +1,52 @@
 <script setup lang="ts">
-import SiderBar from '#/SiderBar.vue'
-import MainView from '#/MainView.vue'
-import FView from '#/Footer/FView.vue'
+import { debounce, lowerFirst } from 'lodash'
 import { ref, onMounted, computed } from 'vue'
-import { debounce } from 'lodash'
-import { RACES } from '$/config'
-/* Sidebar */
-const scrollY = ref(0)
-// v-show
-const tableWidth = ref(1120)
-const width = ref(window.innerWidth)
-const height = ref(window.innerHeight)
+import Main from '#/MainContent.vue'
+import Side from '#/SideNavigation.vue'
+import { usePiniaStore } from '$/store'
+import { RACES, TABLE_HEADS } from '$/config'
+const pinia = usePiniaStore()
+
+/* Sider Visibility */
+const charLength = RACES.map(({ value }) => value).join('').length + 2
+const innerWidth = ref(window.innerWidth)
+const innerHeight = ref(window.innerHeight)
+const tableWidth = ref(0)
 const SideVisibility = computed(() => {
-  const minWidth = tableWidth.value + 50
-  const charLength = RACES.map(({ value }) => value).join('').length + 2
-  const [isLandscape, isEnoughWidth, isEnoughHeight] = [
-    width.value > height.value,
-    width.value >= minWidth,
-    height.value >= charLength * 18,
-  ]
-  return isLandscape && isEnoughWidth && isEnoughHeight
+  const isEnoughWidth = innerWidth.value >= tableWidth.value + 16 * 2
+  const isEnoughHeight = innerHeight.value >= charLength * 18 * 0.75
+  return isEnoughWidth && isEnoughHeight
 })
 
 /* Life Hooks */
-const mViewRef = ref<InstanceType<typeof MainView>>()
-const roundY = computed(() => Math.round(window.scrollY))
 onMounted(() => {
-  const mView = mViewRef.value as InstanceType<typeof MainView>
-  const table = mView.tViewRef?.tableRef as HTMLTableElement
-  tableWidth.value = table.offsetWidth
-
+  tableWidth.value = pinia.TABLE_WIDTH
   /* onResize */
   window.addEventListener('resize', debounce(() => {
-    width.value = window.innerWidth
-    height.value = window.innerHeight
+    innerWidth.value = window.innerWidth
+    innerHeight.value = window.innerHeight
   }, 20, { 'leading': false, 'trailing': true }))
 
-  /* onScroll */
   window.addEventListener('scroll', debounce(() => {
-    scrollY.value = roundY.value
-    sessionStorage.setItem('scrollY', `${scrollY.value}`)
-  }, 100, { 'leading': false, 'trailing': true }))
+    pinia.scrollY = (window.scrollY)
+    console.log(pinia.scrollY)
+  }, 200, { 'leading': false, 'trailing': true }))
 })
+
+/* Init Document */
+/* Set Document Title */
+document.title = pinia.TABLE_CAPTION
+
+/* Set CSS element color variables */
+TABLE_HEADS.filter(({ color }) => color)
+  .forEach(({ key, color }) => document.documentElement.style.setProperty(`--color-${key}`, color))
 
 </script>
 
 <template>
-  <!-- Aside -->
+  <!-- <div style="position:fixed; right:10px;">{{ pinia.scrollY }}</div> -->
   <Transition name="sidebar">
-    <sider-bar v-show="SideVisibility" :Y="scrollY" />
+    <Side v-show="SideVisibility" />
   </Transition>
-  <!-- Main Table -->
-  <main-view ref="mViewRef" />
-  <f-view />
+  <Main />
 </template>

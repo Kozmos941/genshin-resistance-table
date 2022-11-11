@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import MToken from './MToken.vue'
-import MButton from './MButton.vue'
 import { ref } from 'vue'
-import { loadWebFont } from '$/webfont'
-import { imageForage, isMobile, usePiniaStore } from '$/store'
 import { storeToRefs } from 'pinia'
+import MToken from '#/Download/MToken.vue'
+import MButton from '#/Download/MButton.vue'
+import { loadWebFont } from '$/webfont'
+import { imageForage, isMobile, useImageStore } from '$/store'
 
-const store = usePiniaStore()
-const { size } = storeToRefs(store)
-const { fileName } = store
+const image = useImageStore()
+const { size } = storeToRefs(image)
+const { fileName } = image
 
 /* Load Font */
 const section = ref<HTMLElement>()
