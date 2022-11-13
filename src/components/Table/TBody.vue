@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { THItem, TDValue } from '$/types'
 import { data, rowspan } from '@/data/table.json'
 import { RACES } from '$/config'
 import { usePiniaStore } from '$/store'
