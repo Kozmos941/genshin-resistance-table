@@ -1,24 +1,36 @@
-<script>
+<script lang="ts">
   const items = [
-  {
-    title: 'Reference', links: [
-      { value: 'NGA', url: 'https://nga.178.com/read.php?tid=29649225' },
-      { value: 'Paimon.moe', url: 'https://paimon.moe/' },
-    ],
-  },
-  {
-    title: 'Resource', links: [
-      { value: 'Google Fonts', url: 'https://fonts.google.com/' },
-    ],
-  },
-  { title: 'Graph', links: [{ value: 'desmos', url: 'https://www.desmos.com/calculator/qkuw6igsu1' }] },
-  {
-    title: 'Deployment', links: [
-      { value: 'GitHub Pages', url: 'https://kozmos941.github.io/genshin-resistance-table/' },
-      { value: 'Vercel', url: 'https://grt.kozmos941.vercel.app' },
-    ],
-  },
-]
+    {
+      title: 'Reference',
+      links: [
+        { value: 'NGA', url: 'https://nga.178.com/read.php?tid=29649225' },
+        { value: 'Paimon.moe', url: 'https://paimon.moe/' },
+      ],
+    },
+    {
+      title: 'Resource',
+      links: [{ value: 'Google Fonts', url: 'https://fonts.google.com/' }],
+    },
+    {
+      title: 'Graph',
+      links: [
+        {
+          value: 'desmos',
+          url: 'https://www.desmos.com/calculator/qkuw6igsu1',
+        },
+      ],
+    },
+    {
+      title: 'Deployment',
+      links: [
+        {
+          value: 'GitHub Pages',
+          url: 'https://kozmos941.github.io/genshin-resistance-table/',
+        },
+        { value: 'Vercel', url: 'https://grt.kozmos941.vercel.app' },
+      ],
+    },
+  ]
 </script>
 
 <footer>

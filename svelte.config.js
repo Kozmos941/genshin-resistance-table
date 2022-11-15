@@ -15,7 +15,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			'$comp': 'src/components',
+			'$comp': 'src/lib/components',
 		}
 	}
 };

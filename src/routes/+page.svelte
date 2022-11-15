@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import Sider from '$comp/Sider.svelte'
-  import Modal from '$comp/Modal.svelte'
-  import Button from '$comp/Button.svelte'
-  import GitHub from '$comp/GitHub.svelte'
-  import Table from '$comp/Table.svelte'
-  import Footer from '$comp/Footer.svelte'
-  import { Download } from '$lib/Download'
+  import Sider from '$lib/components/Sider.svelte'
+  import Modal from '$lib/components/Modal.svelte'
+  import Button from '$lib/components/Button.svelte'
+  import GitHub from '$lib/components/GitHub.svelte'
+  import Table from '$lib/components/Table.svelte'
+  import Footer from '$lib/components/Footer.svelte'
+  import { Download } from '$lib/modules/Download'
   import { mainWidth, tHeadHeight, imageForage, image } from '$lib/store'
 
   /* Download */

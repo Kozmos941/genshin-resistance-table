@@ -4,6 +4,7 @@
   import { RACES, TABLE_HEADS, SIGN_REPLACE } from '$lib/config'
   import { title, tCellRace } from '$lib/store'
 
+  console.log(import.meta.env)
   /* Table */
   export let table: HTMLTableElement
 
