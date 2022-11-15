@@ -28,3 +28,9 @@ declare interface TRowItem {
   geo: Element
   physical: Element
 }
+
+declare interface DLOptions {
+  scale?: number,
+  type?: string,
+  quality?: number
+}

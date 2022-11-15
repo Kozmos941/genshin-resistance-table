@@ -12,15 +12,17 @@ span {
   color: #00000066;
   user-select: none;
   text-align: center;
+  cursor: pointer;
 
   &.cache {
     color: var(--red-accent2);
   }
 
-  &.mobile {
+  &.modify {
     text-align: end;
+
     &.is {
-      color: var(--blue-lighten2);
+      color: var(--cyan-lighten2);
     }
   }
 }

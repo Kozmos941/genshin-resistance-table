@@ -1,33 +1,31 @@
 import html2canvas from 'html2canvas'
 import type { Options as HOptions } from 'html2canvas'
 
-interface DOptions {
-  scale?: number,
-  type?: string,
-  quality?: number
-}
-
 export class Download {
   element: HTMLElement
-  options: DOptions
+  options: DLOptions
   canvas: Promise<HTMLCanvasElement>
   dataURL: Promise<string>
-  constructor(element: HTMLElement, options: DOptions = {}) {
+  constructor(element: HTMLElement, options: DLOptions = {}) {
     this.element = element
     this.options = Object.assign({
       scale: 1.0,
       type: 'image/jpeg',
       quality: 0.92,
     }, options)
-    this.canvas = this.getCanvas({ scale: options.scale })
-    this.dataURL = this.getDataURL(options.type, options.quality)
+    this.canvas = this.#getCanvas({ scale: options.scale })
+    this.dataURL = this.#getDataURL(options.type, options.quality)
+  }
+  async getURLSize() {
+    const dataURL = await (this.dataURL)
+    return (3 / 4 * dataURL.length / Math.pow(2, 20)).toFixed(2)
   }
 
-  async getCanvas(options?: Partial<HOptions>) {
+  async #getCanvas(options?: Partial<HOptions>) {
     return await html2canvas(this.element, options)
   }
 
-  async getDataURL(type?: string | undefined, quality?: number) {
+  async #getDataURL(type?: string | undefined, quality?: number) {
     const cavans = await this.canvas
     return cavans.toDataURL(type, quality)
   }
