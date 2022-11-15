@@ -21,14 +21,12 @@ onMounted(() => {
 })
 
 function isActive(key: string) {
-  let active = false
-  if (tCellRaces.size !== 0) {
-    const td = tCellRaces.get(key) as HTMLTableCellElement
-    const { THEAD_HEIGHT, scrollY } = pinia
-    const { top, bottom } = td.getBoundingClientRect()
-    active = (top - 1) <= THEAD_HEIGHT && THEAD_HEIGHT < (bottom)
-  }
-  return active
+  if (tCellRaces.size === 0) return false
+  
+  const td = tCellRaces.get(key) as HTMLTableCellElement
+  const { THEAD_HEIGHT, scrollY } = pinia
+  const { top, bottom } = td.getBoundingClientRect()
+  return (top - 1) <= THEAD_HEIGHT && THEAD_HEIGHT < (bottom)
 }
 
 </script>

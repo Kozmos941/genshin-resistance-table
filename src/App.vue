@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { debounce, lowerFirst } from 'lodash'
+import { debounce } from 'lodash'
 import { ref, onMounted, computed } from 'vue'
 import Main from '#/MainContent.vue'
 import Side from '#/SideNavigation.vue'

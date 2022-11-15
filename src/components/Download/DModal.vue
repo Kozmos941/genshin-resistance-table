@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { throttle } from 'lodash'
 import { storeToRefs } from 'pinia'
 import MToken from '#/Download/MToken.vue'
 import MButton from '#/Download/MButton.vue'
+import DModify from '#/Download/DModify.vue'
 import { loadWebFont } from '$/webfont'
-import { imageForage, isMobile, useImageStore } from '$/store'
+import { imageForage, usePiniaStore, useImageStore } from '$/store'
+import { Download } from '$/classes'
 
 const image = useImageStore()
+const pinia = usePiniaStore()
 const { size } = storeToRefs(image)
-const { fileName } = image
 
 /* Load Font */
 const section = ref<HTMLElement>()
@@ -20,8 +23,10 @@ const emit = defineEmits<{ (e: 'closeModal'): void }>()
 /* Click Handler */
 async function saveAs() {
   const a = document.createElement('a')
-  a.href = await imageForage.getItem('dataURL') as string
-  a.download = fileName
+  a.href = download.value ?
+    await download.value.dataURL :
+    await imageForage.getItem('dataURL') as string
+  a.download = image.fileName
   a.click()
   emit('closeModal')
 }
@@ -35,17 +40,32 @@ function clearCache() {
   }
 }
 
+const ModifyMode = ref(false)
+const download = ref<Download>()
+async function getDownload(changed: boolean) {
+  if (!changed) return
+  const { scale, type, quality } = image
+  console.log({ scale, type, quality })
+  download.value = new Download(pinia.TABLE, { scale, type, quality })
+  size.value = '...'
+  size.value = await download.value.getURLSize() + ''
+}
+const toggleModify = throttle(() => { ModifyMode.value = !ModifyMode.value }, 300, { trailing: false })
+
 </script>
 
 <template>
   <div class="modal" @dblclick.prevent="emit('closeModal')">
     <section @dblclick.stop ref="section">
       <h1>保存图片</h1>
-      <m-token class="mobile" :class="isMobile ? 'is' : null">MOBILE</m-token>
+      <m-token class="modify" :class="ModifyMode ? 'is' : null" @click.stop="toggleModify">
+        MODIFY
+      </m-token>
       <m-token class="cache" @dblclick="clearCache">CACHE</m-token>
       <article>
         <p>* 若发现图片与网页内容排版明显不一致，可尝试双击上面 <strong>CACHE</strong> 字样清除缓存并刷新</p>
-        <p style="align-self: center;"><strong>{{ fileName }} ({{ size }} MB)</strong></p>
+        <p style="align-self: center;"><strong>{{ image.fileName }} ({{ size }} MB)</strong></p>
+        <DModify :mode="ModifyMode" @changed="getDownload" />
       </article>
       <m-button class="confirm" @click="saveAs()">确 定</m-button>
       <m-button class="cancel" @click="emit('closeModal')">取 消</m-button>
@@ -65,11 +85,10 @@ section {
   /* Grid Layout */
   display: grid;
   grid-template:
-    "head head mobl  clr " auto
-    "text text text  text" auto
-    ".    .    .     .   " auto
-    ".    .    cnfm  cncl" auto / 1fr 1fr 1fr 1fr;
-
+    "head head mod  clr " auto
+    "text text text text" auto
+    ".    .    .    .   " auto
+    ".    .    cfm  ccl " auto / 1fr 1fr 1fr 1fr;
   row-gap: 1rem;
   column-gap: 2rem;
 }
@@ -119,15 +138,15 @@ h1 {
   grid-area: clr;
 }
 
-.mobile {
-  grid-area: mobl;
+.modify {
+  grid-area: mod;
 }
 
 .confirm {
-  grid-area: cnfm;
+  grid-area: cfm;
 }
 
 .cancel {
-  grid-area: cncl;
+  grid-area: ccl;
 }
 </style>

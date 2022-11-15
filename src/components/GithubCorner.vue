@@ -1,14 +1,14 @@
 <script setup lang="ts">
 interface Props {
-  size?: string | number
   url?: string
+  size?: string | number
   fill?: string
   color?: string
 }
 
 const {
+  url = 'https://github.com/Kozmos941/genshin-resistance-table',
   size = '5rem',
-  url = '/',
   fill = '#ffffff',
   color = '#25294a',
 } = defineProps<Props>()
