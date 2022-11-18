@@ -4,6 +4,7 @@
 *.txt text
 *.html text
 *.css text
+*.postcss text
 *.js text
 *.ts text
 *.vue text

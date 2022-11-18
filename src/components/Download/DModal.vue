@@ -63,10 +63,11 @@ const toggleModify = throttle(() => { ModifyMode.value = !ModifyMode.value }, 30
       </m-token>
       <m-token class="cache" @dblclick="clearCache">CACHE</m-token>
       <article>
-        <p>* 若发现图片与网页内容排版明显不一致，可尝试双击上面 <strong>CACHE</strong> 字样清除缓存并刷新</p>
+        <p>* 若发现图片与网页内容排版明显不一致，可尝试双击上面 <strong>CACHE</strong> 字样清除缓存并刷新。</p>
+        <p>* 点击 <strong>MODIFY</strong> 亮起后可配置图片的缩放、类型和质量，再次点击应用配置。</p>
         <p style="align-self: center;"><strong>{{ image.fileName }} ({{ size }} MB)</strong></p>
-        <DModify :mode="ModifyMode" @changed="getDownload" />
       </article>
+      <d-modify :mode="ModifyMode" @changed="getDownload" />
       <m-button class="confirm" @click="saveAs()">确 定</m-button>
       <m-button class="cancel" @click="emit('closeModal')">取 消</m-button>
     </section>
@@ -87,7 +88,7 @@ section {
   grid-template:
     "head head mod  clr " auto
     "text text text text" auto
-    ".    .    .    .   " auto
+    "modi modi modi modi" auto
     ".    .    cfm  ccl " auto / 1fr 1fr 1fr 1fr;
   row-gap: 1rem;
   column-gap: 2rem;
@@ -96,12 +97,12 @@ section {
 article {
   padding: 0 2rem;
   grid-area: text;
-  width: 600px;
+  width: 750px;
   font-size: 1.5rem;
   font-weight: 500;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 
   & strong {
     color: var(--color-dark2);
