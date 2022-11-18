@@ -39,8 +39,8 @@ async function config() {
   const utf8 = await fs.promises.readFile('./src/scripts/config.ts', 'utf-8')
 
   function arraySlice(txt, count) {
-    const lefts = [...utf8.matchAll(/\[\n/g)]
-    const rights = [...utf8.matchAll(/\]\n/g)]
+    const lefts = [...utf8.matchAll(/\[\r?\n/g)]
+    const rights = [...utf8.matchAll(/\]\r?\n/g)]
     const array = []
     for (let i = 0; i < count; i++) {
       const l = lefts[i].index
@@ -48,7 +48,7 @@ async function config() {
       const json = txt.slice(l, r)
         .replace(/(\w+):/g, '"$1":')
         .replace(/'/g, '"')
-        .replace(/,\n\]$/, '\n]')
+        .replace(/,\r?\n\]$/, '\n]')
       array.push(JSON.parse(json))
     }
     return array

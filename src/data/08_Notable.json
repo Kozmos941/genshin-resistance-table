@@ -100,7 +100,7 @@
         "electro": 50
       },
       {
-        "state": "阶段２·带盾",
+        "state": "阶段２·盾",
         "general": 230,
         "electro": 290
       },
@@ -110,7 +110,7 @@
         "electro": -80
       },
       {
-        "state": "阶段２·无盾",
+        "state": "阶段２",
         "general": 30,
         "electro": 90
       }
