@@ -1,6 +1,6 @@
 ## genshin-resistance-table
 
- 原神怪物抗性表
+ 原神抗性表
 
 - [genshin-resistance-table](#genshin-resistance-table)
 - [Development](#development)
@@ -26,8 +26,9 @@
 # Merge Several Data Files into One
 > npm run merge
 
-# Pass a 'noSpan' argument can generate data without considering rowspan (may be used for other projects)
+# Pass a 'noSpan' argument (case insensitive) can generate data without considering rowspan (may be used for other projects)
 > npm run merge -- noSpan
+> npm run merge noSpan
 
 # ESLint
 > npm run lint
@@ -38,32 +39,36 @@
 
 ```
 genshin-resistance-table/
-├─ ...                     ##
-├─ src/                    ##
-│  ├─ components/          ##
-│  │  ├─ Download/         ## Image Save
-│  │  │  ├─ DButton.vue    ## Download Button
-│  │  │  ├─ DModal.vue     ## Download Modal
-│  │  │  └─ ...            ## 
-│  │  ├─ Table/            ## Table Related
-│  │  │  ├─ ...            ## 
-│  │  │  └─ TView.vue      ## Table
-│  │  ├─ GithubCorner.vue  ## 
-│  │  ├─ MainView.vue      ## Table + Button + GitHub
-│  │  └─ Sidebar.vue       ## 
-│  ├─ data/                ##
-│  │  ├─ ...               ##
-│  │  └─ table.json        ## Data for Rendering Table
-│  ├─ scripts              ##
-│  │  ├─ classes.ts        ## Class for Download & Sider Event Handling
-│  │  ├─ config.ts         ## Table Config (Constant)
-│  │  ├─ store.ts          ## Pinia & localforage
-│  │  ├─ types.ts          ## 
-│  │  └─ webfont.ts        ## Web Font Subsetting
-│  ├─ App.vue              ## Sidebar + MainView
-│  └─ main.ts              ##
-├─ db.json                 ##
-├─ merge.js                ## Merge data files into table.json
+├─ ...                       ##
+├─ src/                      ##
+│  ├─ components/            ##
+│  │  ├─ Download/           ## Image Save Related
+│  │  │  ├─ DButton.vue      ## Download Button
+│  │  │  ├─ DModal.vue       ## Download Modal
+│  │  │  └─ ...              ## 
+│  │  ├─ Footer/             ## Footer Related
+│  │  │  └─ ...              ## 
+│  │  ├─ Table/              ## Table Related
+│  │  │  └─ ...              ## 
+│  │  ├─ FooterView.vue      ## Footer
+│  │  ├─ GithubCorner.vue    ## GitHub
+│  │  ├─ MainView.vue        ## Button + GitHub + Table + Footer
+│  │  ├─ SideNavigation.vue  ## Sider
+│  │  └─ TableView.vue       ## Table
+│  ├─ data/                  ##
+│  │  ├─ ...                 ## Raw data used to generate
+│  │  └─ table.json          ## Data for Rendering Table
+│  ├─ scripts                ##
+│  │  ├─ classes.ts          ## Class for Download, Event Handling
+│  │  ├─ config.ts           ## Table Config (constant)
+│  │  ├─ store.ts            ## Pinia & localforage
+│  │  └─ webfont.ts          ## Web Font Subsetting
+│  ├─ App.vue                ## Side + Main
+│  ├─ style.postcss          ## CSS Variable (mainly)
+│  └─ main.ts                ##
+├─ DEVLOG.md                 ## Recording issues, tries in development  
+├─ index.html                ## 
+├─ merge.js                  ## Merge data files into table.json
 └─ ...
 ```
 
@@ -225,8 +230,6 @@ Map() {
 | THEADS_LENGTH | 表格头长度 |                                         |
 | SIGN_REPLACE  | 替换符号   | 数据中 '*', 'infinity', '\n' 的替换符号 |
 | TABLE_CAPTION | 表格标题   |                                         |
-| MAIN_WIDTH    | 表格宽度   | 表格及表格外容器的宽度                  |
-
 
 ## TO DO
 - 现在 commit 就是乱写，先定个大致的规矩
@@ -240,6 +243,41 @@ Map() {
   - 目前先搁置, 看看有什么更好的方法
 
 - 可以设定图片保存时的文件名，以及自定义缩放，图片类型、质量等
+  - input 样式还不是那么兼容
+    - 了解一下 clip-path
+  - 类型 webp，缩放 1；质量 0.99，大小 1.04MB；质量 1，大小反而 0.63MB，是什么原因？ 
+
+```css
+input[type=range] {
+  -webkit-appearance: none;
+
+  /* Hides the slider so that custom slider can be made */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 2rem;
+    width: 1rem;
+    margin-top: -0.625rem;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+
+    /* Add cool effects to your sliders! */
+    @nest :disabled& {
+      cursor: not-allowed;
+      background: transparent;
+    }
+  }
+
+  &::-webkit-slider-runnable-track {
+    height: 0.75rem;
+    /* cursor: pointer; */
+    background: var(--teal-300);
+    border-radius: .25rem;
+  }
+}
+```
+
+- 安卓端（Chrome）打开 DModal，向上滑屏，浏览器地址栏会隐藏，导致下方出现一小块未遮盖区域
+  - 应该可以在开启状态中禁用滑屏，但还是看看有没有更好的解决办法 
 
 - 尝试 i18n
-

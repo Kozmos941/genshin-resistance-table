@@ -20,6 +20,8 @@
 ## TO LEARN
 
 - 使用 React, Svelte 编写项目
+  - 使用 SvelteKit + Svelte 基本复刻完成
+  - 使用 Vite + React 实现了表格，功能待实现
 - 了解 Web Worker, Unit Test 等的用法及作用
 
 ### Vue
@@ -27,6 +29,7 @@
 - [Template Ref](https://vuejs.org/guide/typescript/composition-api.html#typing-component-template-refs)
   - 如何在 Component 上配合 `<script setup lang="ts">` 使用
   - `defineExpose({})` 传入的是 `{}`, 第一次用没注意, 一直获取不到实例
+  - 嵌套太麻烦，改用 Pinia 存储，该方案废弃
 
 ```ts
 /* TView.vue */
@@ -46,11 +49,12 @@ onMounted(() => {
 - [Event Handling](https://vuejs.org/guide/essentials/event-handling.html#event-modifiers)
   - Modifiers
 
-
 | modifiers | native                  |
 | --------- | ----------------------- |
 | .stop     | Event.stopPropagation() |
 | .prevent  | Event.preventDefault()  |
+
+- v-model
 
 ### CSS
 
@@ -62,6 +66,8 @@ onMounted(() => {
 
 - Flexbox
   - 如何控制单个盒子大小, 比如某些固定, 某些自适应
+    - [Controlling flex item ratios](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Controlling_Ratios_of_Flex_Items_Along_the_Main_Ax)
+    - 还是有点问题，比如在 Chrome 一行能装下的两个元素，在 Firefox 中不能从而会换行。
 
 - Grid Layout
   - 在 `DModal.vue` 组件中试了下
@@ -130,6 +136,7 @@ onMounted(() => {
 
 - 尽量不使用 CSS/UI framework, Vuex 等
   - 了解下如何实现一个简单的状态管理
+    - 可以用 `reactive()` API [State Management](https://vuejs.org/guide/scaling-up/state-management.html#simple-state-management-with-reactivity-api)
   - 所以最后还是用了 Pinia
 
 - 在 Sider 上使用[事件委托](https://javascript.info/event-delegation)

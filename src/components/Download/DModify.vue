@@ -70,7 +70,8 @@ onBeforeUpdate(() => {
 
 <style scoped lang="postcss">
 div.form {
-  display: flex;
+  grid-area: modi;
+  display: grid;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   justify-content: space-around;
@@ -79,14 +80,27 @@ div.form {
   font-weight: 900;
   color: var(--color-light);
   background-color: var(--color-dark2);
+  grid-template:
+    "type qual" auto
+    "scal scal" auto / auto 1fr;
 
   &>div {
     display: flex;
     flex-wrap: nowrap;
 
-    &.quality,
-    &.scale,
-    & input {
+    &.quality {
+      grid-area: qual;
+    }
+
+    &.scale {
+      grid-area: scal;
+    }
+
+    &.type {
+      grid-area: type;
+    }
+
+    &>input {
       flex-grow: 1;
     }
 
@@ -130,31 +144,4 @@ div.form {
   }
 }
 
-input[type=range] {
-  -webkit-appearance: none;
-
-  /* Hides the slider so that custom slider can be made */
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 2rem;
-    width: 1rem;
-    margin-top: -0.625rem;
-    border-radius: 3px;
-    background: #ffffff;
-    cursor: pointer;
-
-    /* Add cool effects to your sliders! */
-    @nest :disabled& {
-      cursor: not-allowed;
-      background: transparent;
-    }
-  }
-
-  &::-webkit-slider-runnable-track {
-    height: 0.75rem;
-    /* cursor: pointer; */
-    background: var(--teal-300);
-    border-radius: .25rem;
-  }
-}
 </style>
