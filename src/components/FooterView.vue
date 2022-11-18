@@ -17,9 +17,10 @@ const items = [
   { title: 'Graph', links: [{ value: 'desmos', url: 'https://www.desmos.com/calculator/qkuw6igsu1' }] },
   {
     title: 'Deployment', links: [
-      { value: 'GitHub Pages', url: 'https://kozmos941.github.io/genshin-resistance-table/' },
-      { value: 'Vercel', url: 'https://genshin-resistance-table.vercel.app' },
-      { value: 'Netlify', url: 'https://genshin-resistance-table.netlify.app' },
+      { value: 'GitHub', url: 'https://kozmos941.github.io/genshin-resistance-table/' },
+      { value: 'Vercel', url: 'https://genshin-resistance-table.vercel.app/' },
+      { value: 'Netlify', url: 'https://genshin-resistance-table.netlify.app/' },
+      { value: 'Cloudfare', url: 'https://genshin-resistance-table.pages.dev/' },
     ],
   },
 ]

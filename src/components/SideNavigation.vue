@@ -22,11 +22,11 @@ onMounted(() => {
 
 function isActive(key: string) {
   if (tCellRaces.size === 0) return false
-  
+
   const td = tCellRaces.get(key) as HTMLTableCellElement
   const { THEAD_HEIGHT, scrollY } = pinia
   const { top, bottom } = td.getBoundingClientRect()
-  return (top - 1) <= THEAD_HEIGHT && THEAD_HEIGHT < (bottom)
+  return Math.floor(top) <= THEAD_HEIGHT && THEAD_HEIGHT < Math.floor(bottom)
 }
 
 </script>

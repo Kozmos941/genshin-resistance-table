@@ -438,18 +438,6 @@
       "physical": -20
     },
     {
-      "state": "魔化",
-      "correspond": null,
-      "pyro": 60,
-      "hydro": 60,
-      "anemo": 60,
-      "electro": 60,
-      "dendro": 60,
-      "cryo": 60,
-      "geo": 60,
-      "physical": 30
-    },
-    {
       "state": "虚弱",
       "correspond": -50,
       "pyro": 10,
@@ -460,6 +448,18 @@
       "cryo": 10,
       "geo": 10,
       "physical": -20
+    },
+    {
+      "state": "魔化",
+      "correspond": null,
+      "pyro": 60,
+      "hydro": 60,
+      "anemo": 60,
+      "electro": 60,
+      "dendro": 60,
+      "cryo": 60,
+      "geo": 60,
+      "physical": 30
     },
     {
       "state": "厄灵",
@@ -1275,7 +1275,7 @@
       "physical": 10
     },
     {
-      "state": "阶段２·带盾",
+      "state": "阶段２·盾",
       "correspond": null,
       "pyro": 230,
       "hydro": 230,
@@ -1299,7 +1299,7 @@
       "physical": -140
     },
     {
-      "state": "阶段２·无盾",
+      "state": "阶段２",
       "correspond": null,
       "pyro": 30,
       "hydro": 30,
