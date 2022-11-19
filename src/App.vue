@@ -44,7 +44,6 @@ TABLE_HEADS.filter(({ color }) => color)
 </script>
 
 <template>
-  <!-- <div style="position:fixed; right:10px;">{{ pinia.scrollY }}</div> -->
   <Transition name="side">
     <Side v-show="SideVisibility" />
   </Transition>

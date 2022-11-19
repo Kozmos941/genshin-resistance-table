@@ -20,7 +20,7 @@ const items = [
       { value: 'GitHub', url: 'https://kozmos941.github.io/genshin-resistance-table/' },
       { value: 'Vercel', url: 'https://genshin-resistance-table.vercel.app/' },
       { value: 'Netlify', url: 'https://genshin-resistance-table.netlify.app/' },
-      { value: 'Cloudfare', url: 'https://genshin-resistance-table.pages.dev/' },
+      { value: 'Cloudflare', url: 'https://genshin-resistance-table.pages.dev/' },
     ],
   },
 ]

@@ -1,6 +1,6 @@
+import './style.postcss'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import './style.postcss'
 import App from './App.vue'
 
 const pinia = createPinia()
