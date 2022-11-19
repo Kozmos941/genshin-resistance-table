@@ -7,7 +7,7 @@ import * as _ from '$/config'
 const SERIF_TEXT = textDeduplicate(''.concat(
   ..._.TABLE_HEADS.map(({ value }) => value),
   ..._.RACES.map(({ value }) => value),
-  '原神抗性表',
+  document.title,
 ))
 
 const SANS_TEXT = textDeduplicate(''.concat(
