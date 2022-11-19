@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { RACES, TABLE_HEADS } from '$/config'
 import { SidebarEventDelegation } from '$/classes'
 import { usePiniaStore } from '$/store'
@@ -12,18 +12,14 @@ const colors = TABLE_HEADS
   .sort(() => Math.random() - 0.5)
 
 /* OnMounted */
-const asideRef = ref<HTMLElement>()
-const { tCellRaces } = pinia
 onMounted(() => {
-  const { THEAD_HEIGHT } = pinia
-  const aside = asideRef.value as HTMLElement
-  new SidebarEventDelegation(aside, THEAD_HEIGHT, tCellRaces)
+  const { aside, THEAD_HEIGHT, tCellRaces } = pinia
+  new SidebarEventDelegation(aside as HTMLElement, THEAD_HEIGHT, tCellRaces)
 })
 
 function isActive(key: string) {
-  if (tCellRaces.size === 0) return false
-
-  const td = tCellRaces.get(key) as HTMLTableCellElement
+  if (pinia.tCellRaces.size === 0) return false
+  const td = pinia.tCellRaces.get(key) as HTMLTableCellElement
   const { THEAD_HEIGHT, scrollY } = pinia
   const { top, bottom } = td.getBoundingClientRect()
   return Math.floor(top) <= THEAD_HEIGHT && THEAD_HEIGHT < Math.floor(bottom)
@@ -32,7 +28,7 @@ function isActive(key: string) {
 </script>
 
 <template>
-  <aside ref="asideRef">
+  <aside :ref="(e) => { pinia.aside = e as HTMLElement }">
     <div class="top" data-index="TOP">
       <span>▲</span>
     </div>
@@ -53,8 +49,10 @@ aside {
   cursor: pointer;
   /* Box */
   position: fixed;
-  left: 0;
-  height: 100vh;
+  background-color: var(--color-dark2);
+  height: 100%;
+  /* height: 100vh; */
+  /* height: v-bind('pinia.innerHeight+"px"'); */
   width: 1rem;
   /* Flex */
   display: flex;
@@ -62,21 +60,19 @@ aside {
   /* Font */
   font-family: var(--font-sans);
   font-weight: 700;
-  background-color: var(--color-dark2);
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+  color: var(--color-dark);
 
   & div {
     /* Box */
     margin: 0;
     flex: auto;
     padding: 0 0.125rem;
+    background-color: var(--color-light);
     /* Flex */
     display: flex;
     align-items: center;
-    /* Font */
-    font-size: 0.75rem;
-    line-height: 0.75rem;
-    color: var(--color-dark);
-    background-color: var(--color-light);
     /* Border */
     border-width: 2px 0;
     border-style: solid;
@@ -85,7 +81,7 @@ aside {
     &.active,
     &:hover {
       color: var(--color-random);
-      background-color: var(--color-dark2);
+      background-color: inherit;
     }
 
     &.top,
@@ -101,6 +97,10 @@ aside {
     &.bottom {
       border-bottom: 0;
     }
+  }
+
+  @media (orientation: portrait) {
+    display: none;
   }
 }
 </style>

@@ -232,20 +232,20 @@ Map() {
 | TABLE_CAPTION | 表格标题   |                                         |
 
 ## TO DO
-- 现在 commit 就是乱写，先定个大致的规矩
+- 现在 commit 就是乱写, 先定个大致的规矩
   - commit message 先参考 vue 的写法 `release:``chore:``feat:` 等
-  - version 的更新以生成的图片为标准，即只要图片内容有变，就算一个新版本
-    - 比如修改数据、样式，虽然只是小修改，但只要图片变化就更新版本 `release: [new version]`
+  - version 的更新以生成的图片为标准, 即只要图片内容有变, 就算一个新版本
+    - 比如修改数据、样式, 虽然只是小修改, 但只要图片变化就更新版本 `release: [new version]`
 
 - 侧边栏锚点标签随着滚动即时改变背景颜色
   - 用 id 和 `<a>` 标签定位, 但效果达不到预期, 遂放弃
   - 利用 `onscroll` 粗略实现了但是有问题, 而且代码很乱, 打算重写
   - 目前先搁置, 看看有什么更好的方法
 
-- 可以设定图片保存时的文件名，以及自定义缩放，图片类型、质量等
+- 可以设定图片保存时的文件名, 以及自定义缩放, 图片类型、质量等
   - input 样式还不是那么兼容
     - 了解一下 clip-path
-  - 类型 webp，缩放 1；质量 0.99，大小 1.04MB；质量 1，大小反而 0.63MB，是什么原因？ 
+  - 类型 webp, 缩放 1；质量 0.99, 大小 1.04MB；质量 1, 大小反而 0.63MB, 是什么原因？ 
 
 ```css
 input[type=range] {
@@ -277,7 +277,35 @@ input[type=range] {
 }
 ```
 
-- 安卓端（Chrome）打开 DModal，向上滑屏，浏览器地址栏会隐藏，导致下方出现一小块未遮盖区域
-  - 应该可以在开启状态中禁用滑屏，但还是看看有没有更好的解决办法 
+- 移动端适配
+  - 移动端问题好多, 感觉如果想适配移动端的话, 还不如再写一套移动端的样式...
+  - 安卓端（Chrome）打开 DModal, 向上滑屏, 浏览器地址栏会隐藏, 导致下方出现一小块未遮盖区域
+    - 应该可以在开启状态中禁用滑屏, 但还是看看有没有更好的解决办法 
+    - https://discourse.webflow.com/t/chrome-url-bar-scrolling-on-mobile/126334
+    - https://developer.chrome.com/blog/url-bar-resizing/
+    - https://chanind.github.io/javascript/2019/09/28/avoid-100vh-on-mobile-web.html
+    - https://bokand.github.io/demo/urlbarsize.html
+  - (Chrome for Android) 第一次加载 `tableWidth` 比实际小, 怀疑是 Layout Shifting
+  - `watchEffect` 没用
+  - `onBeforeUpdate` 有用，但我不希望每次更新都赋值, 毕竟样式加载完全后, `tableWidth` 就不会变了
+  - 看到说可以使用 ResizeObserver, 参考：
+    - https://stackoverflow.com/questions/61112367/offsetwidth-of-element-seems-to-change-randomly
+    - https://stackoverflow.com/questions/66282539/observe-size-change-of-element
+    - https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver
+    - https://web.dev/resize-observer/
+
+```js
+  const resizeObserver = new ResizeObserver(entries => {
+    for (const entry of entries) {
+      const { contentRect } = entry
+      console.log('Element:', entry.target)
+      console.log(`Element padding: ${contentRect.top}px ; ${contentRect.left}px`)
+      console.log(`Element size: ${contentRect.width}px x ${contentRect.height}px`)
+      tableWidth.value = Math.ceil(contentRect.width)
+    }
+  })
+  // Observe one or multiple elements
+  resizeObserver.observe(table.value as HTMLTableElement)
+```
 
 - 尝试 i18n

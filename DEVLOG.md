@@ -7,23 +7,21 @@
     - [Vue](#vue)
     - [SvelteKit](#sveltekit)
     - [CSS](#css)
+      - [Media Query](#media-query)
     - [TypeScript](#typescript)
     - [Web Storage](#web-storage)
   - [Configuration](#configuration)
     - [Vite](#vite)
-      - [PostCSS](#postcss)
     - [TypeScript](#typescript-1)
     - [ESLint](#eslint)
   - [Deployement](#deployement)
     - [Vercel](#vercel)
     - [Netlify](#netlify)
     - [Domain](#domain)
-      - [使用域名](#使用域名)
-      - [DNS 相关](#dns-相关)
+      - [How to use Custom Domain](#how-to-use-custom-domain)
+      - [DNS Related](#dns-related)
     - [Cloudflare](#cloudflare)
       - [DNS Records](#dns-records)
-        - [Types](#types)
-        - [TTL](#ttl)
       - [Email Routing](#email-routing)
       - [Pages](#pages)
   - [Done](#done)
@@ -34,7 +32,7 @@
 
 - 使用 React, Svelte 编写项目
   - 使用 SvelteKit + Svelte 基本复刻完成
-  - 使用 Vite + React 实现了表格，功能待实现
+  - 使用 Vite + React 实现了表格, 功能待实现
 - 了解 Web Worker, Unit Test 等的用法及作用
 
 ### Vue
@@ -42,7 +40,7 @@
 - [Template Ref](https://vuejs.org/guide/typescript/composition-api.html#typing-component-template-refs)
   - 如何在 Component 上配合 `<script setup lang="ts">` 使用
   - `defineExpose({})` 传入的是 `{}`, 第一次用没注意, 一直获取不到实例
-  - 嵌套太麻烦，改用 Pinia 存储，该方案废弃
+  - 嵌套太麻烦, 改用 Pinia 存储, 该方案废弃
 
 ```ts
 /* TView.vue */
@@ -84,7 +82,7 @@ onMounted(() => {
 - Flexbox
   - 如何控制单个盒子大小, 比如某些固定, 某些自适应
     - [Controlling flex item ratios](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Controlling_Ratios_of_Flex_Items_Along_the_Main_Ax)
-    - 还是有点问题，比如在 Chrome 一行能装下的两个元素，在 Firefox 中不能从而会换行。
+    - 还是有点问题, 比如在 Chrome 一行能装下的两个元素, 在 Firefox 中不能从而会换行。
 
 - Grid Layout
   - 在 `DModal.vue` 组件中试了下
@@ -101,6 +99,13 @@ onMounted(() => {
   Button
 </button>
 ```
+
+#### Media Query
+
+- [Media Query Styles Not Overriding Original Styles](https://stackoverflow.com/a/47258781/15369811)
+  - You need to link the media query file (queries.css) later than the normal css file (style.css).
+
+- [CSS Nesting Syntax](https://drafts.csswg.org/css-nesting-1/#conditionals)
 
 ### TypeScript
 
@@ -121,6 +126,8 @@ onMounted(() => {
 
 ### Vite
 
+- alias
+
 ```ts
 // alias
 import { resolve } from 'path'
@@ -139,9 +146,9 @@ resolve: {
 server: {
   host: '0.0.0.0',
 }
-````
+```
 
-#### define
+- define
 
 ```ts
 // vite-env.d.ts
@@ -153,7 +160,7 @@ define: {
 },
 ```
 
-#### PostCSS
+- PostCSS
 
 - 配置 `vite.config.ts`
 
@@ -204,7 +211,7 @@ css: {
 ### Vercel
 
 - [Ignored Build Step](#https://vercel.com/guides/how-do-i-use-the-ignored-build-step-field-on-vercel)
-  - 每次 `git push`，Vercel 都会生成一个 Preview Deployment
+  - 每次 `git push`, Vercel 都会生成一个 Preview Deployment
   - 如下配置可以只对 `main` branch 上的 push 进行 build 
 
 ```bash
@@ -213,32 +220,32 @@ if [ "$VERCEL_GIT_COMMIT_REF" == "main" ]; then exit 1; else exit 0; fi
 
 ### Netlify
 
-- 没看到 Preview，不能像 Vercel 自定义多个域名，但好在没被 GFW
+- 没看到 Preview, 不能像 Vercel 自定义多个域名, 但好在没被 GFW
 
 - [Status badges](https://docs.netlify.com/monitor-sites/status-badges/)
 
 ### Domain
 
-- 注册了个域名，目前不是很清楚具体是怎么运作的
+- 注册了个域名, 目前不是很清楚具体是怎么运作的
 - 据说把域名给 Cloudflare 代理可以避免被墙
 
-#### 使用域名
+#### How to use Custom Domain
 
 - 将域名给 Cloudflare 代理
-  - 将域名注册商那里的 Nameserver，修改成 Cloudflare 提供的
-    - 修改之后，就不能在注册商那里 Manage DNS 了
-  - 修改成功后，在 Cloudflare 会看到如下所示
+  - 将域名注册商那里的 Nameserver, 修改成 Cloudflare 提供的
+    - 修改之后, 就不能在注册商那里 Manage DNS 了
+  - 修改成功后, 在 Cloudflare 会看到如下所示
     - 但好像还是得等个一天才能正常使用
 ```
 Great news! Cloudflare is now protecting your site
 Data about your site's usage will be here once available.
 ```
 - 添加 DNS Recordss
-  - 在 Cloudflare 这边添加 Record，对应地，在网站托管服务那边也要添加 Domain
+  - 在 Cloudflare 这边添加 Record, 对应地, 在网站托管服务那边也要添加 Domain
   - (How do I use a Cloudflare domain with Vercel?)[https://vercel.com/guides/using-cloudflare-with-vercel]
   - (How do I resolve "err_too_many_redirects" when using a Cloudflare proxy with Vercel?)[https://vercel.com/guides/resolve-err-too-many-redirects-when-using-cloudflare-proxy-with-vercel]
 
-#### DNS 相关
+#### DNS Related
 
 - Command Line
 
@@ -261,19 +268,20 @@ Addresses:  [IPADDRESS1]
 ### Cloudflare
 
 #### DNS Records
-##### [Types](https://developers.cloudflare.com/dns/manage-dns-records/reference/dns-record-types/)
-- IP address resolution
-  - A & AAAA records map a domain name to one or multiple IPv4 or IPv6 address(es).
-  - CNAME records map a domain name to another (canonical) domain name.
-- Email authentication
-  - A mail exchange (MX) record is required to deliver email to a mail server.
-- Specialized records
-  - A text (TXT) record lets you enter text into the DNS system.
 
-##### [TTL](https://developers.cloudflare.com/dns/manage-dns-records/reference/ttl/)
+- [Types](https://developers.cloudflare.com/dns/manage-dns-records/reference/dns-record-types/)
+  - IP address resolution
+    - A & AAAA records map a domain name to one or multiple IPv4 or IPv6 address(es).
+    - CNAME records map a domain name to another (canonical) domain name.
+  - Email authentication
+    - A mail exchange (MX) record is required to deliver email to a mail server.
+  - Specialized records
+    - A text (TXT) record lets you enter text into the DNS system.
+
+- [TTL](https://developers.cloudflare.com/dns/manage-dns-records/reference/ttl/)
 
 #### Email Routing
-- 邮件转发，设置后自动配置 DNS Record
+- 邮件转发, 设置后自动配置 DNS Record
 
 | Record type | Hostname | Priority |                   Value                    | Status |
 | :---------: | :------: | :------: | :----------------------------------------: | :----: |
@@ -303,8 +311,8 @@ Addresses:  [IPADDRESS1]
   - 做完后反应过来了, 根本不用那么麻烦, 直接 `<table>` 外再套一层一样宽的 `<div>` 的就行了
 
 - JSON.stringify(value[, replacer [, space]])
-  - 之前生成的数据写入文件后只有一行，每次 git diff 都是整个文件
-  - 发现 stringify 可以返回 formatted 的数据，顺便改用 replacer 来去除被 rowspan 覆盖掉的列
+  - 之前生成的数据写入文件后只有一行, 每次 git diff 都是整个文件
+  - 发现 stringify 可以返回 formatted 的数据, 顺便改用 replacer 来去除被 rowspan 覆盖掉的列
 
 - `merge.js` 
   - 想改用 TypeScript, 这样就能直接从 `config.ts` 导入
@@ -331,8 +339,8 @@ Addresses:  [IPADDRESS1]
 
 ### Web Font Loader
 
-- 想使用 `Web Font Loader` 但 Android 端字体完全没加载（Chrome, Firefox），原因不明
-  - [GitHub](https://github.com/typekit/webfontloader#get-started) 教程上是 `1.6.26`，换成 [jsdelivr](https://www.jsdelivr.com/package/npm/webfontloader) 上的 `1.6.28` 移动端也加载字体了
+- 想使用 `Web Font Loader` 但 Android 端字体完全没加载（Chrome, Firefox）, 原因不明
+  - [GitHub](https://github.com/typekit/webfontloader#get-started) 教程上是 `1.6.26`, 换成 [jsdelivr](https://www.jsdelivr.com/package/npm/webfontloader) 上的 `1.6.28` 移动端也加载字体了
 
 ```html
 <!-- Web Font Loader -->
