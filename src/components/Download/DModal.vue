@@ -46,7 +46,10 @@ async function getDownload(changed: boolean) {
   if (!changed) return
   const { scale, type, quality } = image
   console.log({ scale, type, quality })
-  download.value = new Download(pinia.TABLE, { scale, type, quality })
+  download.value = new Download(
+    pinia.table as HTMLTableElement,
+    { scale, type, quality },
+  )
   size.value = '...'
   size.value = await download.value.getURLSize() + ''
 }
