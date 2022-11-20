@@ -61,8 +61,12 @@ genshin-resistance-table/
 │  ├─ scripts                ##
 │  │  ├─ classes.ts          ## Class for Download, Event Handling
 │  │  ├─ config.ts           ## Table Config (constant)
-│  │  ├─ store.ts            ## Pinia & localforage
+│  │  ├─ store.ts            ## 
 │  │  └─ webfont.ts          ## Web Font Subsetting
+│  ├─ stores                 ##
+│  │  ├─ forage.ts           ## localforage
+│  │  ├─ image.ts            ## useImageStore
+│  │  └─ pinia.ts            ## usePiniaStore
 │  ├─ App.vue                ## Side + Main
 │  ├─ style.postcss          ## CSS Variable (mainly)
 │  └─ main.ts                ##

@@ -18,7 +18,7 @@
     - [Vercel](#vercel)
     - [Netlify](#netlify)
     - [Domain](#domain)
-      - [How to use Custom Domain](#how-to-use-custom-domain)
+      - [How to use](#how-to-use)
       - [DNS Related](#dns-related)
     - [Cloudflare](#cloudflare)
       - [DNS Records](#dns-records)
@@ -32,6 +32,7 @@
 
 - 使用 React, Svelte 编写项目
   - 使用 SvelteKit + Svelte 基本复刻完成
+    - 了解 SSR (Server Side Render)
   - 使用 Vite + React 实现了表格, 功能待实现
 - 了解 Web Worker, Unit Test 等的用法及作用
 
@@ -229,21 +230,24 @@ if [ "$VERCEL_GIT_COMMIT_REF" == "main" ]; then exit 1; else exit 0; fi
 - 注册了个域名, 目前不是很清楚具体是怎么运作的
 - 据说把域名给 Cloudflare 代理可以避免被墙
 
-#### How to use Custom Domain
+#### How to use
 
 - 将域名给 Cloudflare 代理
   - 将域名注册商那里的 Nameserver, 修改成 Cloudflare 提供的
     - 修改之后, 就不能在注册商那里 Manage DNS 了
   - 修改成功后, 在 Cloudflare 会看到如下所示
     - 但好像还是得等个一天才能正常使用
+
 ```
 Great news! Cloudflare is now protecting your site
 Data about your site's usage will be here once available.
 ```
+
 - 添加 DNS Recordss
   - 在 Cloudflare 这边添加 Record, 对应地, 在网站托管服务那边也要添加 Domain
-  - (How do I use a Cloudflare domain with Vercel?)[https://vercel.com/guides/using-cloudflare-with-vercel]
-  - (How do I resolve "err_too_many_redirects" when using a Cloudflare proxy with Vercel?)[https://vercel.com/guides/resolve-err-too-many-redirects-when-using-cloudflare-proxy-with-vercel]
+  - 如果不是使用 Cloudflare Pages 托管, 可能还要打开 SSL/TLS
+    - (How do I use a Cloudflare domain with Vercel?)[https://vercel.com/guides/using-cloudflare-with-vercel]
+    - (How do I resolve "err_too_many_redirects" when using a Cloudflare proxy with Vercel?)[https://vercel.com/guides/resolve-err-too-many-redirects-when-using-cloudflare-proxy-with-vercel]
 
 #### DNS Related
 
@@ -307,8 +311,8 @@ Addresses:  [IPADDRESS1]
 
 - 下载按钮要对齐表格左上角,  用 `html2canvas` 转换 `<table>` 时图片上不能有按钮
   - 这意味着不能把 `<button>` 作为 `<table>` 的子结点, 从而使用 `position: absolute`
-  - 利用 `onresize` 即时检测 `<table>` 的 `left` 属性, 并通过 [v-bind in CSS](https://vuejs.org/api/sfc-css-features.html#v-bind-in-css) 给 `<button>`
-  - 做完后反应过来了, 根本不用那么麻烦, 直接 `<table>` 外再套一层一样宽的 `<div>` 的就行了
+  - 利用 `onresize` 监听 `<table>` 的 `left` 属性, 并通过 [v-bind in CSS](https://vuejs.org/api/sfc-css-features.html#v-bind-in-css) 给 `<button>`
+  - 做完后反应过来了, 根本不用那么麻烦, 直接 `<table>` 外再套一层一样宽的 `<main>` 的就行了
 
 - JSON.stringify(value[, replacer [, space]])
   - 之前生成的数据写入文件后只有一行, 每次 git diff 都是整个文件
@@ -323,17 +327,17 @@ Addresses:  [IPADDRESS1]
     - 可以传 `both` 同时生成两种数据...
   - 试一试 JSON-Server
 
-- Sider 样式想实现每次刷新 `div:hover` 都是随机的颜色
-  - Inline Style 不能设置 :hover
-  - CSS attr() 只能和 content 一起使用
-  - 最后发现了[这个](https://stackoverflow.com/a/50551202/15369811) (从HTML给CSS传值, 这是什么黑科技)
+- Sider
+  - 样式想实现每次刷新 `div:hover` 都是随机的颜色
+    - Inline Style 不能设置 :hover
+    - CSS attr() 只能和 content 一起使用
+    - 最后发现了[这个](https://stackoverflow.com/a/50551202/15369811) (从HTML给CSS传值, 这是什么黑科技)
+  - 使用[事件委托](https://javascript.info/event-delegation)
 
 - 尽量不使用 CSS/UI framework, Vuex 等
   - 了解下如何实现一个简单的状态管理
     - 可以用 `reactive()` API [State Management](https://vuejs.org/guide/scaling-up/state-management.html#simple-state-management-with-reactivity-api)
   - 所以最后还是用了 Pinia
-
-- 在 Sider 上使用[事件委托](https://javascript.info/event-delegation)
 
 ## Legacy
 

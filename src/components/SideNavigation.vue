@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { RACES, TABLE_HEADS } from '$/config'
-import { SidebarEventDelegation } from '$/classes'
 import { usePiniaStore } from '$/store'
 const pinia = usePiniaStore()
 
@@ -10,12 +8,6 @@ const colors = TABLE_HEADS
   .filter(({ color }) => color)
   .map(({ color }) => color)
   .sort(() => Math.random() - 0.5)
-
-/* OnMounted */
-onMounted(() => {
-  const { aside, THEAD_HEIGHT, tCellRaces } = pinia
-  new SidebarEventDelegation(aside as HTMLElement, THEAD_HEIGHT, tCellRaces)
-})
 
 function isActive(key: string) {
   if (pinia.tCellRaces.size === 0) return false

@@ -31,8 +31,7 @@ export class Download {
   }
 }
 
-// https://javascript.info/event-delegation
-export class SidebarEventDelegation {
+export class SiderEventDelegation {
   element: HTMLElement
   offset: number
   map: Map<string, HTMLElement>
