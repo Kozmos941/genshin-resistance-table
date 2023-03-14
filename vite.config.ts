@@ -1,7 +1,7 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
-import postcssNesting from "postcss-nesting";
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+import postcssNesting from 'postcss-nesting'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,24 +20,24 @@ export default defineConfig({
     __LAST_UPDATE__: new Date(),
   },
   server: {
-    host: "0.0.0.0",
+    host: '0.0.0.0',
   },
-  base: "./",
+  base: './',
   resolve: {
-    extensions: [".ts", ".js", ".vue"],
+    extensions: ['.ts', '.js', '.vue'],
     alias: [
       {
-        find: "@",
-        replacement: resolve(__dirname, "src"),
+        find: '@',
+        replacement: resolve(__dirname, 'src'),
       },
       {
-        find: "$",
-        replacement: resolve(__dirname, "src/scripts"),
+        find: '$',
+        replacement: resolve(__dirname, 'src/scripts'),
       },
       {
-        find: "#",
-        replacement: resolve(__dirname, "src/components"),
+        find: '#',
+        replacement: resolve(__dirname, 'src/components'),
       },
     ],
   },
-});
+})
