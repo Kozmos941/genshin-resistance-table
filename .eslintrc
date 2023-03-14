@@ -64,12 +64,12 @@
       "unix"
     ],
     "quotes": [
-      "error",
-      "single"
+      "warn",
+      "double"
     ],
     "semi": [
       "error",
-      "never"
+      "always"
     ],
     "comma-spacing": [
       "error",
